@@ -1,0 +1,10 @@
+site_name: OpenFIBSEM Documentation
+
+theme: 
+  name: "material"
+
+plugins:
+  - mkdocstrings
+
+nav:
+  - index.md
