@@ -105,7 +105,7 @@ The microscope is a client connection to the Microscope Server. At the moment, o
 
 MicroscopeSettings is a large structure containing the settings for the different microscope systems.
 
-::: fibsem.structures.MicroscopeSettings
+<!-- ::: fibsem.structures.MicroscopeSettings -->
 
 It is populated from your configuration in system.yaml. Most functions take a combination of the microscope client, and settings as arguments. 
 
@@ -113,9 +113,9 @@ It is populated from your configuration in system.yaml. Most functions take a co
 
 The most basic use case for the package is taking an image. Imaging functions are contained in fibsem.acquire, and imaging conditions are controlled by modifying the ImageSettings struct.
 
-::: fibsem.acquire.new_image
+<!-- ::: fibsem.acquire.new_image
 
-:::fibsem.structures.ImageSettings
+:::fibsem.structures.ImageSettings -->
 
 ImageSettings is part of the MicroscopeSettings, and can be accessed by settings.image. For example, to change the hfw of the image and take an image (snippet):
 

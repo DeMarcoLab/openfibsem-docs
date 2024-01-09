@@ -145,13 +145,13 @@ def detect_features_v2(
 
 The supported Feature Types are as follows:
 
-::: fibsem.detection.detection.Feature
+<!-- ::: fibsem.detection.detection.Feature
 ::: fibsem.detection.detection.LamellaCentre
 ::: fibsem.detection.detection.ImageCentre
 ::: fibsem.detection.detection.LamellaRightEdge
 ::: fibsem.detection.detection.LamellaLeftEdge
 ::: fibsem.detection.detection.NeedleTip
-::: fibsem.detection.detection.LandingPost
+::: fibsem.detection.detection.LandingPost -->
 
 
 
@@ -181,7 +181,7 @@ To use eucentric movements, use:
 microscope.vertical_move(settings, dy)
 ```
 
-::: fibsem.microscope.ThermoMicroscope.vertical_move
+<!-- ::: fibsem.microscope.ThermoMicroscope.vertical_move -->
 
 where dy is the distance to move in the image plane (eucentric movements are always calculated from the ion beam perspective).
 
@@ -198,4 +198,4 @@ microscope.stable_move(settings, dx, dy, beam_type)
 ```
 where dx, dy are the distance to move in the image plane, and beam_type is the beam type to use for the movement.
 
-::: fibsem.microscope.ThermoMicroscope.stable_move
+<!-- ::: fibsem.microscope.ThermoMicroscope.stable_move -->
