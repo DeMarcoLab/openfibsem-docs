@@ -1,5 +1,7 @@
 site_name: OpenFIBSEM Documentation
-
+repo_name: DeMarcoLab/fibsem
+repo_url: https://github.com/DeMarcoLab/fibsem
+site_description: Documentation for the OpenFIBSEM Project
 theme: 
   name: "material"
   font:
