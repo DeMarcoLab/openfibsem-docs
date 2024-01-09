@@ -12,5 +12,5 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install mkdocs-material mkdocstrings-python
-      - run: pip install fibsem autolamella
+      - run: pip install fibsem==0.2.5
       - run: mkdocs gh-deploy --force
