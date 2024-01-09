@@ -2,9 +2,55 @@ site_name: OpenFIBSEM Documentation
 
 theme: 
   name: "material"
+  font:
+    text: "Roboto"
+    code: "Roboto Mono"
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: black
+      accent: deep purple
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: deep purple
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features: 
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.expand
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
 
 plugins:
   - mkdocstrings
+  - search
 
 nav:
-  - index.md
+  - OpenFIBSEM:
+    - index.md
+  - OpenFIBSEM API: 
+    - openfibsem/index.md
+    - Getting Started: openfibsem/getting_started.md
+    - Installation: openfibsem/installation.md
+    - Getting Started: openfibsem/getting_started.md
+    - Concepts: openfibsem/concepts.md
+    - User Guide: openfibsem/user_guide.md
+    - Examples: openfibsem/examples.md
+    - API Reference: openfibsem/reference.md
+  - AutoLamella:
+    - autolamella/index.md
+    - Getting Started: autolamella/getting_started.md
+    - Motivation: autolamella/motivation.md
+    - User Guide: autolamella/user_guide.md
+    - Machine Learning: autolamella/ml.md
+    - Case Study - Serial Liftout: autolamella/case_study_serial_liftout.md
