@@ -1,6 +1,7 @@
 # Concepts
 
 Overview of FIBSEM system
+
 Skip to Core API Concepts if you are familar with FIBSEMs
 
 ## System Overview
@@ -10,100 +11,254 @@ FIBSEM Systems
 ## Chamber
 
 Overview
+
 Vaccuum, Venting and Pumping
+
 Cryogenic Temperature
 
 ## Imaging
 
 Overview
+
 Electron Beam Imaging
+
 Ion Beam Imaging
+
 Fluorescence Imaging
+
 Imaging Parameters
 
 ## Stage
 
 Overview
+
 Axes and Coordinate Systems
+
 Shuttle, and Pre-Tilt
+
 Stage Movement
 
 ## Milling
 
 Overview
+
 Milling Patterns
+
 Milling Parameters
+
 Usage
 
 ## Manipulator
 
 Overview
+
 Axes and Coordinate Systems
+
 Manipulator Movement
+
 Manipulator Calibration
+
 Manipulator Exchange
 
 ## Gas Injection and Sputter Coater
 
 Overview
+
 Specific Deposition
+
 Cryogenic Deposition
+
 Sputter Coating
 
 ## Core API Concepts
 
-### Imaging
+### Imaging API
 
 Changing Imaging Parameters
 
 Acquiring Images
-
-### Movement
+ 
+### Movement API
 
 Relative Movement
+
 Absolute Movement
-Beam Coincidence
+
 Stable Movement
+
 Vertical Movement
 
-Microscope State
-
-### Milling
+### Milling API
 
 Milling Patterns
+
 Changing Milling Patterns
+
 Changing Milling Parameters
+
 Running Milling Operations
+
 
 ### Logging
 
 Event Log
 
+Log Parsing
+AutoLamella contains a log parser for extracting statistical information from the logs, and a explorer application for analysing data.
+
+Log Parser:
+
+```bash
+autolamella/tools/data
+```
+
+To run the explorer app:
+
+```bash
+streamlit run autolamella/tools/stats.py
+```
+
 ### Automation
 
-- Image Registration, Cross-Correlation
-- Machine Learning, Segmentation, Feature Detection
+Image Registration
 
-### Configuring your Microscope
+Segmentation
 
-ip_address
-manufacturer
-shuttle_pre_tilt
-reference_rotation: 0-rotation
+Feature Detection
 
-system fingerprint
 
-advanced configuration
+### Key Concepts and Terminology
+
+
+
+Flat to Beam
+
+Beam Coincidence
+
+Microscope State
+
+Saved Position
+
+
 
 ## User Interface
 
+Each application has an associated user interface to allow the user to easily setup and monitor the workflow.
+
+Applications: 
+
+- OpenFIBSEM UI:  General FIBSEM control user interface.
+- AutoLamella UI: On Grid lamella preparataion workflows
+- AutoLiftout UI: Liftout based lamella preparation workflows (NB: this will be merged with AutoLamella UI in the near future)
+
+Each user interface is implemented in napari and pyqt5. To launch the applications and plugins through napari see [napari plugins](#napari-plugins) section.
+
+
+### User Interface Controls
+
+The following standard controls are used in all applications.
+
+#### Movement Controls
+
+When interacting with the imaging displays, the follow controls are supported.
+
+- Double Left Click: Move the stage to the selected position (Stable Move)
+- Alt + Double Left Click: Move the stage to the selected position (Vertical Move). Only supported in Ion Beam.
+- Shift + Left Click: Move the selected milling pattern to the position. Only supported in the Ion Beam.
+
+#### Keypoint Controls
+
+The following controls are supported when interacting with keypoints. 
+Select Keypoint: Click on keypoint
+Move Keypoint: Select and drag keypoint
+
+
+
+
+
 ### User Interface Widgets
+
+We developed a set of ui widgets that are reused across applications.
+
+#### System Configuration Widget
+
+This widget allows the user to connect to the microscope, and configure the system.
+
+#### Imaging Widget
+
+This widget allows the user to acquire images, adjust imaging parameters and use tools (e.g. ruler).
+
+#### Movement Widget
+
+This widget allows the user to move the stage, and save positions.
+
+#### Milling Widget
+
+This widget allows the user to draw milling patterns, adjust parameters, setup milling operations and run milling.
+
+#### Manipulator Widget
+
+This widget allows the user to control the manipulator.
+
+#### Feature Detection Widget
+
+This widget allows the user to supervise the keypoint detections during a workflow, and correct them if required. 
+
+#### Minimap Widget
+
+This widget allows the user to use the minimap, which supports tiled imaging, low magnifcation navigation and lamella position selection. 
+
+### User Inferface Tools
+
+#### GIS Deposition
+
+BETA:Not Yet Available
+
+#### Sputter Coating 
+
+BETA:Not Yet Available
+
+#### Manipulator Calibration
+
+There are two supported calibration tools; ThermoFisher and TESCAN
+
+##### Thermo Fisher EasyLift
+
+The manipulator calibration tool assists in calibrating the EasyLift. Due to API limitations, the user still has to activate the calibration procedure in xTUI and then can follow the instructions in the tool to calibrate their EasyLift each day.
+
+##### TESCAN Calibration
+
+The manipulator calibration tool will calibrate the TESCAN manipulator and map it to known coordinate systems. This allows it to follow the same convention used in the rest of the Manipulator API.
+
+#### Manipulator Preparation
+
+BETA:Not Yet Available
 
 ### Supervised Mode
 
-Machine Learning
+Supervised mode can be enabled in AutoLamella. In the mode the software will pause and wait for user feedback / confirmation at specific points in the workflow. This enables the user to supervise the process, fix any mistakes, and have the software execute the rest of the workflow.  
 
-Milling Operations
+#### Feature Detection
+
+In supervised mode, the software will pause after making a keypoint detection, and ask the user to confirm. The user can move the keypoint to the correct position, and continue with the workflow. The updated keypoint will be used in the workflow, and the correction data will be logged for later use in the data engine (see below).
+
+#### Milling Operations
+
+In supervised mode, the software will pause before performing a milling operation, and ask the user to confirm the milling operations. The user can move the pattern, adjust the parameters and repeat the milling operations mulitple times. If not in supervised mode, milling operations are completed automatically.
+
+#### Additional
+
+In supervised mode, the software will also pause and ask for confirmation at other specific steps. For example, the when running liftout methods, the software will ask the user to confirm the lamella has made contact with the post. If they confirm, the software continues with the workflow, if not the final landing procedure is repeated until the lamella lands correctly. 
+
+### Napari Plugins
+
+To enable access to the user interfaces, and plugins directly through napari, please install the openfibsem napari plugin (napari-openfibsem).
+
+```bash
+pip install napari-openfibsem
+```
+
+This allows the user to access the Applications (OpenFIBSEM UI, AutoLamella UI, AutoLiftout UI) and Plugins (Imaging Labelling, Keypoint Labelling) directly through the plugin interface. 
 
 ## Machine Learning Data Engine
 
@@ -180,17 +335,17 @@ Download weights: [MobileSAM ViT-T](https://drive.google.com/file/d/1dE-YAG-1mFC
 
 ### Model Training
 
-Model training is relatively simple, and by default we use models from the segmentation-models-pytorch package for the implementation. 
+Model training is relatively simple, and by default we use models from the segmentation-models-pytorch package for the implementation.
 
 #### Data Augmentation
 
-Data is augmented with standard data augmentation methods that are suitable for electron microscope data. 
+Data is augmented with standard data augmentation methods that are suitable for electron microscope data.
 
 We currently use; random rotation, random horizontal / vertical flip, random autocontrast, random equalize, gaussian blue and color jitter.
 
 #### Losses, Optimiser
 
-We use a standard Adam optimiser, and multi-loss (cross-entropy, dice, and focal) 
+We use a standard Adam optimiser, and multi-loss (cross-entropy, dice, and focal)
 
 #### Training the Model
 
@@ -199,7 +354,6 @@ To train the model:
 ```bash
 python fibsem/segementation/train.py --config config.yaml
 ```
-
 
 Example Model Training Config
 
@@ -236,7 +390,6 @@ note: "notes about this specific training run"  # additional trianing note (desc
 
 NNUnet is a popular library for training segmentation models. We provide a set of converters for converting datasets to the nnunet format, and converting nnunet models to compatible openfibsem formats.
 
-
 Script to convert data labelled with OpenFIBSEM to NNUnet format.
 
 ```bash
@@ -266,7 +419,6 @@ from fibsem.segementation.model import load_model
 model = load_model('my-nnunet-model-checkpoint.pt')
 
 ```
-
 
 #### External Integration - ONNX
 

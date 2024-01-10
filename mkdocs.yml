@@ -44,7 +44,6 @@ nav:
     - openfibsem/index.md
     - Getting Started: openfibsem/getting_started.md
     - Installation: openfibsem/installation.md
-    - Getting Started: openfibsem/getting_started.md
     - Concepts: openfibsem/concepts.md
     - User Guide: openfibsem/user_guide.md
     - Examples: openfibsem/examples.md
@@ -54,5 +53,5 @@ nav:
     - Getting Started: autolamella/getting_started.md
     - Motivation: autolamella/motivation.md
     - User Guide: autolamella/user_guide.md
-    - Machine Learning: autolamella/ml.md
+    - Case Study - Machine Learning: autolamella/case_study_datasets_and_models.md
     - Case Study - Serial Liftout: autolamella/case_study_serial_liftout.md
