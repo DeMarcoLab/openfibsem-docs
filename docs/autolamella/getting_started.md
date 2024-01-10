@@ -9,7 +9,8 @@ conda create -n fibsem python=3.9 pip
 conda activate fibsem
 pip install autolamella
 ```
-This will also install the openfibsem dependency. 
+
+This will also install the openfibsem dependency.
 
 Alternatively, installing the napari plugin with pip or through the napari plugin manager, will install autolamella.
 
@@ -23,7 +24,7 @@ Please see the OpenFIBSEM API [Getting Started](../openfibsem/getting_started.md
 
 ## Protocols
 
-The protocol file defines everything about the workflow. This includes the method, machine learning parameters, workflow options, and the milling configurations. 
+The protocol file defines everything about the workflow. This includes the method, machine learning parameters, workflow options, and the milling configurations.
 
 We provide individual baseline protocols for each method:
 
@@ -281,13 +282,14 @@ landing_sever:                                                          # landin
     preset: "30 keV; 20 nA"
 ```
 
-
 ## Running AutoLamella
 
 Once you have configured your microscope, and have a protocol selected, you are ready to run AutoLamella.
 
 To run autolamella:
+
 ```bash
+
 autolamella_ui
 ```
 
@@ -319,4 +321,3 @@ AutoLamella - Add Lamella
 
 ![AutoLamella Trench Ready](assets/autolamella_ui_trench_ready.png)
 AutoLamella - Trench Ready
-
