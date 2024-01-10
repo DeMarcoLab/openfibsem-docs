@@ -1,23 +1,8 @@
 # OpenFIBSEM
 
-Documentation site
+Welcome to the documentation site for OpenFIBSEM.
 
-[Under construction]
+Check out the API documentation, or AutoLamella project in the tabs above.
 
-## OpenFIBSEM API
+[Under Construction]
 
-- Overview
-- Concepts and Terminology
-- Getting Started
-- Applications
-- Napari Plugin
-- Reference
-
-## AutoLamella
-
-- Overview
-- Motivation
-- Dataset and Models
-- Case Study: Serial Liftout
-- Getting Started
-- Walkthrough

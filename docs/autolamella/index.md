@@ -2,9 +2,14 @@
 
 ## Introduction
 
-Lamella Preparation 
+Lamella Preparation
+
 Methods
+
 Conceptual Overview
+
 Implementation
+
 Experiment Management
+
 Analysis and Results
