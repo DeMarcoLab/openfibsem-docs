@@ -19,13 +19,11 @@ This basic example script demonstrates how to connect to the microscope (setup_s
 
 To run the script:
 
-```python
+```bash
 python example/example.py
 ```
 
-Code:
-
-```python
+```py title="example/example.py"
 from fibsem import utils, acquire
 
 import matplotlib.pyplot as plt
@@ -57,24 +55,18 @@ if __name__ == "__main__":
 ```
 
 
-
-
-
-
-
 ## Imaging
 
 The imaging example demonstrate how to take an image with both beams, and change the imaging settings. 
 
 To run the script:
 
-```python
+```bash 
 python example/example_imaging.py
 ```
 
-Code:
 
-```python
+```python title="example/example_imaging.py"
 import matplotlib
 import matplotlib.pyplot as plt
 
@@ -141,13 +133,11 @@ The movement example
 
 To run the script
 
-```python
+```bash
 python example/example_movement.py
 ```
 
-Code:
-
-```python
+```python title="example/example_movement.py"
 from fibsem import utils
 from fibsem.structures import  FibsemStagePosition
 import numpy as np
@@ -232,11 +222,11 @@ if __name__ == "__main__":
 
 The milling example demonstrates how the define milling patterns, and run ion beam milling. Note: at the moment only ion beam milling is supported, we hope to add electron beam patterning in the future. 
 
-```python
+```bash
 python example/example_milling_.py
 ```
 
-```python
+```python title="example/example_milling.py"
 
 from fibsem import utils
 from fibsem.structures import FibsemPatternSettings, FibsemPattern, FibsemMillingSettings
@@ -319,13 +309,11 @@ The autolamella script is a minimal recreation of the original autolamella progr
 
 To run the script:
 
-```python
+```bash
 python example/autolamella.py
 ```
 
-Code: 
-
-```python
+```python title="example/autolamella.py"
 
 import logging
 import os

@@ -165,16 +165,13 @@ When interacting with the imaging displays, the follow controls are supported.
 - Double Left Click: Move the stage to the selected position (Stable Move)
 - Alt + Double Left Click: Move the stage to the selected position (Vertical Move). Only supported in Ion Beam.
 - Shift + Left Click: Move the selected milling pattern to the position. Only supported in the Ion Beam.
+- Ctrl + Shift + Left Click: Move all milling patterns to the position. Only supported in the Ion Beam.
 
 #### Keypoint Controls
 
 The following controls are supported when interacting with keypoints. 
 Select Keypoint: Click on keypoint
 Move Keypoint: Select and drag keypoint
-
-
-
-
 
 ### User Interface Widgets
 
@@ -352,12 +349,12 @@ We use a standard Adam optimiser, and multi-loss (cross-entropy, dice, and focal
 To train the model:
 
 ```bash
-python fibsem/segementation/train.py --config config.yaml
+python fibsem/segementation/train.py --config training-config.yaml
 ```
 
 Example Model Training Config
 
-```yaml
+```yaml title="training-config.yaml"
 # data
 data_paths:  [/path/to/data, /path/to/second/data]                  # paths to image data (multiple supported)
 label_paths: [/path/to/data/labels, /path/to/second/data/labels]    # paths to label data (multiple supported)

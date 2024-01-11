@@ -12,7 +12,7 @@ pip install fibsem
 
 ### Additional Installation Information
 
-For detailed instructions on installation, and installing the commercial microscope APIs, see [Installation Guide](INSTALLATION.md).
+For detailed instructions on installation, and installing the commercial microscope APIs, see [Installation Guide](installation.md).
 
 ## Configuring your Microscope
 
@@ -44,7 +44,7 @@ You can edit the rest of the configuration values once it has been generated. Th
 
 The full microscope configuration after generation is as follows. See below for an explanation of some specific values.
 
-```yaml
+```yaml title="microscope-configuration.yaml"
 # configuration
 core:
     name: openfibsem-microscope-configuration               # a descriptive name for your configuration                     [SPECIFIED]
@@ -106,11 +106,11 @@ subsystems:
         sputter_coater:         false                       # sputter coater is enabled                                     [USER]                        
 ```
 
-##### IP Address
+#### IP Address
 
 To find the local ip address of the microscope PC, you can use [ipconfig](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig). If you have a standard setup, and have installed openfibsem on the Support PC, this ip address is usually 192.168.0.1. But this might not be the case, so check with ipconfig
 
-##### Rotation Reference
+#### Rotation Reference
 
 The rotation reference is the reference point for stage rotation. For standard ThermoFisher systems it is the rotation when initially loading the stage. It is also the rotation used when you tilt perpendicular to the Electron Beam. The rotation_180 value is 180 degrees offset from the reference rotation, and is the rotation used to tilt perpendicular to the Ion Beam.
 
@@ -118,7 +118,7 @@ INSERT: FLAT_TO_ELECTRON_IMAGE
 
 INSERT: FLAT_TO_ION_IMAGE
 
-###### Column Tilt
+#### Column Tilt
 
 The column tilt angle for each beam. This is standardised for each manufactuer.
 
@@ -127,7 +127,7 @@ The column tilt angle for each beam. This is standardised for each manufactuer.
 | Thermo Fisher      | 0 deg      | 52 deg    |
 | Tescan | 0 deg       | 55 deg    |
 
-##### Eucentric Height
+#### Eucentric Height
 
 The pre-defined working distance for each beam, that defines the eucentric point of the system. This is standard for each different model. I will add more to the table below as I confirm them.
 
@@ -136,6 +136,13 @@ The pre-defined working distance for each beam, that defines the eucentric point
 | TFS - Helios      | 4.0 mm       | 16.5 mm    |
 | TFS - Aquilos | 7.0 mm        | 16.5 mm    |
 | TESCAN - Amber |          |               |
+
+
+#### Thermo Fisher Microscopes
+
+If you are using a Thermo Fisher FIBSEM, I would recommend loading our application files; autolamella and cryo_Pt_dep. You don't have to use them, but you may need to setup application files to work with our milling conventions. 
+
+They are found in fibsem/external/application_files. You can load them using xTUI. 
 
 #### System Fingerprint
 
@@ -201,4 +208,4 @@ OpenFIBSEM UI - Images Acquired
 
 If you made it this far, congratulations! Your system is setup and should be ready to use. We have only scratched the surface of concepts and the api, so please check out the [Concepts](concepts.md) page to learn more about the OpenFIBSEM API, and how it can best help you.
 
-If you have any questions feel free to reach out to Patrick on [Twitter](https://twitter.com/PatrickCleeve) or via [email](patrick@openfibsem.com).
+If you have any questions feel free to reach out to Patrick on [Twitter](https://twitter.com/PatrickCleeve) or via [email](mailto:patrick@openfibsem.com).

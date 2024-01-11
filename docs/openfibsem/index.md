@@ -50,7 +50,7 @@ Or use napari plugin manager
 
 #### Additional Installation Information
 
-For detailed instructions on installation, and installing the commercial microscope APIs, see [Installation Guide](INSTALLATION.md).
+For detailed instructions on installation, and installing the commercial microscope APIs, see [Installation Guide](installation.md).
 
 ## Getting Started
 
@@ -60,7 +60,7 @@ Recommended: You can start an offline demo microscope by speciying manufacturer:
 
 This example shows you how to connect to the microscope, take an image with both beams, and then plot.
 
-```python
+```python title="example/example.py"
 from fibsem import utils, acquire
 import matplotlib.pyplot as plt
 
