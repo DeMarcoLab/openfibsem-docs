@@ -13,9 +13,9 @@ Summary
 | Dataset / Method      | Train    |   Test   |  Total |
 | ----------- | ----------- | -----------| -----------|
 | Waffle      |    214    |  76   | 290 |
-| Liftout |   801      | 168 | 969 |
-| Serial Liftout |   301      | 111             |  412 |
-| **Full** | **1316** | **355** | **1671** |
+| Liftout |   801      | 163 | 969 |
+| Serial Liftout |   301      | 109             |  412 |
+| **Full** | **1316** | **348** | **1664** |
 
 
 Details about the datasets can be found in summary.csv in the dataset directory.
@@ -180,7 +180,7 @@ The evaluation will run each model checkpoint through the detection pipeline, sa
 
 Here we are showing evaluations from the development models.
 
-[TODO]
+[Under Constrution]
 
 ## Experimental
 

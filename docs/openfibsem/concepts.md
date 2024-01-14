@@ -98,7 +98,6 @@ Changing Milling Parameters
 
 Running Milling Operations
 
-
 ### Logging
 
 Event Log
