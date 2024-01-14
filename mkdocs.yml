@@ -61,13 +61,14 @@ nav:
     - Concepts: openfibsem/concepts.md
     - User Guide: openfibsem/user_guide.md
     - Examples: openfibsem/examples.md
+    - Roadmap: openfibsem/roadmap.md
     - API Reference: openfibsem/reference.md
   - AutoLamella:
     - autolamella/index.md
     - Getting Started: autolamella/getting_started.md
     - Motivation: autolamella/motivation.md
     - User Guide: autolamella/user_guide.md
-    - Case Study - Machine Learning: autolamella/case_study_datasets_and_models.md
+    - Machine Learning: autolamella/ml.md
     - Case Study - Serial Liftout: autolamella/case_study_serial_liftout.md
   - Blog:
     - blog/index.md

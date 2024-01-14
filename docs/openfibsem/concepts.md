@@ -273,7 +273,7 @@ In order to efficiently improve the model, as well as automatically generate tes
 
 This form of active learning allows us to collect images that the model is currently failing on, and not feed it any more of images that it already succeeds at. This is crucical to balance the dataset, and efficiently improve when the dataset is relative small (~100s of images).
 
-For more details on this approach to data curation, please see [AutoLamella Datasets and Models](../autolamella/case_study_dataset_and_models.md)
+For more details on this approach to data curation, please see [AutoLamella Datasets and Models](../autolamella/ml.md)
 
 ### Data Labelling
 
@@ -282,7 +282,7 @@ We developed a napari plugin for labelling images for semantic segmentation. The
 [Image Labelling Napari Plugin]
 [Example Labelling GIF for each mode]
 
-For details about how this was used, please see [AutoLamella Datasets and Models](../autolamella/case_study_dataset_and_models.md)
+For details about how this was used, please see [AutoLamella Datasets and Models](../autolamella/ml.md)
 
 ### Manual Labelling
 
@@ -298,37 +298,14 @@ To use, go to the Model tab and load your model, and then tick 'model assisted' 
 
 ### SegmentAnything Assisted Labelling
 
-We have implemented the Segment Anything Model from MetaAI. This model is trained to segment any object. Here we use it as part of the model assisted labelling. We currently support two versions of SAM; SegmentAnything and MobileSAM.
+We have implemented the Segment Anything Model from MetaAI. This model is trained to segment any object. Here we use it as part of the model assisted labelling. We currently support the huggingface transformers implementation for SAM. You can use any compatible SAM model.
 
-SegmentAnything is the original model from MetaAI. It is powerful, but requires a decently large GPU.
-MobileSAM is a recent, faster implementation of SAM, that can be run without a large GPU.
+The recommended models are:
 
-To use either model, you will need to install some additional dependencies, and download the model weights as described below.
+- Large GPU: facebook/sam-vit-base or facebook/sam-vit-large
+- Small GPU / CPU: Zigeng/SlimSAM-uniform-50
 
-##### Segment Anything
-
-For more detailed about SAM see: <https://github.com/facebookresearch/segment-anything>
-
-To use SAM:
-  
-  ```python
-pip install git+https://github.com/facebookresearch/segment-anything.git
-pip install opencv-python pycocotools matplotlib onnxruntime onnx
-
-```
-
-Download weights: [SAM ViT-H](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth)
-
-##### MobileSAM
-
-The labelling UI also supports using MobileSAM which is a faster version of Segment Anything (+ less gpu memory).
-
-``` bash
-pip install git+https://github.com/ChaoningZhang/MobileSAM.git
-
-```
-
-Download weights: [MobileSAM ViT-T](https://drive.google.com/file/d/1dE-YAG-1mFCBmao2rHDp0n-PP4eH7SjE/view?usp=sharing)
+Instructions for using SAM assisted labelling are shown in the side panel.
 
 ### Model Training
 
