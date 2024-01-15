@@ -10,48 +10,722 @@ discussion with sk and ohs about serial liftout method
 
 Changes to workflows stages for serial liftout implementation
 
-with code
+Code examples for completing steps throughout the workflow.
+
+## Getting Started
+
+For information on how to configure your microscope for use with openfibsem, please see [Getting Started](../openfibsem/getting_started.md)
+
+
+### Connecting to the Microscope
+
+Once you have configured your microscope, you should be able to sucessfully connect using your configuration.
+
+```python
+
+from fibsem import utils
+
+# connect to microscope
+microscope, settings = utils.setup_session(config_path="path/to/configuration.yaml", 
+                                            protocol_path="path/to/protocol-serial-liftout.yaml")
+
+```
+The microscope object is the client connection to the microscope server, and settings is the configured settings of the microscope, for example the default imaging settings are available with settings.image.
+
+You can access the protocol dictionary from settings.protocol.
 
 ## Terminology
 
-Flat to Beam
-Image Coincidence
-Feature Detection
+We will use the following terminology in this guide. Please see the [Concepts Page](../openfibsem/concepts.md) for additional information. 
+
+### Beam Coincidence
+
+Beam coincidence refers to when the same feature is centred in both beams. Practically there will always be a small shift, but we want to minimise this where possible. Eucentric height is also refered to, as the position of the stage such that features stay in the same position when the stage is rotated. 
 
 
+### Flat to Beam
 
-## Serial Liftout Model
+When the stage is flat to a beam (e.g. flat to the electron beam) it is perpendicular to the imaging plane. Based on the microscope configuration (manufactuer, stage, and shuttle pre-tilt), we calculate the orientation required (rotation, and tilt) to move the stage to these positions. In the serial liftout appendix, the positions are given for a 45 deg shuttle-pre-tilt, and the term relative rotation is used. These map to the following flat to beam positions. 
+
+- Flat to Electron Beam: 0 relative rotation,  shuttle-pre-tilt deg tilt
+- Flat to Ion Beam: 180deg relative rotation, 52 - shuttle-pre-tilt deg tilt
 
 
+### Movement Modes
 
-## Workflow Changes
+- Stable Movement (Stage): Stable movements move along the sample plane, and maintain the coincidence of the beams. They correct for the stage tilt, shuttle pre-tilt and the imaging perspective. 
+- Vertical Movement (Stage): Vertical movements move the stage vertically in the chamber, corrected for the stage tilt, pre-tilt and imaging perspective. They are used to realign beam coincidence (i.e. align ion to electron). 
+- Corrected Movement (Manipulator): Corrected manipulator movements move only single axes at a time. The axes correspond to the imaging perspectives. Electron beam x and y directions map to the x, y axes and the Ion Beam x and y directions map to the x, and z axes. This allows you to move a single manipulator axes, without moving its position in the other beam.
+
+As these movements all correct for the imaging perspective, they also take the beam type as a parameter. The beam type is where the imaging perspective correction is calculated from. Imaging perspective refers to the distortion when the imaging plane is not parallel to the sample plane. For example, imaging in the ion beam when the sample is flat to the electron beam causes a perspective distortion. 
+
+### Microscope Configuration
+
+The microscope configuration refers to how the microscope is initially configured, including specifying metatdata about the manufacturer, hardware and settings used. 
+
+Protocol
+
+The protocol refers to method specific parameters that are used to control how workflows are executed, select options, and define milling parameters. 
+
+## Serial Liftout Dataset and Model
+
+The MPI team generously provided a dataset from their serial liftout experiments. From this data we have labelled ~400 images from a workflow, and trained a segmentation model. 
+
+```yaml
+checkpoint: 'autolamella-serial-liftout-20240107.pt'
+```
+You can access both the dataset and model through the huggingface api. For more information on both the dataset and models, please see [Machine Learning Page](.ml.md).
+
+We will be using examples from the dataset, and model inference throughout this guide. 
+
+## AutoLamella Implementation
+
+We have a work in progress implementation of Serial Liftout in AutoLamella
+The current implementation in AutoLamella is slightly different than this example, due to additional experiment management integrations, logging and user interface interaction. You should be able to map these examples onto the implementation pretty closely however. 
+
+You can try this in the AutoLiftout UI by selecting the autolamella/protocol-serial-liftout.yaml protocol, or selecting the autoliftout-serial-liftout method and configuring your protocol in the user interface. 
+
+The specific workflow code is located:
+
+- Core: autolamella/workflows/core.py
+- Serial Liftout: autolamella/workflows/serial.py
+
+If you want to try out this implementation workflow feel free, and if you would like any assistance please contact Patrick  on Github (@patrickcleeve2) or via [email](mailto:patrick@openfibsem.com).
 
 
-## Setup
+## Serial Liftout Workflow
 
-### Select Positions
+We will work through the explanatory protocol document, and demonstrate how we can implement the steps using the openfibsem api. We will start from the section Procedure:Preparatory Steps on page 16. This is the start of the FIBSEM operation, after sample preparation and vitrification.
 
-Select a single position
+This guide was written for a Thermo Fisher Hydra Plasma FIB, but should be general for other systems. The guide is intened more as an introduction to using openfibsem, rather than a complete automated workfloww. For current implementation in the user interface, please see [AutoLamella Implementation](#autolamella-implementation).
 
-### Select Landing Positions
+### Preparatory Steps
 
-Select an initial landing position
-Generating landing positions
+The goal of the preparatory steps is to prepare the manipulator and grids for the workflow. 
 
-### Liftout
+#### Step 1 - Prepare Manipulator
 
-Lift-Out
+In this step we have to prepare and calibrate the manipulator. 
+
+A. Focus and Link Stage
+Currently it is recommend to manually focus and link the stage before starting openfibsem. Once you are more confident with the system, you can restore to a saved position to automatically skip this step. 
+
+B. Beam Coincidence
+
+To align the beams coincident, we can use the following steps:
+
+1. Detect a Feature in Electron Beam
+2. Move the Feature the centre of in Electron Beam (Stable Movement)
+3. Detect the Feature in the Ion Beam
+4. Move the stage vertically to move the Feature to the centre of the Ion Beam. (Vertical Movement)
+
+We support multiple different ways of doing this coincident alignment, including manually via user input, alignment with reference images, and feature detection (ml) based alignment (discussed later). You can also perform this correction manually in the user interface by centred a feature with double click in the electron beam, then centring the same feature with alt + double click in the ion beam (to move vertically).
+
+To start, we recommend you manually align the coincidence using the FIBSEM User Interface controls (Double Click to centre feature in Electron, Alt + Double Click to centre feature in Ion). 
+
+C. Move the Shuttle Down
+We move the shuttle down to avoid the manipulator making contact with the stage. All Fibsem stage positions are in the raw coordinate system (z positive is up). This coordinate system is independent of the linked (specimen) coordinate system, which is linked to the SEM working distance. 
+
+```python
+
+from fibsem.structures import FibsemStagePosition
+
+# move the stage down
+microscope.move_stage_relative(FibsemStagePosition(z=-2e-3))
+
+```
+
+D. Insert Manipulator
+
+We insert the manipulator to examine its condition. Depending on when your system was last used and the manipulator was calibrated, this position may vary a lot. We will calibrate the manipulator in the next few steps. 
+
+```python
+
+# insert manipulator
+microscope.insert_manipulator(name="PARK")
+
+```
+
+E. Prepare Manipulator Surface
+
+We mill the bottom surface of the manipulator flat to prepare for attaching the copper adaptor. 
+
+We can define our milling protocol as follows:
+
+```yaml 
+
+flatten:
+    cleaning_cross_section: true
+    depth: 1.0e-05
+    height: 2.5e-6
+    width: 20.0e-06
+    hfw: 150.e-6
+    milling_voltage: 30.0e+3
+    milling_current: 2.8e-08
+    rotation: 0.0
+    scan_direction: BottomToTop
+    application_file: "autolamella"
+    type: "Rectangle"
+
+```
+
+We can use the model to detect the manipulator tip, and then place our milling pattern
+
+```python
+
+# detect points in ion beam at low mag
+settings.image.hfw = 400e-6
+settings.image.beam_type = BeamType.ION
+features = [NeedleTip()]
+det = detection.take_image_and_detect_features(
+    microscope=microscope,
+    settings=settings,
+    features=features,
+)
+
+# offset detection, so we cut into manipulator
+point = det.features[0].feature_m   # position of feature in metres (microscope image coordinates)
+point.y -= 5e-6
+point.x -= 5e-6
+
+# get milling stages from protocol
+stage = _get_milling_stages("flatten", settings.protocol, point)
+
+# mill stages
+milling.mill_stages(microscope, settings, stages)
+
+```
+
+F. Manipulator Calibration
+
+We provide a manipulator calibration tool to assist in calibrating the EasyLift. Due to API limitations, the user still has to activate the calibration procedure in xTUI and then can follow the instructions in the tool to calibrate their EasyLift each day. The tool is available in the AutoLiftout UI via the Tools -> Calibrate Manipulator menu.  The tool uses the machine learning model to calibrate the manipulator. 
+
+
+```python
+from fibsem import calibration
+
+# manipulator calibration
+calibration._calibrate_manipulator_thermo(microscope, settings)
+
+```
+
+After calibrating, we can confirm our calibration was successful, by re-inserting to the saved positions, and checking the positions.
+
+```python
+from fibsem.structures import FibsemStagePosition
+
+# make sure you move the stage down first
+microscope.move_stage_relative(FibsemStagePosition(z=-1e-3))
+
+# insert to parking position (~180um above stage)
+microscope.insert_manipulator(name="PARK")
+
+# insert to eucentric position (centre of both beams)
+microscope.insert_manipulator(name="EUCENTRIC")
+
+# retract manipulator
+microscope.retract_manipulator()
+```
+
+#### Step 2, 3 - Clip and Load the Receiver Grid
+
+These steps clip and and load the receiver grid into the FIBSEM. This is not something we can help with at the moment :D.
+
+#### Step 4 - Copper Block Attachment
+
+The steps prepare the copper adaptor block, and attach it to the manipulator. Figures https://www.nature.com/articles/s41592-023-02113-5/figures/7 show the process.
+
+A. Mill Copper Bar
+
+We move to the milling orientation, and mill the grid bar to be ~20um thick. 
+
+```yaml
+
+copper-bar-clean:
+    cleaning_cross_section: false
+    depth: 2.0e-05
+    height: 5.0e-6
+    width: 80.0e-06
+    hfw: 150.e-6
+    milling_voltage: 30.0e+3
+    milling_current: 65.0e-9
+    rotation: 0.0
+    scan_direction: TopToBottom
+    application_file: "autolamella"
+    type: "Rectangle"
+
+```
+
+```python
+
+import numpy as np
+
+# first move flat to electron
+microscope.move_flat_to_beam(settings, BeamType.ELECTRON)
+
+# move to milling angle
+milling_position = FibsemStagePosition(t=np.deg2rad(18))
+microscope._safe_absolute_stage_movement(milling_position)
+
+# get milling stages
+stages = _get_milling_stages("copper-bar-clean", settings.protocol)
+
+# run milling 
+milling.mill_stages(microscope, settings, stages)
+
+```
+
+B. Rotate Flat to Ion
+
+We rotate around flat to the ion beam.
+
+```python
+
+# move flat to ion
+microscope.move_flat_to_beam(settings, BeamType.ION)
+
+```
+
+C. Mill Chain of Blocks
+
+We mill a chain of blocks into the copper bar, leaving them attached to each other on the side. 
+
+```yaml
+
+copper-block-removal:
+    cleaning_cross_section: false
+    depth: 2.0e-05
+    height: 20.0e-6
+    width: 10.0e-06
+    hfw: 150.e-6
+    milling_voltage: 30.0e+3
+    milling_current: 65.0e-9
+    rotation: 0.0
+    scan_direction: TopToBottom
+    application_file: "autolamella"
+    type: "Rectangle"
+copper-block-removal-top:
+    cleaning_cross_section: false
+    depth: 2.0e-05
+    height: 10.0e-6
+    width: 110.0e-06
+    hfw: 150.e-6
+    milling_voltage: 30.0e+3
+    milling_current: 65.0e-9
+    rotation: 0.0
+    scan_direction: TopToBottom
+    application_file: "autolamella"
+    type: "Rectangle"
+
+```
+
+```python
+
+from fibsem import utils
+from fibsem.patterning import _get_milling_stages
+from fibsem.ui.utils import _draw_milling_stages_on_image 
+from fibsem.structures import Point
+from copy import deepcopy
+import numpy as np
+
+# get evenly spaced points
+width = 100e-6
+n_patterns = 4
+pos_x = np.linspace(-width/2, width/2, n_patterns)
+points = [Point(x, 0) for x in pos_x]
+
+# acquire image for visualiation
+settings.image.hfw = 150e-6
+image = microscope.acquire_image(settings.image)
+
+block_stages = []
+for i, pt in enumerate(points):
+
+    # get milling stages, at each position
+    stage = _get_milling_stages("copper-block-removal", deepcopy(settings.protocol), deepcopy(pt))[0]
+    stage.name = f"Copper-Block-Removal-{i:02d}"
+    block_stages.append(deepcopy(stage))
+
+# get top removal stage
+top_stages= _get_milling_stages("copper-block-removal-top", settings.protocol, Point(0, 10e-6))
+
+stages = top_stages + block_stages
+
+# draw stages on image
+fig = _draw_milling_stages_on_image(image, stages)
+
+```
+
+TODO: draw patterns
+
+D. Move Flat to Ion Beam
+
+```python
+
+# move flat to ion beam
+microscope.move_flat_to_beam(settings, BeamType.ION)
+
+```
+
+E. Insert Maipulator
+
+We insert the manipulator, and move it onto one of the blocks. This moving is best done manually at this point. 
+
+```python
+
+# insert manipulator
+microscope.insert_manipulator(name="PARK")
+
+```
+
+F. Manipulator Contact
+
+We make contact with the block face. We can run another milling stage to polish the face to ensure they are flat.
+
+G. Attach the Block
+
+H. Release the Block
+
+I. Remove Manipulator
+
+```python
+# move manipulator up
+microscope.move_manipulator_corrected(dx=0, dy=10e-6, beam_type=BeamType.ION)
+
+```
+
+J. Retract Manipulator
+```python
+
+# retract manipulator
+microscope.retract_manipulator()
+
+```
+
+#### Step 5 - Prepare the Receiver Grid
+
+## Trench Milling
+
+### Steps 1 - 6 Manual Setup
+
+Steps 1 through 6 involve setting up the microscope, clearing contamination, platinum deposition and image correlation. At the moment these setup steps (focus and link, decontamination) are best performed manually  or not fully supported yet (correlation). 
+
+### Step 7 - Low Magnification, High Resolution Image at SEM
+
+You can use the movement and imaging api to move to the required orientations, and acquire reference images using the following:
+
+```python
+
+# move to imaging orientation -> flat to electron
+microscope.move_flat_to_beam(settings, BeamType.ELECTRON)
+
+# set imaging parameters
+settings.image.beam_type = BeamType.ELECTRON
+settings.image.resolution = [6144, 4096]
+settings.image.dwell_time = 2e-6
+settings.image.hfw = 2000e-6                            # size of grid
+settings.image.label = f"ref_mapping_high_res_electron" # filename
+settings.image.save = True
+
+# acquire the image
+image = acquire.new_image(microscope, settings.image)
+
+```
+
+### Step 8 - Platinum Deposition
+
+You can use the deposition api, but it was developed for a system that had a multi-chem, I haven't been able to test it on a regular gis system. You can also access the deposition tool via the AutoLamella UI -> Tools -> Cryo Deposition.
+
+Example cryo deposition api.
+
+```python
+
+from fibsem import gis
+
+# define gis deposition protocol
+gis_protocol = {
+    "application_file": "cryo_Pt_dep",
+    "gas": "Pt cryo",
+    "position": "cryo",
+    "hfw": 3.0e-05 ,
+    "length": 7.0e-06,
+    "beam_current": 1.0e-8,
+    "time": 30.0,
+}
+
+# move to milling orientation -> flat to ion
+microscope.move_flat_to_beam(settings, BeamType.ION)
+
+# run cryo deposition at the current stage position
+# the stage will move down by 1mm to avoid collision before sputtering.
+gis.cryo_deposition(microscope, gis_protocol)
+
+# run cryo deposition at the a named stage position
+# You will need to define this named position through the Movement Tab (positions.yaml)
+gis.cryo_deposition(microscope, gis_protocol name="cryo-deposition-position")
+```
+
+### Step 9 - Low Magnification, High Resolution Image Post platinum deposition
+
+We can also acquire images after platinum deposition.
+
+```python
+
+# move to imaging orientation -> flat to electron
+microscope.move_flat_to_beam(settings, BeamType.ELECTRON)
+
+# set imaging parameters
+settings.image.beam_type = BeamType.ELECTRON
+settings.image.resolution = [6144, 4096]
+settings.image.dwell_time = 2e-6
+settings.image.hfw = 2000e-6                                # size of grid
+settings.image.label = f"ref_mapping_high_res_electron_pt"  # filename
+settings.image.save = True
+
+# acquire the image
+image = acquire.new_image(microscope, settings.image)
+
+```
+
+### Steps 10 - 11 Correlation
+
+At the moment, correlation is best performed using external software.
+
+You can acquire tilesets using the Minimap UI. It is available through the user interface -> Tools -> Open Minimap
+
+
+### Step 12 - Move to Trench Milling Orientation
+
+We can move to the trench milling orientation (flat to ion beam), with the following code:
+
+```python
+# move perpendicular to ion beam
+microscope.move_flat_to_beam(settings, BeamType.ION)
+
+```
+
+### Step 13 - Align Reference Image
+
+We can align the SEM reference image to the ION image with the following code. 
+
+```python
+
+# load reference image
+ref_image = FibsemImage.load("path/to/reference_image.tif")
+
+# rotate the reference 
+ref_image_electron = image_utils.rotate_image(ref_image_electron)
+
+# acquire ion image using same imaging settings
+settings.image = ImageSettings.fromFibsemImage(ref_image)
+settings.image.beam_type = BeamType.ION
+new_image = acquire.new_image(microscope, settings.image)
+
+# align reference
+# NOTE: there are additional options for masking, and changing filters available
+alignment.align_using_reference_images(microscope, settings, ref_image, new_image)
+```
+
+### Step 14 - Align Features Coincident
+
+To align the beams to the feature of interest is coincident, we can use the following steps:
+
+1. Detect a Feature in Electron Beam
+2. Move the Feature the centre of in Electron Beam (Stable Movement)
+3. Detect the Feature in the Ion Beam
+4. Move the stage vertically to move the Feature to the centre of the Ion Beam. (Vertical Movement)
+
+We support multiple different ways of doing this coincident alignment, including manually via user input, alignment with reference images, and feature detection (ml) based alignment (discussed later). You can also perform this correction manually in the user interface by centred a feature with double click in the electron beam, then centring the same feature with alt + double click in the ion beam (to move vertically).
+
+```python
+
+
+# example: pseudocode
+# we are flat to the ion and want to rotate around 180 to be flat to the electron. then we need to re-align coincidence.
+# assuming the beams were coincident prior to a rotation. We can take reference images before rotation, then cross align them after rotation to restore coincidence. 
+# this is just pseudo code, real examples require more tuning and parameters to make it work repeatedly. For this reason, we prefer using the ml version.
+
+# acquire reference images
+ref_image_electron, ref_image_ion = acquire.take_reference_images(microscope, settings.image)
+
+# rotate flat to electorn
+microscope.move_flat_to_beam(settings, BeamType.ELECTRON)
+
+# acquire new images
+new_image_electron, new_image_ion = acquire.take_reference_images(microscope, settings.image)
+
+# rotate references
+ref_image_electron = image_utils.rotate_image(ref_image_electron)
+ref_image_ion = image_utils.rotate_image(ref_image_ion)
+
+# stable movement (step 1, 2)
+alignment.align_using_reference_images(microscope, settings, ref_image_1, new_image_1)
+
+# vertical movement (step 3, 4)
+alignment.align_using_reference_images(microscope, settings, ref_image_2, new_image_2, constrain_vertical=True)
+
+# the beams should now be coincident again. 
+
+```
+
+
+### Step 14 - Region of Interest
+
+The region of interest is determined manually. Once the stage is moved to the correct position, we can save the state of the microscope with the following code:
+
+```python
+# save trench milling position
+milling_state = microscope.get_current_microscope_state()
+
+# we can restore back to this position / state at any time using:
+microscope.set_microscope_state(milling_state)
+
+# we can also save the state to file, to be reloaded later
+utils.save_yaml("path/to/milling_state.yaml", milling_state.__to_dict__())
+
+```
+
+### Step 15 - Trench Milling
+
+We can define the trench milling protocol as follows, we use a two stage milling protocol. The first stage mills the large trenches at high current, and the second polishes the contact surface. 
+
+```yaml title="protocol-serial-liftout.yaml"
+trench:
+    stages:
+    -   depth: 25.0e-6
+        hfw: 400e-06
+        height: 180.0e-06
+        width: 4.5e-05
+        milling_voltage: 30.0e+3
+        milling_current: 3.0e-9
+        rotation: 0.0
+        scan_direction: TopToBottom
+        side_trench_width: 5.0e-06
+        top_trench_height: 30.0e-6
+        application_file: "autolamella"
+        type: "HorseshoeVertical"
+        preset: "30 keV; 20 nA"
+    -   depth: 25.0e-6
+        hfw: 8.0e-05
+        height: 2.5e-06
+        width: 4.5e-05
+        milling_voltage: 30.0e+3
+        milling_current: 300.0e-12
+        rotation: 0.0
+        scan_direction: TopToBottom
+        application_file: "autolamella"
+        type: "Rectangle"
+
+```
+
+We can then run the trench milling with the following code.
+
+```python
+from fibsem import milling
+from fibsem.patterning import _get_milling_stages
+
+# move the polishing pattern to the top of the volume block
+polishing_offset = Point(0, settings.protocol["trench"]["stages"][0]["height"] / 2)
+
+# get milling stages from the protocol
+stages = _get_milling_stages("trench", settings.protocol, [None, polishing_offset])
+
+# run milling operations
+milling.mill_stages(microscope, settings, stages)
+
+```
+
+We can also draw the milling stages on an image to see them before milling.
+```python
+from fibsem.ui.utils import _draw_milling_stages_on_image
+
+# acquire image
+settings.image.hfw = 400e-6
+settings.image.beam_type = BeamType.ION
+image = acquire.new_image(microscope, settings.image)
+
+# draw milling stages
+fig = _draw_milling_stages_on_image(image, stages)
+
+```
+
+### Step 16 - Acquire Reference Image
+
+We can acquire the final trench reference images with the following code. 
+
+```python
+
+# move to imaging orientation -> flat to electron
+microscope.move_flat_to_beam(settings, BeamType.ELECTRON)
+
+# set imaging parameters
+settings.image.beam_type = BeamType.ELECTRON
+settings.image.resolution = [6144, 4096]
+settings.image.dwell_time = 2e-6
+settings.image.hfw = 2000e-6                                # size of grid
+settings.image.label = f"ref_trench_milling_final"          # filename
+settings.image.save = True
+
+# acquire the image
+image = acquire.new_image(microscope, settings.image)
+
+```
+
+## Liftout
+
+The liftout steps attach the volume block to the manipulator, and extract it from the rest of the sample bulk.
+
+### Steps 1 - 5 Manual Setup
+
+Similar to Trench milling, steps 1 to 5 should be completed manually.
+
+### Step 6 - Restore Milling State
+
+We can restore our previously saved milling position / state.
+
+```python
+
+# load milling state from disk
+milling_state = utils.load_yaml("path/to/milling_state.yaml")
+
+# restore microscope state
+microscope.set_microscope_state(milling_state)
+
+```
 
 ## Landing
 
-Landing
-
+The landing steps attach the lamella to the landing grid, and sever it from the rest of the volume block. 
 
 ### Step 1 - Setup Stage
 
 *"Move the stage to position the receiver grid in the field of view."*
 
-Not applicable has handled in setup stage. 
+We can restore to a previously saved position, such a starting position by first saving it, and then restoring it by name.
+
+To save and restore a position:
+
+```python
+
+## save position
+# get the current stage position
+stage_position = microscope.get_stage_position()
+
+# give your position a name
+stage_position.name = "my-position-grid-01"
+
+# save position to positions.yaml
+# default path: fibsem/config/positions.yaml
+utils.save_positions([stage_position])
+
+## restore position
+# you can restore these positions by loading the position by name:
+stage_position = utils._get_position("my-position-grid-01")
+
+# move to position (safely)
+microscope._safe_absolute_stage_movement(stage_position)
+
+```
 
 ### Step 2 - Move to Landing Orientation
 
@@ -59,9 +733,8 @@ Not applicable has handled in setup stage.
 and adjust the stage rotation to make sure that the pins or 400 mesh grid bars are aligned
 vertical."*
 
-Not applicable as handled in setup stage.
+We can restore to a previously defined position as shown before. In the autolamella application, the landing orientation is defined in the protocol as options/landing_start_position. You can define this position as shown above, or via the Movement Tab. 
 
-The landing orientation is defined by
 ```yaml title="protocol-serial-liftout.yaml"
 options:
     landing_start_position: pre-tilt-35-deg-grid-02-landing
@@ -119,21 +792,39 @@ def generate_landing_positions(microscope, settings) -> list[FibsemStagePosition
     
     return positions
 ```
+
 TODO: show generated grid
+
+
+Once we have selected our initial landing position, we can generate this grid of landing positions as follows:
+
+```python
+
+# user moves to initial landing position
+initial_landing_position = 
+
+# generate landing positions
+positions = generate_landing_positions(microscope, settings)
+
+# save landing positions to file
+utils.save_positions("path/to/saved-landing-positions.yaml")
+
+```
+
+As these generated positions use the stable movement api (stage moves along the sample plane, coincidence is maintained), the positions should be relatively coincident across the entire grid. However, sample variation and damage to the grid can mean that the sample plane is not completely flat, breaking this assumption. 
 
 ### Step 4 - Move to Landing Position
 
 "*Go back to the first section attachment position"*
 
-This is the point we begin the landing workflow. The initial landing position is selected during setup, and then we use the generated landing position. 
-
+This is the point we begin the landing workflow. The initial landing position is selected during setup, and then we use the generated landing position.  
 
 ```python
 
 def create_lamella(microscope, experiment: Experiment, positions: list) -> Lamella:
     """Create a new lamella object, ready for landing at the next available landing position"""
 
-    # create a new lamella
+    # create a new lamella 
     num = max(len(experiment.positions) + 1, 1)
     lamella = Lamella(experiment.path, num)
 
@@ -152,7 +843,7 @@ def create_lamella(microscope, experiment: Experiment, positions: list) -> Lamel
 def landing_workflow(microscope, settings, experiment) -> Experiment:
 
     # generated positions
-    positions = experiment.landing_positions
+    positions = utils._get_positions("path/to/saved-landing-positions.yaml")
 
     # continue landing until exhausted
     continue_landing = True
@@ -213,7 +904,7 @@ det = detection.take_image_and_detect_features(
 )
 
 # set the offset y=10um
-det._offset = Point(0, 10e-6)
+det._offset = Point(0, -10e-6)
 
 # move based on detection
 detection.move_based_on_detection(microscope, settings, det, beam_type=BeamType.ION)
@@ -447,6 +1138,36 @@ We break this down into the following steps
 3. Measure the distance between these points
 4. If the distance is greater than threshold continue. If not, repeat the milling. 
 
+
+```python
+
+confirm_sever = False
+while confirm_sever is False:
+
+    # Step 11 - Mill Sever 
+    # HERE
+
+    # move the manipulator up a small amount
+    for i in range(3):
+        microscope.move_manipulator_corrected(dx=0, dy=50e-9, beam_type=BeamType.ION)
+
+    # detect the distance between volume block and lamella
+    settings.image.beam_type = BeamType.ION
+    features = [VolumeBlockBottomEdge(), LamellaTopEdge()]
+    det = detection.take_image_and_detect_features(
+        microscope=microscope,
+        settings=settings,
+        features=features,
+    )
+
+    # check if the distance is greater than threshold 
+    threshold = 0.5e-6
+    confirm_sever = (abs(det.distance.y) > threshold)
+
+# Step 13 - Move Manipulator up
+
+```
+
 ### Step 13 - Move Manipulator Up
 
 *"Once the section is released, carefully maneuver the extraction volume up. As soon as there is some distance to the section (~1 µm), increase the step size or jog. Move the volume up
@@ -504,7 +1225,7 @@ def validate_volume_block_size(microscope, settings) -> bool:
     )
 
     # get distance
-    volume_block_height = det.distance # distance between features
+    volume_block_height = abs(det.distance.y) # distance between features
 
     # check threshold
     threshold = settings.protocol["options"].get("minimum_volume_size", 10e-6)

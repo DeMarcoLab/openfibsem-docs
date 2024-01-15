@@ -88,6 +88,30 @@ plt.show()
 |  ![WaffleData](assets/show_waffle.png)   |   ![LiftoutData](assets/show_liftout.png)   |  ![LiftoutData](assets/show_serial_liftout.png)  |
 
 
+You can also concatenate the datasets together into a single dataset for easy combined training (e.g. mega models)
+
+
+```python
+from datasets import load_dataset, concatenate_datasets
+
+# load invidual datasets
+waffle_train_ds = load_dataset("patrickcleeve/autolamella", name="waffle", split="train")
+liftout_train_ds = load_dataset("patrickcleeve/autolamella", name="liftout", split="train")
+serial_liftout_train_ds = load_dataset("patrickcleeve/autolamella", name="serial-liftout", split="train")
+
+# concatenate datasets (e.g. mega model)
+train_ds = concatenate_datasets([waffle_train_ds, liftout_train_ds, serial_liftout_train_ds])
+
+print(train_ds)
+```
+
+```yaml
+Dataset({
+    features: ['image', 'annotation'],
+    num_rows: 1316
+})
+```
+
 
 ### Acknowledgement
 
