@@ -354,6 +354,9 @@ stages = top_stages + block_stages
 # draw stages on image
 fig = _draw_milling_stages_on_image(image, stages)
 
+# run milling
+milling.mill_stages(microscope, settings, stages)
+
 ```
 
 TODO: draw patterns
@@ -403,6 +406,41 @@ microscope.retract_manipulator()
 ```
 
 #### Step 5 - Prepare the Receiver Grid
+
+We prepare for the double sided attachment.
+
+
+```yaml
+grid-lines:
+    cleaning_cross_section: 0
+    depth: 5.0e-05
+    height: 1.0e-6
+    width: 500.0e-06
+    hfw: 900.0e-6
+    milling_voltage: 30.0e+3
+    milling_current: 2.8e-08
+    rotation: 0.0
+    scan_direction: TopToBottom
+    application_file: "autolamella"
+    type: "Rectangle" # TODO: update to Line
+
+```
+
+```python
+# move flat to ion
+microscope.move_flat_to_beam(settings, BeamType.ION)
+
+# get milling stages
+stages = _get_milling_stages("grid-lines", settings.protocol)
+
+# mill stages
+milling.mill_stages(microscope, settings, stages)
+
+```
+
+The manipulator and grid are now prepared. 
+
+
 
 ## Trench Milling
 
