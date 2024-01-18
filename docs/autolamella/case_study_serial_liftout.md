@@ -241,18 +241,16 @@ We move to the milling orientation, and mill the grid bar to be ~20um thick.
 
 ```yaml
 
-copper-bar-clean:
-    cleaning_cross_section: false
-    depth: 2.0e-05
-    height: 5.0e-6
-    width: 80.0e-06
-    hfw: 150.e-6
-    milling_voltage: 30.0e+3
-    milling_current: 65.0e-9
-    rotation: 0.0
-    scan_direction: TopToBottom
-    application_file: "autolamella"
-    type: "Rectangle"
+prepare-copper-grid:
+    stages:
+    -   application_file: autolamella
+        hfw: 0.00015
+        milling_current: 28.0e-9
+        milling_voltage: 30000
+        type: Rectangle
+        width: 100.0e-6
+        height: 5.0e-6
+        depth: 30.0e-6
 
 ```
 
@@ -268,7 +266,7 @@ milling_position = FibsemStagePosition(t=np.deg2rad(18))
 microscope._safe_absolute_stage_movement(milling_position)
 
 # get milling stages
-stages = _get_milling_stages("copper-bar-clean", settings.protocol)
+stages = _get_milling_stages("prepare-copper-grid", settings.protocol)
 
 # run milling 
 milling.mill_stages(microscope, settings, stages)
@@ -291,65 +289,51 @@ C. Mill Chain of Blocks
 We mill a chain of blocks into the copper bar, leaving them attached to each other on the side. 
 
 ```yaml
-
-copper-block-removal:
-    cleaning_cross_section: false
-    depth: 2.0e-05
-    height: 20.0e-6
-    width: 10.0e-06
-    hfw: 150.e-6
-    milling_voltage: 30.0e+3
-    milling_current: 65.0e-9
-    rotation: 0.0
-    scan_direction: TopToBottom
-    application_file: "autolamella"
-    type: "Rectangle"
-copper-block-removal-top:
-    cleaning_cross_section: false
-    depth: 2.0e-05
-    height: 10.0e-6
-    width: 110.0e-06
-    hfw: 150.e-6
-    milling_voltage: 30.0e+3
-    milling_current: 65.0e-9
-    rotation: 0.0
-    scan_direction: TopToBottom
-    application_file: "autolamella"
-    type: "Rectangle"
+prepare-copper-blocks:
+    stages:
+    -   application_file: autolamella
+        hfw: 150.0e-6
+        milling_current: 28.0e-9
+        milling_voltage: 30000
+        depth: 10.0e-6
+        distance: 30.0e-6
+        height: 20.0e-6
+        width: 10.0e-6
+        type: SpotWeldVertical
+        passes: null
+        number: 4.0
+        scan_direction: TopToBottom
+    -   application_file: autolamella
+        hfw: 0.00015
+        milling_current: 28.0e-9
+        milling_voltage: 30000
+        type: Rectangle
+        width: 100.0e-6
+        height: 7.50e-6
+        depth: 10.0e-6
 
 ```
 
 ```python
 
-from fibsem import utils
+from fibsem import utils, acquire
 from fibsem.patterning import _get_milling_stages
 from fibsem.ui.utils import _draw_milling_stages_on_image 
 from fibsem.structures import Point
-from copy import deepcopy
-import numpy as np
 
-# get evenly spaced points
-width = 100e-6
-n_patterns = 4
-pos_x = np.linspace(-width/2, width/2, n_patterns)
-points = [Point(x, 0) for x in pos_x]
 
 # acquire image for visualiation
 settings.image.hfw = 150e-6
 image = microscope.acquire_image(settings.image)
 
-block_stages = []
-for i, pt in enumerate(points):
+# offset for top pattern
+h1 = settings.protocol["prepare-copper-blocks"]["stages"][0]["height"]
+h2 = settings.protocol["prepare-copper-blocks"]["stages"][1]["height"]
+dy = h1/2 - h2/2
+pts = [Point(0, 0), Point(0, dy)]
 
-    # get milling stages, at each position
-    stage = _get_milling_stages("copper-block-removal", deepcopy(settings.protocol), deepcopy(pt))[0]
-    stage.name = f"Copper-Block-Removal-{i:02d}"
-    block_stages.append(deepcopy(stage))
-
-# get top removal stage
-top_stages= _get_milling_stages("copper-block-removal-top", settings.protocol, Point(0, 10e-6))
-
-stages = top_stages + block_stages
+# get milling stages form protocol
+stages = _get_milling_stages("prepare-copper-blocks", settings.protocol, pts)
 
 # draw stages on image
 fig = _draw_milling_stages_on_image(image, stages)
@@ -387,7 +371,49 @@ We make contact with the block face. We can run another milling stage to polish 
 
 G. Attach the Block
 
+
+```yaml
+
+prepare-copper-block-weld:
+    stages:
+    -   height: 2.5e-6
+        width: 0.5e-6
+        depth: 4.0e-6
+        distance: 0.25e-6
+        number: 10
+        rotation: 0.0
+        passes: 1.0
+        milling_voltage: 30.0e+3
+        milling_current: 300.0e-12
+        hfw: 150.0e-6
+        application_file: "autolamella"
+        scan_direction: "TopToBottom"
+        type: "SpotWeldVertical"
+        preset: "30 keV; 2.5 nA"
+
+
+```
+
 H. Release the Block
+
+```yaml
+
+prepare-copper-release:
+    stages:
+    -   application_file: autolamella
+        hfw: 150.0e-6
+        milling_current: 28.0e-9
+        milling_voltage: 30000
+        depth: 10.0e-6
+        distance: 30.0e-6
+        height: 20.0e-6
+        width: 5.0e-6
+        type: SpotWeldVertical
+        passes: null
+        number: 2.0
+        scan_direction: TopToBottom
+
+```
 
 I. Remove Manipulator
 
@@ -1032,7 +1058,7 @@ We break this down into the following steps:
 First we need to define our weld milling protocol. We already support these kind of milling patterns, under the type "Spot Weld". A spot weld consists of a set of equally horizontal patterns, and is used as the name suggests for redeposition welds. Similar to attaching the  volume block to the adapter, setting passes = 1 is important so we don't mill over our redeposited material.
 
 ```yaml title="protocol-serial-liftout.yaml"
-weld:
+landing-weld:
     stages:
     # left weld
     -   height: 0.5e-6
@@ -1126,7 +1152,7 @@ Milling protocol
 
 ```yaml title="protocol-serial-liftout.yaml"
 
-landing_sever:
+landing-sever:
     cleaning_cross_section: 0.0
     depth: 20.0e-06
     height: 0.25e-06
@@ -1157,7 +1183,7 @@ point = det.features[0].feature_m
 point.y += v_offset
 
 # get weld milling stages
-stages = milling._get_milling_stages("landing_sever", settings.protocol, point)
+stages = milling._get_milling_stages("landing-sever", settings.protocol, point)
 
 # mill stages
 milling.mill_stages(microscope=microscope, settings=settings, stages=stages)

@@ -200,7 +200,7 @@ flatten:                                                                # flatte
     application_file: "autolamella"
     type: "Rectangle"
     preset: "30 keV; 20 nA"
-liftout_sever:                                                          # liftout_sever: (autolamella-serial-liftout)
+liftout-sever:                                                          # liftout-sever: (autolamella-serial-liftout)
     cleaning_cross_section: 0.0
     depth: 25.0e-06
     height: 5.0e-06
@@ -212,7 +212,7 @@ liftout_sever:                                                          # liftou
     application_file: "autolamella"
     type: "Rectangle"
     preset: "30 keV; 20 nA"
-liftout_weld:                                                           # liftout_weld: (autolamella-serial-liftout)
+liftout-weld:                                                           # liftout-weld: (autolamella-serial-liftout)
     height: 5.0e-6
     width: 0.5e-6
     depth: 5.0e-6
@@ -226,7 +226,7 @@ liftout_weld:                                                           # liftou
     scan_direction: "TopToBottom"
     type: "SpotWeldVertical"
     preset: "30 keV; 2.5 nA"
-adapter_weld:                                                           # adapter_weld: (autolamella-serial-liftout)
+prepare-copper-block-weld:                                                           # prepare-copper-block-weld: (autolamella-serial-liftout)
     height: 5.0e-6
     width: 0.5e-6
     depth: 5.0e-6
@@ -268,7 +268,7 @@ weld:                                                                   # weld: 
         scan_direction: "LeftToRight"
         type: "SpotWeld"
         preset: "30 keV; 2.5 nA"
-landing_sever:                                                          # landing_sever: (autolamella-serial-liftout)
+landing-sever:                                                          # landing-sever: (autolamella-serial-liftout)
     cleaning_cross_section: 0.0
     depth: 25.0e-06
     height: 1.0e-06

@@ -123,7 +123,6 @@ microexpansion:
   distance: 1.0e-05
   height: 1.8e-05
   hfw: 200e-6
-  lamella_width: 1.0e-05
   milling_current: 2.0e-09
   preset: 30 keV; 2.5 nA
   width: 5.0e-07
