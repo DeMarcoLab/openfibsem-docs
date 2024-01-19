@@ -90,7 +90,7 @@ The specific workflow code is located:
 - Core: autolamella/workflows/core.py
 - Serial Liftout: autolamella/workflows/serial.py
 
-If you want to try out this implementation workflow feel free, and if you would like any assistance please contact Patrick  on Github (@patrickcleeve2) or via [email](mailto:patrick@openfibsem.com).
+If you want to try out this implementation workflow feel free, and if you would like any assistance please contact Patrick  on Github (@patrickcleeve2) or via [email](mailto:patrick@openfibsem.org).
 
 
 ## Serial Liftout Workflow

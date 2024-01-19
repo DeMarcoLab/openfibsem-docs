@@ -208,4 +208,4 @@ OpenFIBSEM UI - Images Acquired
 
 If you made it this far, congratulations! Your system is setup and should be ready to use. We have only scratched the surface of concepts and the api, so please check out the [Concepts](concepts.md) page to learn more about the OpenFIBSEM API, and how it can best help you.
 
-If you have any questions feel free to reach out to Patrick on [Twitter](https://twitter.com/PatrickCleeve) or via [email](mailto:patrick@openfibsem.com).
+If you have any questions feel free to reach out to Patrick on [Twitter](https://twitter.com/PatrickCleeve) or via [email](mailto:patrick@openfibsem.org).
