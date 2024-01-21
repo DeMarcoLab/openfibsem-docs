@@ -148,7 +148,7 @@ The keypoint dataset is used for model evaluation, to as closely mimic the onlin
 
 ## Baseline Models
 
-We have trained models for each method on the subset of data. Models are available on huggingface patrickcleeve/openfibsem-baseline. Includes archived development models. You can try out a demo of these models on [huggingface](https://huggingface.co/spaces/patrickcleeve/autolamella-demo).
+We have trained models for each method on the subset of data. Models are available on huggingface patrickcleeve/autolamella. Includes archived development models. You can try out a demo of these models on [huggingface](https://huggingface.co/spaces/patrickcleeve/autolamella-demo).
 
 The current best performing models for each method are:
 

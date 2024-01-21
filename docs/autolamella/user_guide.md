@@ -141,7 +141,7 @@ After milling the undercut pattern, we can optionally return flat to the electro
 
 ```yaml
 options:
-    return_to_eb_after_undercut: true   # move flat to electron after undercut
+    undercut_return_to_electron: true   # move flat to electron after undercut
 ```
 
 #### Align Feature in Ion Beam
@@ -296,7 +296,8 @@ We acquire low and high magnification reference images for analysis and alignmen
 ```yaml
 options:
     take_final_reference_images: true               # take reference images after polishing
-    take_final_high_quality_reference_images: true  # take high quality reference images after polishing
+    high_quality_image: 
+    enabled: true                                   # take high quality reference images after polishing
 
 
 ```

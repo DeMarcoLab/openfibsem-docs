@@ -178,7 +178,7 @@ Vertical movements correct the eucentric position of the microscope. This is use
 
 To use eucentric movements, use: 
 ```python
-microscope.vertical_move(settings, dy)
+microscope.vertical_move(dy)
 ```
 
 <!-- ::: fibsem.microscope.ThermoMicroscope.vertical_move -->
@@ -194,7 +194,7 @@ Stable movements maintain the sample at the eucentric position, allowing for mov
 
 To use stable movements, use: 
 ```python 
-microscope.stable_move(settings, dx, dy, beam_type)
+microscope.stable_move(dx, dy, beam_type)
 ```
 where dx, dy are the distance to move in the image plane, and beam_type is the beam type to use for the movement.
 

@@ -229,7 +229,7 @@ python example/example_milling_.py
 ```python title="example/example_milling.py"
 
 from fibsem import utils
-from fibsem.structures import FibsemPatternSettings, FibsemPattern, FibsemMillingSettings
+from fibsem.structures import FibsemPattern, FibsemPatternType, FibsemMillingSettings
 from fibsem import milling
 import logging
 
@@ -251,8 +251,8 @@ def main():
     microscope, settings = utils.setup_session(manufacturer="Demo", ip_address="localhost")
 
     # rectangle pattern
-    rectangle_pattern = FibsemPatternSettings(
-        pattern = FibsemPattern.Rectangle,
+    rectangle_pattern = FibsemPattern(
+        pattern = FibsemPatternType.Rectangle,
         width = 10.0e-6,
         height = 10.0e-6,
         depth = 2.0e-6,
@@ -262,8 +262,8 @@ def main():
     )
 
     # line pattern one
-    line_pattern_01 = FibsemPatternSettings(
-        pattern = FibsemPattern.Line,
+    line_pattern_01 = FibsemPattern(
+        pattern = FibsemPatternType.Line,
         start_x = 0.0,
         start_y = 0.0,
         end_x = 10.0e-6,
@@ -296,7 +296,7 @@ def main():
     milling.run_milling(microscope, settings.milling.milling_current, milling_voltage=settings.milling.milling_voltage)
 
     # finish milling
-    milling.finish_milling(microscope, settings.system.ion.current)
+    milling.finish_milling(microscope, microscope.system.ion.beam.beam_current)
 
 
 if __name__ == "__main__":
@@ -345,7 +345,7 @@ def main():
     microscope.move_stage_absolute(stage_position) # do need a safe version?
 
     # take a reference image    
-    settings.image.label = "grid_reference"
+    settings.image.filename = "grid_reference"
     settings.image.beam_type = BeamType.ION
     settings.image.hfw = 900e-6
     settings.image.save = True
@@ -355,7 +355,7 @@ def main():
     experiment: list[Lamella] = []
     lamella_no = 1
     settings.image.hfw = 80e-6
-    base_path = settings.image.save_path
+    base_path = settings.image.path
 
     while True:
         response = input(f"""Move to the desired position. 
@@ -366,12 +366,12 @@ def main():
             
             # set filepaths
             path = os.path.join(base_path, f"{lamella_no:02d}")
-            settings.image.save_path = path
-            settings.image.label = f"ref_lamella"
+            settings.image.path = path
+            settings.image.filename = f"ref_lamella"
             acquire.take_reference_images(microscope, settings.image)
 
             lamella = Lamella(
-                state=microscope.get_current_microscope_state(),
+                state=microscope.get_microscope_state(),
                 reference_image=acquire.new_image(microscope, settings.image),
                 path = path
             )
@@ -415,13 +415,13 @@ def main():
             milling.finish_milling(microscope)
 
             # retake reference image
-            settings.image.save_path = lamella.path
-            settings.image.label = f"ref_mill_stage_{stage_no:02d}"
+            settings.image.path = lamella.path
+            settings.image.filename = f"ref_mill_stage_{stage_no:02d}"
             lamella.reference_image = acquire.new_image(microscope, settings.image)
 
             if stage_no == 3:
                 # take final reference images
-                settings.image.label = f"ref_final"
+                settings.image.filename = f"ref_final"
                 acquire.take_reference_images(microscope, settings.image)
    
     logging.info(f"Finished autolamella: {settings.protocol['name']}")

@@ -83,7 +83,7 @@ We will be using examples from the dataset, and model inference throughout this 
 We have a work in progress implementation of Serial Liftout in AutoLamella
 The current implementation in AutoLamella is slightly different than this example, due to additional experiment management integrations, logging and user interface interaction. You should be able to map these examples onto the implementation pretty closely however. 
 
-You can try this in the AutoLiftout UI by selecting the autolamella/protocol-serial-liftout.yaml protocol, or selecting the autoliftout-serial-liftout method and configuring your protocol in the user interface. 
+You can try this in the AutoLiftout UI by selecting the autolamella/protocol-serial-liftout.yaml protocol, or selecting the autolamella-serial-liftout method and configuring your protocol in the user interface. 
 
 The specific workflow code is located:
 
@@ -189,7 +189,7 @@ point.y -= 5e-6
 point.x -= 5e-6
 
 # get milling stages from protocol
-stage = _get_milling_stages("flatten", settings.protocol, point)
+stage = get_milling_stages("flatten", settings.protocol, point)
 
 # mill stages
 milling.mill_stages(microscope, settings, stages)
@@ -259,14 +259,14 @@ prepare-copper-grid:
 import numpy as np
 
 # first move flat to electron
-microscope.move_flat_to_beam(settings, BeamType.ELECTRON)
+microscope.move_flat_to_beam(BeamType.ELECTRON)
 
 # move to milling angle
 milling_position = FibsemStagePosition(t=np.deg2rad(18))
-microscope._safe_absolute_stage_movement(milling_position)
+microscope.safe_absolute_stage_movement(milling_position)
 
 # get milling stages
-stages = _get_milling_stages("prepare-copper-grid", settings.protocol)
+stages = get_milling_stages("prepare-copper-grid", settings.protocol)
 
 # run milling 
 milling.mill_stages(microscope, settings, stages)
@@ -280,7 +280,7 @@ We rotate around flat to the ion beam.
 ```python
 
 # move flat to ion
-microscope.move_flat_to_beam(settings, BeamType.ION)
+microscope.move_flat_to_beam(BeamType.ION)
 
 ```
 
@@ -317,7 +317,7 @@ prepare-copper-blocks:
 ```python
 
 from fibsem import utils, acquire
-from fibsem.patterning import _get_milling_stages
+from fibsem.patterning import get_milling_stages
 from fibsem.ui.utils import _draw_milling_stages_on_image 
 from fibsem.structures import Point
 
@@ -333,7 +333,7 @@ dy = h1/2 - h2/2
 pts = [Point(0, 0), Point(0, dy)]
 
 # get milling stages form protocol
-stages = _get_milling_stages("prepare-copper-blocks", settings.protocol, pts)
+stages = get_milling_stages("prepare-copper-blocks", settings.protocol, pts)
 
 # draw stages on image
 fig = _draw_milling_stages_on_image(image, stages)
@@ -350,7 +350,7 @@ D. Move Flat to Ion Beam
 ```python
 
 # move flat to ion beam
-microscope.move_flat_to_beam(settings, BeamType.ION)
+microscope.move_flat_to_beam(BeamType.ION)
 
 ```
 
@@ -454,10 +454,10 @@ grid-lines:
 
 ```python
 # move flat to ion
-microscope.move_flat_to_beam(settings, BeamType.ION)
+microscope.move_flat_to_beam(BeamType.ION)
 
 # get milling stages
-stages = _get_milling_stages("grid-lines", settings.protocol)
+stages = get_milling_stages("grid-lines", settings.protocol)
 
 # mill stages
 milling.mill_stages(microscope, settings, stages)
@@ -481,14 +481,14 @@ You can use the movement and imaging api to move to the required orientations, a
 ```python
 
 # move to imaging orientation -> flat to electron
-microscope.move_flat_to_beam(settings, BeamType.ELECTRON)
+microscope.move_flat_to_beam(BeamType.ELECTRON)
 
 # set imaging parameters
 settings.image.beam_type = BeamType.ELECTRON
 settings.image.resolution = [6144, 4096]
 settings.image.dwell_time = 2e-6
 settings.image.hfw = 2000e-6                            # size of grid
-settings.image.label = f"ref_mapping_high_res_electron" # filename
+settings.image.filename = f"ref_mapping_high_res_electron" # filename
 settings.image.save = True
 
 # acquire the image
@@ -518,7 +518,7 @@ gis_protocol = {
 }
 
 # move to milling orientation -> flat to ion
-microscope.move_flat_to_beam(settings, BeamType.ION)
+microscope.move_flat_to_beam(BeamType.ION)
 
 # run cryo deposition at the current stage position
 # the stage will move down by 1mm to avoid collision before sputtering.
@@ -536,14 +536,14 @@ We can also acquire images after platinum deposition.
 ```python
 
 # move to imaging orientation -> flat to electron
-microscope.move_flat_to_beam(settings, BeamType.ELECTRON)
+microscope.move_flat_to_beam(BeamType.ELECTRON)
 
 # set imaging parameters
 settings.image.beam_type = BeamType.ELECTRON
 settings.image.resolution = [6144, 4096]
 settings.image.dwell_time = 2e-6
 settings.image.hfw = 2000e-6                                # size of grid
-settings.image.label = f"ref_mapping_high_res_electron_pt"  # filename
+settings.image.filename = f"ref_mapping_high_res_electron_pt"  # filename
 settings.image.save = True
 
 # acquire the image
@@ -564,7 +564,7 @@ We can move to the trench milling orientation (flat to ion beam), with the follo
 
 ```python
 # move perpendicular to ion beam
-microscope.move_flat_to_beam(settings, BeamType.ION)
+microscope.move_flat_to_beam(BeamType.ION)
 
 ```
 
@@ -613,7 +613,7 @@ We support multiple different ways of doing this coincident alignment, including
 ref_image_electron, ref_image_ion = acquire.take_reference_images(microscope, settings.image)
 
 # rotate flat to electorn
-microscope.move_flat_to_beam(settings, BeamType.ELECTRON)
+microscope.move_flat_to_beam(BeamType.ELECTRON)
 
 # acquire new images
 new_image_electron, new_image_ion = acquire.take_reference_images(microscope, settings.image)
@@ -639,13 +639,13 @@ The region of interest is determined manually. Once the stage is moved to the co
 
 ```python
 # save trench milling position
-milling_state = microscope.get_current_microscope_state()
+milling_state = microscope.get_microscope_state()
 
 # we can restore back to this position / state at any time using:
 microscope.set_microscope_state(milling_state)
 
 # we can also save the state to file, to be reloaded later
-utils.save_yaml("path/to/milling_state.yaml", milling_state.__to_dict__())
+utils.save_yaml("path/to/milling_state.yaml", milling_state.to_dict())
 
 ```
 
@@ -686,13 +686,13 @@ We can then run the trench milling with the following code.
 
 ```python
 from fibsem import milling
-from fibsem.patterning import _get_milling_stages
+from fibsem.patterning import get_milling_stages
 
 # move the polishing pattern to the top of the volume block
 polishing_offset = Point(0, settings.protocol["trench"]["stages"][0]["height"] / 2)
 
 # get milling stages from the protocol
-stages = _get_milling_stages("trench", settings.protocol, [None, polishing_offset])
+stages = get_milling_stages("trench", settings.protocol, [None, polishing_offset])
 
 # run milling operations
 milling.mill_stages(microscope, settings, stages)
@@ -720,14 +720,14 @@ We can acquire the final trench reference images with the following code.
 ```python
 
 # move to imaging orientation -> flat to electron
-microscope.move_flat_to_beam(settings, BeamType.ELECTRON)
+microscope.move_flat_to_beam(BeamType.ELECTRON)
 
 # set imaging parameters
 settings.image.beam_type = BeamType.ELECTRON
 settings.image.resolution = [6144, 4096]
 settings.image.dwell_time = 2e-6
 settings.image.hfw = 2000e-6                                # size of grid
-settings.image.label = f"ref_trench_milling_final"          # filename
+settings.image.filename = f"ref_trench_milling_final"          # filename
 settings.image.save = True
 
 # acquire the image
@@ -787,7 +787,7 @@ utils.save_positions([stage_position])
 stage_position = utils._get_position("my-position-grid-01")
 
 # move to position (safely)
-microscope._safe_absolute_stage_movement(stage_position)
+microscope.safe_absolute_stage_movement(stage_position)
 
 ```
 
@@ -831,7 +831,7 @@ def generate_landing_positions(microscope, settings) -> list[FibsemStagePosition
     generated along the sample plane, based on the current orientation of the stage."""
 
     # base state = top left corner
-    base_state = microscope.get_current_microscope_state()
+    base_state = microscope.get_microscope_state()
 
     # get the landing grid protocol
     landing_grid_protocol = settings.protocol["options"]["landing_grid"]
@@ -842,12 +842,11 @@ def generate_landing_positions(microscope, settings) -> list[FibsemStagePosition
 
     for i in range(n_rows):
         for j in range(n_cols):
-            _new_position = microscope._calculate_new_position( 
-                settings=settings, 
+            _new_position = microscope.project_stable_move( 
                 dx=grid_square.x*j, 
                 dy=-grid_square.y*i, 
                 beam_type=BeamType.ION, 
-                base_position=base_state.absolute_position)            
+                base_position=base_state.stage_position)            
             
             # position name is number of position in the grid
             _new_position.name = f"Landing Position {i*n_cols + j:02d}"
@@ -898,8 +897,8 @@ def create_lamella(microscope, experiment: Experiment, positions: list) -> Lamel
 
     # set the state of the lamella, ready for landing
     lamella.state.stage = AutoLamellaStage.LiftoutLamella
-    lamella.state.microscope_state = microscope.get_current_microscope_state()
-    lamella.state.microscope_state.absolute_position = deepcopy(positions[land_idx])
+    lamella.state.microscope_state = microscope.get_microscope_state()
+    lamella.state.microscope_state.stage_position = deepcopy(positions[land_idx])
     lamella.landing_state = deepcopy(lamella.state.microscope_state)
 
     return lamella
@@ -1119,7 +1118,7 @@ left_corner.y  +=  v_offset
 right_corner.y +=  v_offset
 
 # get weld milling stages
-stages = milling._get_milling_stages("weld", settings.protocol, [left_point, right_point])
+stages = milling.get_milling_stages("weld", settings.protocol, [left_point, right_point])
 
 # mill stages
 milling.mill_stages(microscope=microscope, settings=settings, stages=stages)
@@ -1183,7 +1182,7 @@ point = det.features[0].feature_m
 point.y += v_offset
 
 # get weld milling stages
-stages = milling._get_milling_stages("landing-sever", settings.protocol, point)
+stages = milling.get_milling_stages("landing-sever", settings.protocol, point)
 
 # mill stages
 milling.mill_stages(microscope=microscope, settings=settings, stages=stages)

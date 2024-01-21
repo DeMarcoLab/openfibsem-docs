@@ -28,7 +28,7 @@ The protocol file defines everything about the workflow. This includes the metho
 
 We provide individual baseline protocols for each method:
 
-- autolamella-default: protocol-base.yaml
+- autolamella-on-grid: protocol-base.yaml
 - autolamella-waffle: protocol-waffle.yaml
 - autolamella-autoliftout: protocol-autoliftout-base.yaml
 - autolamella-serial-liftout: protocol-serial-liftout.yaml
@@ -47,7 +47,12 @@ options:
     alignment_attempts: 3.0                                             # the max number alignment repeat attempts
     alignment_at_milling_current: true                                  # whether to align at the milling or imaging current
     take_final_reference_images: true                                   # acquire reference images after final polishing
-    take_final_high_quality_reference_images: false                     # acquire high quality (frame-integrated) images after final polishing
+    high_quality_image:                                                 
+        enabled: false                                                  # acquire high quality (frame-integrated) images after final polishing
+        dwell_time: 2.0e-6                                              # dwell time for hq
+        resolution: [3072, 2048]                                        # resolution for hq
+        hfw: 50.e-6                                                     # hfw for hq
+        frame_integration: 2                                            # frame integration for hq
     take_final_overview_image: true                                     # acquire a low-magnification overview after final polishing
     compucentric_x_offset: 0.0e-6                                       # the fixed offset in x to apply after compucentric rotation 
     compucentric_y_offset: 0.0e-6                                       # the fixed offset in y to apply after compucentric rotation
@@ -64,8 +69,8 @@ options:
         mill_polishing: true
     batch_mode: true                                                    # batch trenching stages together
     confirm_next_stage: true                                            # confirm with the user before advancing to next stage
-    complete_undercut: False                                            # complete the undercut stage
-    return_to_eb_after_undercut: True                                   # return flat to electron beam after undercut
+    undercut_required: False                                            # complete the undercut stage
+    undercut_return_to_electron: True                                   # return flat to electron beam after undercut
     liftout_joining_method: None                                        # method to join the manipulator and lamella (autolamella-autoliftout only) [None, Weld]
     liftout_contact_detection: True                                     # use brightness based contact detection (autolamella-autoliftout only)
     liftout_contact_offset: 0.25e-6                                     # additional offset movement after contact (autolamella-autoliftout only)
