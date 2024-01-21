@@ -205,16 +205,17 @@ The evaluation will run each model checkpoint through the detection pipeline, sa
 Here we are showing evaluations from the development models.
 
 [Under Constrution]
+TODO: insert data from paper
 
 ## Experimental
 
 ### Generating Labels
 
-From the segmentation masks, you can generate other useful labelled objects. The following script will generate bounding boxes and instance segmentations for each object in the mask.
+From the segmentation masks, you can generate other useful labelled objects. The following script will generate bounding boxes and instance segmentations for each object in the mask. This uses the [Get Objects API](../openfibsem/concepts.md#feature-detection).
 
 Generate bounding boxes and instance masks from segmentation masks.
 generate_segmentation_objects.py
 
-These should be easily converted to coco-format for training.
+These bounding boxes, and instance masks should be useful for training different, and larger models, or panoptic segmentation models. If you would like any help using the dataset, labels, or api please contact Patrick @patrickcleeve2, or via [email](mailto:patrick@openfibsem.org).
 
 [Under Construction]

@@ -40,7 +40,7 @@ We will use the following terminology in this guide. Please see the [Concepts Pa
 
 ### Beam Coincidence
 
-Beam coincidence refers to when the same feature is centred in both beams. Practically there will always be a small shift, but we want to minimise this where possible. Eucentric height is also refered to, as the position of the stage such that features stay in the same position when the stage is rotated. 
+Beam coincidence refers to when the same feature is centred in both beams. Practically there will always be a small shift, but we want to minimise this where possible. Eucentric height is also refered to, as the position of the stage such that features stay in the same position when the stage is tilted. 
 
 
 ### Flat to Beam
@@ -103,6 +103,10 @@ This guide was written for a Thermo Fisher Hydra Plasma FIB, but should be gener
 
 The goal of the preparatory steps is to prepare the manipulator and grids for the workflow. 
 
+#### Available via User Interface
+
+The manipulator preparation is available in AutoLiftout UI in the Tools menu. You will need to connect to the microscope, create / load an experiment and load a serial-liftout protocol before you can access it. 
+
 #### Step 1 - Prepare Manipulator
 
 In this step we have to prepare and calibrate the manipulator. 
@@ -121,9 +125,15 @@ To align the beams coincident, we can use the following steps:
 
 We support multiple different ways of doing this coincident alignment, including manually via user input, alignment with reference images, and feature detection (ml) based alignment (discussed later). You can also perform this correction manually in the user interface by centred a feature with double click in the electron beam, then centring the same feature with alt + double click in the ion beam (to move vertically).
 
-To start, we recommend you manually align the coincidence using the FIBSEM User Interface controls (Double Click to centre feature in Electron, Alt + Double Click to centre feature in Ion). 
+To start, we recommend you manually align the coincidence using the FIBSEM User Interface controls 
+
+1. Double Click to centre feature in Electron Beam
+2.  Alt + Double Click to centre feature in Ion Beam 
+
+The feature should now be centred in both beams, and you are coincident.
 
 C. Move the Shuttle Down
+
 We move the shuttle down to avoid the manipulator making contact with the stage. All Fibsem stage positions are in the raw coordinate system (z positive is up). This coordinate system is independent of the linked (specimen) coordinate system, which is linked to the SEM working distance. 
 
 ```python
