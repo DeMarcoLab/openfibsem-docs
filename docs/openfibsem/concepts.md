@@ -1398,13 +1398,6 @@ AutoLamella checkpoints are available via huggingface (patrickcleeve/autolamella
 
 
 
-
-
-
-
-
-
-
 ## User Interface
 
 Each application has an associated user interface to allow the user to easily setup and monitor the workflow.
@@ -1441,7 +1434,7 @@ Move Keypoint: Select and drag keypoint
 
 We developed a set of ui widgets that are reused across applications.
 
-#### System Configuration Widget
+#### Microscope Connection Widget
 
 This widget allows the user to connect to the microscope, and configure the system.
 

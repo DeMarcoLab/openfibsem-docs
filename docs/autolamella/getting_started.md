@@ -39,11 +39,12 @@ Protocol Structure
 
 ```yaml
 # protocol
-core:
+options:
     name: autolamella-waffle-mouse-scan-rotation-0deg                   # descriptive name of the protocol
     method: autolamella-waffle                                          # protocol method (see supported methods)
     ml-checkpoint: autolamella-05-34.pt                                 # machine learning checkpoint to use (see supported models)
-options:
+    use_microexpansion: false                                           # mill the microexpansion patterns (stress relief)
+    use_notch: true                                                     # mill the notch pattern (stress relief)
     alignment_attempts: 3.0                                             # the max number alignment repeat attempts
     alignment_at_milling_current: true                                  # whether to align at the milling or imaging current
     take_final_reference_images: true                                   # acquire reference images after final polishing
@@ -101,154 +102,125 @@ platinum:                                                               # platin
         hfw: 3.0e-05
         length: 7.0e-06
         time: 30.0
-# milling                                                               # milling protocols for each stage (required for method)
-notch:                                                                  # notch (autolamella-waffle)
-    application_file: autolamella
-    cleaning_cross_section: false
-    depth: 2.5e-06
-    distance: 2.0e-06
-    enabled: true
-    flip: 0
-    hfw: 80e-6
-    hheight: 2.0e-07
-    hwidth: 4.0e-06
-    milling_current: 2.0e-09
-    preset: 30 keV; 2.5 nA
-    vheight: 2.0e-06
-    vwidth: 2.0e-07
-    type: WaffleNotch
-trench:                                                                 # trench: (autolamella-waffle, autolamella-autoliftout, autolamella-serial-liftout)
-    application_file: autolamella
-    cleaning_cross_section: false
-    depth: 1.25e-06
-    hfw: 0.00018
-    lamella_height: 2.5e-05
-    lamella_width: 2.2e-05
-    milling_current: 7.6e-09
-    offset: 0.0
-    preset: 30 keV; 2.5 nA
-    size_ratio: 2.0
-    trench_height: 3.2e-05
-    type: Trench
-undercut:                                                               # undercut: (autolamella-waffle, autolamella-autoliftout, autolamella-serial-liftout)
-    application_file: autolamella
-    cleaning_cross_section: false
-    depth: 1.2e-06
-    height: 16.0e-06
-    hfw: 8.0e-05
-    milling_current: 7.6e-09
-    preset: 30 keV; 2.5 nA
-    tilt_angle: -5.0
-    tilt_angle_step: 2.0
-    width: 22.0e-6
-    type: Rectangle
-fiducial:                                                               # fiducial: (all)
-    application_file: autolamella
-    cleaning_cross_section: false
-    depth: 1.5e-06
-    enabled: true
-    height: 1.0e-05
-    hfw: 8.0e-05
-    milling_current: 7.6e-09
-    passes: null
-    preset: 30 keV; 20 nA
-    rotation: 45
-    width: 1.0e-06
-    type: Fiducial
-lamella:                                                                # lamella: (all)
-    stages:
-    -   application_file: autolamella
-        cleaning_cross_section: true
-        depth: 2.0e-06
-        hfw: 8.0e-05
-        lamella_height: 5.0e-07
-        lamella_width: 14.0e-6
+milling:                                                                    # milling protocols for each stage (required for method)
+    notch:                                                                  # notch (autolamella-waffle)
+        application_file: autolamella
+        cleaning_cross_section: false
+        depth: 2.5e-06
+        distance: 2.0e-06
+        enabled: true
+        flip: 0
+        hfw: 80e-6
+        hheight: 2.0e-07
+        hwidth: 4.0e-06
         milling_current: 2.0e-09
-        offset: 2.0e-06
         preset: 30 keV; 2.5 nA
-        size_ratio: 1.0
-        trench_height: 5.0e-06
-        type: Trench
-    -   application_file: autolamella
-        cleaning_cross_section: true
-        depth: 1.0e-06
-        hfw: 8.0e-05
-        lamella_height: 5.0e-07
-        lamella_width: 1.4e-05
-        milling_current: 7.4e-10
-        offset: 5.0e-07
-        preset: 30 keV; 1 nA
-        size_ratio: 1.0
-        trench_height: 2.0e-06
-        type: Trench
-    -   application_file: autolamella
-        cleaning_cross_section: true
-        depth: 4.0e-07
-        hfw: 8.0e-05
-        lamella_height: 4.5e-07
-        lamella_width: 1.4e-05
-        milling_current: 6.0e-11
+        vheight: 2.0e-06
+        vwidth: 2.0e-07
+        type: WaffleNotch
+    trench:                                                                 # trench: (autolamella-waffle, autolamella-autoliftout, autolamella-serial-liftout)
+        application_file: autolamella
+        cleaning_cross_section: false
+        depth: 1.25e-06
+        hfw: 0.00018
+        lamella_height: 2.5e-05
+        lamella_width: 2.2e-05
+        milling_current: 7.6e-09
         offset: 0.0
-        preset: 30 keV; 50 pA
-        size_ratio: 1.0
-        trench_height: 6.0e-07
+        preset: 30 keV; 2.5 nA
+        size_ratio: 2.0
+        trench_height: 3.2e-05
         type: Trench
-flatten:                                                                # flatten: (autolamella-autoliftout)
-    cleaning_cross_section: 1.0
-    depth: 1.0e-05
-    height: 2.5e-05
-    hfw: 8.0e-05
-    milling_current: 2.8e-08
-    rotation: 0.0
-    scan_direction: LeftToRight
-    width: 2.0e-06
-    application_file: "autolamella"
-    type: "Rectangle"
-    preset: "30 keV; 20 nA"
-liftout-sever:                                                          # liftout-sever: (autolamella-serial-liftout)
-    cleaning_cross_section: 0.0
-    depth: 25.0e-06
-    height: 5.0e-06
-    hfw: 400.0e-6
-    milling_current: 28.0e-09
-    rotation: 0.0
-    scan_direction: TopToBottom
-    width: 50.0e-06
-    application_file: "autolamella"
-    type: "Rectangle"
-    preset: "30 keV; 20 nA"
-liftout-weld:                                                           # liftout-weld: (autolamella-serial-liftout)
-    height: 5.0e-6
-    width: 0.5e-6
-    depth: 5.0e-6
-    distance: 2.0e-6
-    number: 5
-    rotation: 0.0
-    passes: 1.0
-    milling_current: 0.74e-09
-    hfw: 150.0e-6
-    application_file: "autolamella"
-    scan_direction: "TopToBottom"
-    type: "SpotWeldVertical"
-    preset: "30 keV; 2.5 nA"
-prepare-copper-block-weld:                                                           # prepare-copper-block-weld: (autolamella-serial-liftout)
-    height: 5.0e-6
-    width: 0.5e-6
-    depth: 5.0e-6
-    distance: 2.0e-6
-    number: 5
-    rotation: 0.0
-    passes: 1.0
-    milling_current: 0.74e-09
-    hfw: 150.0e-6
-    application_file: "autolamella"
-    scan_direction: "TopToBottom"
-    type: "SpotWeldVertical"
-    preset: "30 keV; 2.5 nA"
-weld:                                                                   # weld: (autolamella-autoliftout, autolamella-serial-liftout)
-    stages:
-    -   height: 0.5e-6
-        width: 5.0e-6
+    undercut:                                                               # undercut: (autolamella-waffle, autolamella-autoliftout, autolamella-serial-liftout)
+        application_file: autolamella
+        cleaning_cross_section: false
+        depth: 1.2e-06
+        height: 16.0e-06
+        hfw: 8.0e-05
+        milling_current: 7.6e-09
+        preset: 30 keV; 2.5 nA
+        tilt_angle: -5.0
+        tilt_angle_step: 2.0
+        width: 22.0e-6
+        type: Rectangle
+    fiducial:                                                               # fiducial: (all)
+        application_file: autolamella
+        cleaning_cross_section: false
+        depth: 1.5e-06
+        enabled: true
+        height: 1.0e-05
+        hfw: 8.0e-05
+        milling_current: 7.6e-09
+        passes: null
+        preset: 30 keV; 20 nA
+        rotation: 45
+        width: 1.0e-06
+        type: Fiducial
+    lamella:                                                                # lamella: (all)
+        stages:
+        -   application_file: autolamella
+            cleaning_cross_section: true
+            depth: 2.0e-06
+            hfw: 8.0e-05
+            lamella_height: 5.0e-07
+            lamella_width: 14.0e-6
+            milling_current: 2.0e-09
+            offset: 2.0e-06
+            preset: 30 keV; 2.5 nA
+            size_ratio: 1.0
+            trench_height: 5.0e-06
+            type: Trench
+        -   application_file: autolamella
+            cleaning_cross_section: true
+            depth: 1.0e-06
+            hfw: 8.0e-05
+            lamella_height: 5.0e-07
+            lamella_width: 1.4e-05
+            milling_current: 7.4e-10
+            offset: 5.0e-07
+            preset: 30 keV; 1 nA
+            size_ratio: 1.0
+            trench_height: 2.0e-06
+            type: Trench
+        -   application_file: autolamella
+            cleaning_cross_section: true
+            depth: 4.0e-07
+            hfw: 8.0e-05
+            lamella_height: 4.5e-07
+            lamella_width: 1.4e-05
+            milling_current: 6.0e-11
+            offset: 0.0
+            preset: 30 keV; 50 pA
+            size_ratio: 1.0
+            trench_height: 6.0e-07
+            type: Trench
+    flatten:                                                                # flatten: (autolamella-autoliftout)
+        cleaning_cross_section: 1.0
+        depth: 1.0e-05
+        height: 2.5e-05
+        hfw: 8.0e-05
+        milling_current: 2.8e-08
+        rotation: 0.0
+        scan_direction: LeftToRight
+        width: 2.0e-06
+        application_file: "autolamella"
+        type: "Rectangle"
+        preset: "30 keV; 20 nA"
+    liftout-sever:                                                          # liftout-sever: (autolamella-serial-liftout)
+        cleaning_cross_section: 0.0
+        depth: 25.0e-06
+        height: 5.0e-06
+        hfw: 400.0e-6
+        milling_current: 28.0e-09
+        rotation: 0.0
+        scan_direction: TopToBottom
+        width: 50.0e-06
+        application_file: "autolamella"
+        type: "Rectangle"
+        preset: "30 keV; 20 nA"
+    liftout-weld:                                                           # liftout-weld: (autolamella-serial-liftout)
+        height: 5.0e-6
+        width: 0.5e-6
         depth: 5.0e-6
         distance: 2.0e-6
         number: 5
@@ -257,11 +229,12 @@ weld:                                                                   # weld: 
         milling_current: 0.74e-09
         hfw: 150.0e-6
         application_file: "autolamella"
-        scan_direction: "RightToLeft"
-        type: "SpotWeld"
+        scan_direction: "TopToBottom"
+        type: "SpotWeldVertical"
         preset: "30 keV; 2.5 nA"
-    -   height: 0.5e-6
-        width: 5.0e-6
+    prepare-copper-block-weld:                                                           # prepare-copper-block-weld: (autolamella-serial-liftout)
+        height: 5.0e-6
+        width: 0.5e-6
         depth: 5.0e-6
         distance: 2.0e-6
         number: 5
@@ -270,21 +243,49 @@ weld:                                                                   # weld: 
         milling_current: 0.74e-09
         hfw: 150.0e-6
         application_file: "autolamella"
-        scan_direction: "LeftToRight"
-        type: "SpotWeld"
+        scan_direction: "TopToBottom"
+        type: "SpotWeldVertical"
         preset: "30 keV; 2.5 nA"
-landing-sever:                                                          # landing-sever: (autolamella-serial-liftout)
-    cleaning_cross_section: 0.0
-    depth: 25.0e-06
-    height: 1.0e-06
-    hfw: 150.0e-6
-    milling_current: 7.6e-09
-    rotation: 0.0
-    scan_direction: TopToBottom
-    width: 50.0e-06
-    application_file: "autolamella"
-    type: "Rectangle"
-    preset: "30 keV; 20 nA"
+    weld:                                                                   # weld: (autolamella-autoliftout, autolamella-serial-liftout)
+        stages:
+        -   height: 0.5e-6
+            width: 5.0e-6
+            depth: 5.0e-6
+            distance: 2.0e-6
+            number: 5
+            rotation: 0.0
+            passes: 1.0
+            milling_current: 0.74e-09
+            hfw: 150.0e-6
+            application_file: "autolamella"
+            scan_direction: "RightToLeft"
+            type: "SpotWeld"
+            preset: "30 keV; 2.5 nA"
+        -   height: 0.5e-6
+            width: 5.0e-6
+            depth: 5.0e-6
+            distance: 2.0e-6
+            number: 5
+            rotation: 0.0
+            passes: 1.0
+            milling_current: 0.74e-09
+            hfw: 150.0e-6
+            application_file: "autolamella"
+            scan_direction: "LeftToRight"
+            type: "SpotWeld"
+            preset: "30 keV; 2.5 nA"
+    landing-sever:                                                          # landing-sever: (autolamella-serial-liftout)
+        cleaning_cross_section: 0.0
+        depth: 25.0e-06
+        height: 1.0e-06
+        hfw: 150.0e-6
+        milling_current: 7.6e-09
+        rotation: 0.0
+        scan_direction: TopToBottom
+        width: 50.0e-06
+        application_file: "autolamella"
+        type: "Rectangle"
+        preset: "30 keV; 20 nA"
 ```
 
 ## Running AutoLamella
@@ -297,6 +298,9 @@ To run autolamella:
 
 autolamella_ui
 ```
+
+Or launch via napari plugin manager:
+Napari -> Plugins -> Napari OpenFIBSEM -> AutoLamella UI
 
 ### User Guide
 
