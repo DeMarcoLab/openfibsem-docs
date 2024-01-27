@@ -218,62 +218,75 @@ milling:                                                                    # mi
         application_file: "autolamella"
         type: "Rectangle"
         preset: "30 keV; 20 nA"
-    liftout-weld:                                                           # liftout-weld: (autolamella-serial-liftout)
-        height: 5.0e-6
+    liftout-weld:                                                          # liftout-weld: (autolamella-serial-liftout)
+        height: 2.5e-6
         width: 0.5e-6
-        depth: 5.0e-6
-        distance: 2.0e-6
-        number: 5
+        depth: 4.0e-6
+        pitch_horizontal: 0.25e-6
+        n_columns: 10
+        n_rows: 1
+        pitch_vertical: 0.0e-6
         rotation: 0.0
         passes: 1.0
-        milling_current: 0.74e-09
+        milling_voltage: 30.0e+3
+        milling_current: 300.0e-12
         hfw: 150.0e-6
         application_file: "autolamella"
-        scan_direction: "TopToBottom"
-        type: "SpotWeldVertical"
+        scan_direction: "BottomToTop"
+        type: "ArrayPattern"
         preset: "30 keV; 2.5 nA"
-    prepare-copper-block-weld:                                                           # prepare-copper-block-weld: (autolamella-serial-liftout)
-        height: 5.0e-6
-        width: 0.5e-6
-        depth: 5.0e-6
-        distance: 2.0e-6
-        number: 5
-        rotation: 0.0
-        passes: 1.0
-        milling_current: 0.74e-09
-        hfw: 150.0e-6
-        application_file: "autolamella"
-        scan_direction: "TopToBottom"
-        type: "SpotWeldVertical"
-        preset: "30 keV; 2.5 nA"
-    weld:                                                                   # weld: (autolamella-autoliftout, autolamella-serial-liftout)
+    prepare-copper-weld:                                                           # prepare-copper-block-weld: (autolamella-serial-liftout)
         stages:
-        -   height: 0.5e-6
-            width: 5.0e-6
-            depth: 5.0e-6
-            distance: 2.0e-6
-            number: 5
+        -   height: 2.5e-6
+            width: 0.5e-6
+            depth: 4.0e-6
+            pitch_horizontal: 1.0e-6
+            n_columns: 15
+            n_rows: 1
+            pitch_vertical: 0.0e-6
             rotation: 0.0
             passes: 1.0
-            milling_current: 0.74e-09
+            milling_voltage: 30.0e+3
+            milling_current: 300.0e-12
+            hfw: 150.0e-6
+            application_file: "autolamella"
+            scan_direction: "TopToBottom"
+            type: "ArrayPattern"
+            preset: "30 keV; 2.5 nA"
+    landing-weld:                                                                 # weld: (autolamella-autoliftout, autolamella-serial-liftout)
+        stages:
+        # left weld
+        -   height: 0.5e-6
+            width: 4.0e-6
+            depth: 10.0e-6
+            pitch_vertical: 0.25e-6
+            n_rows: 5
+            n_columns: 1
+            pitch_horizontal: 0
+            rotation: 0.0
+            passes: 1.0
+            milling_current: 300.0e-12
+            milling_voltage: 1.0e-9
             hfw: 150.0e-6
             application_file: "autolamella"
             scan_direction: "RightToLeft"
-            type: "SpotWeld"
-            preset: "30 keV; 2.5 nA"
+            type: "ArrayPattern"
+        # right weld
         -   height: 0.5e-6
-            width: 5.0e-6
-            depth: 5.0e-6
-            distance: 2.0e-6
-            number: 5
+            width: 4.0e-6
+            depth: 10.0e-6
+            pitch_vertical: 0.25e-6
+            n_rows: 5
+            n_columns: 1
+            pitch_horizontal: 0
             rotation: 0.0
             passes: 1.0
-            milling_current: 0.74e-09
+            milling_current: 300.0e-12
+            milling_voltage: 1.0e-9
             hfw: 150.0e-6
             application_file: "autolamella"
             scan_direction: "LeftToRight"
-            type: "SpotWeld"
-            preset: "30 keV; 2.5 nA"
+            type: "ArrayPattern"
     landing-sever:                                                          # landing-sever: (autolamella-serial-liftout)
         cleaning_cross_section: 0.0
         depth: 25.0e-06

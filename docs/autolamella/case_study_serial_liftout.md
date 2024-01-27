@@ -306,12 +306,14 @@ prepare-copper-blocks:
         milling_current: 28.0e-9
         milling_voltage: 30000
         depth: 10.0e-6
-        distance: 30.0e-6
+        pitch_horizontal: 30.0e-6
         height: 20.0e-6
         width: 10.0e-6
-        type: SpotWeldVertical
+        type: ArrayPattern
         passes: null
-        number: 4.0
+        n_columns: 4.0
+        n_rows: 1.0
+        pitch_vertical: 0.0
         scan_direction: TopToBottom
     -   application_file: autolamella
         hfw: 0.00015
@@ -384,13 +386,15 @@ G. Attach the Block
 
 ```yaml
 
-prepare-copper-block-weld:
+prepare-copper-weld:
     stages:
     -   height: 2.5e-6
         width: 0.5e-6
         depth: 4.0e-6
-        distance: 0.25e-6
-        number: 10
+        pitch_horizontal: 1.0e-6
+        n_columns: 15
+        n_rows: 1
+        pitch_vertical: 0.0e-6
         rotation: 0.0
         passes: 1.0
         milling_voltage: 30.0e+3
@@ -398,7 +402,7 @@ prepare-copper-block-weld:
         hfw: 150.0e-6
         application_file: "autolamella"
         scan_direction: "TopToBottom"
-        type: "SpotWeldVertical"
+        type: "ArrayPattern"
         preset: "30 keV; 2.5 nA"
 
 
@@ -415,12 +419,14 @@ prepare-copper-release:
         milling_current: 28.0e-9
         milling_voltage: 30000
         depth: 10.0e-6
-        distance: 30.0e-6
+        pitch_horizontal: 30.0e-6
         height: 20.0e-6
         width: 5.0e-6
-        type: SpotWeldVertical
+        type: ArrayPattern
         passes: null
-        number: 2.0
+        n_columns: 2.0
+        n_rows: 1.0
+        pitch_vertical: 0.0
         scan_direction: TopToBottom
 
 ```
@@ -1073,8 +1079,10 @@ landing-weld:
     -   height: 0.5e-6
         width: 4.0e-6
         depth: 10.0e-6
-        distance: 0.25e-6
-        number: 5
+        pitch_vertical: 0.25e-6
+        n_rows: 5
+        n_columns: 1
+        pitch_horizontal: 0
         rotation: 0.0
         passes: 1.0
         milling_current: 300.0e-12
@@ -1082,21 +1090,23 @@ landing-weld:
         hfw: 150.0e-6
         application_file: "autolamella"
         scan_direction: "RightToLeft"
-        type: "SpotWeld"
+        type: "ArrayPattern"
     # right weld
-    -   height: 2.5e-6
-        width: 5.0e-6
-        depth: 4.0e-6
-        distance: 0.25e-6
-        number: 5
+    -   height: 0.5e-6
+        width: 4.0e-6
+        depth: 10.0e-6
+        pitch_vertical: 0.25e-6
+        n_rows: 5
+        n_columns: 1
+        pitch_horizontal: 0
         rotation: 0.0
         passes: 1.0
-        milling_current: 1.0e-9
-        milling_voltage: 30.0e+3
+        milling_current: 300.0e-12
+        milling_voltage: 1.0e-9
         hfw: 150.0e-6
         application_file: "autolamella"
         scan_direction: "LeftToRight"
-        type: "SpotWeld"
+        type: "ArrayPattern"
 ```
 
 This protocol gives us the following milling patterns.
