@@ -4,7 +4,6 @@ The example directory contains a few example code snippets to help you get start
 
 The scripts are setup to run on the simulated microscope (manufactuer="Demo") by default. You can run them on a real microscope by specifying the manufacturer and ip_address in setup_session. Please becareful and understand the code before running on a real microscope.
 
-
 Before running these scripts, make sure you have installed openfibsem, the manufacturers api, and activated your environment.
 
 To activate your environment
@@ -54,17 +53,15 @@ if __name__ == "__main__":
     main()
 ```
 
-
 ## Imaging
 
-The imaging example demonstrate how to take an image with both beams, and change the imaging settings. 
+The imaging example demonstrate how to take an image with both beams, and change the imaging settings.
 
 To run the script:
 
-```bash 
+```bash
 python example/example_imaging.py
 ```
-
 
 ```python title="example/example_imaging.py"
 import matplotlib
@@ -220,7 +217,7 @@ if __name__ == "__main__":
 
 ## Milling
 
-The milling example demonstrates how the define milling patterns, and run ion beam milling. Note: at the moment only ion beam milling is supported, we hope to add electron beam patterning in the future. 
+The milling example demonstrates how the define milling patterns, and run ion beam milling. Note: at the moment only ion beam milling is supported, we hope to add electron beam patterning in the future.
 
 ```bash
 python example/example_milling_.py

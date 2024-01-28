@@ -28,7 +28,7 @@ The protocol file defines everything about the workflow. This includes the metho
 
 We provide individual baseline protocols for each method:
 
-- autolamella-on-grid: protocol-base.yaml
+- autolamella-on-grid: protocol-on-grid.yaml
 - autolamella-waffle: protocol-waffle.yaml
 - autolamella-autoliftout: protocol-autoliftout-base.yaml
 - autolamella-serial-liftout: protocol-serial-liftout.yaml
@@ -42,7 +42,7 @@ Protocol Structure
 options:
     name: autolamella-waffle-mouse-scan-rotation-0deg                   # descriptive name of the protocol
     method: autolamella-waffle                                          # protocol method (see supported methods)
-    ml-checkpoint: autolamella-05-34.pt                                 # machine learning checkpoint to use (see supported models)
+    ml-checkpoint: autolamella-waffle-20240107.pt                       # machine learning checkpoint to use (see supported models)
     use_microexpansion: false                                           # mill the microexpansion patterns (stress relief)
     use_notch: true                                                     # mill the notch pattern (stress relief)
     alignment_attempts: 3.0                                             # the max number alignment repeat attempts
@@ -343,3 +343,5 @@ AutoLamella - Add Lamella
 
 ![AutoLamella Trench Ready](assets/autolamella_ui_trench_ready.png)
 AutoLamella - Trench Ready
+
+From here you can follow the instructions at the bottom right of the screen, and they will walk you through the workflow.

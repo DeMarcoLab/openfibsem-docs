@@ -310,6 +310,182 @@ options:
 
 ### Liftout Method
 
+AutoLamella Liftout is an automated liftout method for the preparation of cryo lamella.
+The autoliftout requires the following workflow steps:
+
+#### Setup
+
+- The user selects lamella and landing positions.
+
+| Description |Electron Beam            |  Ion Beam
+:-------------------------:|:-------------------------:|:-------------------------:
+| Lamella Position (Low) |![Lamella Positions EB](./assets/liftout/01-subtle-bear/png/ref_lamella_low_res_eb.png) |  ![Lamella Positions IB](./assets/liftout/01-subtle-bear/png/ref_lamella_low_res_ib.png)
+| Lamella Position (High) | ![Lamella Positions EB](./assets/liftout/01-subtle-bear/png/ref_lamella_high_res_eb.png) |  ![Lamella Positions IB](./assets/liftout/01-subtle-bear/png/ref_lamella_high_res_ib.png)
+| Landing Position (Low) | ![Landing Positions EB](./assets/liftout/01-subtle-bear/png/ref_landing_low_res_eb.png) |  ![Landing Positions IB](./assets/liftout/01-subtle-bear/png/ref_landing_low_res_ib.png)
+| Landing Position (High) | ![Landing Positions EB](./assets/liftout/01-subtle-bear/png/ref_landing_high_res_eb.png) |  ![Landing Positions IB](./assets/liftout/01-subtle-bear/png/ref_landing_high_res_ib.png)
+
+
+#### Mill Trench
+
+Mill lower, upper and side trenches using high currents. (horsheshoe pattern, see ref)
+
+- Lower and Upper trenches release lamella from the bulk.
+- Side trench provides access for the needle.
+
+|Description| Electron Beam            |  Ion Beam
+:-------------------------:|:-------------------------:|:-------------------------:
+| Trench Position (Low)  | ![Trench LowResEB](./assets/liftout/01-subtle-bear/png/ref_trench_low_res_eb.png) |  ![Trench LowRes IB](./assets/liftout/01-subtle-bear/png/ref_trench_low_res_ib.png)
+|Trench Position (High)  |![Trench HighRes EB](./assets/liftout/01-subtle-bear/png/ref_trench_high_res_eb.png) |  ![Trench HighRes IB](./assets/liftout/01-subtle-bear/png/ref_trench_high_res_ib.png)
+
+#### Mill Undercut
+
+- Mill the underside and part of the other side of the lamella to release from the base of the bulk. Undercut is also refered to as the jcut.
+
+|Description| Electron Beam            |  Ion Beam
+:-------------------------:|:-------------------------:|:-------------------------:
+| Undercut Position (Low)  | ![UnderCut LowResEB](./assets/liftout/01-subtle-bear/png/ref_jcut_low_res_eb.png) |  ![Trench LowRes IB](./assets/liftout/01-subtle-bear/png/ref_jcut_low_res_ib.png)
+|Undercut Position (High)  |![UnderCut HighRes EB](./assets/liftout/01-subtle-bear/png/ref_jcut_high_res_eb.png) |  ![Trench HighRes IB](./assets/liftout/01-subtle-bear/png/ref_jcut_high_res_ib.png)
+
+
+#### Liftout
+
+1. Insert the needle, and guide to near the lamella.
+2. Charge the sample with the ion beam
+3. Make contact with the lamella,
+4. Sever the lamella from the bulk.
+5. Retract the needle.
+
+| Description |Electron Beam            |  Ion Beam
+:-------------------------:|:-------------------------:|:-------------------------:
+| Liftout Entry Position |![Entry EB](./assets/liftout/01-subtle-bear/png/ref_liftout_needle_eb.png) |  ![Entry IB](./assets/liftout/01-subtle-bear/png/ref_liftout_needle_ib.png)
+| Liftout Ready Position |![Ready EB](./assets/liftout/01-subtle-bear/png/needle_liftout_start_position_eb.png) |  ![Ready IB](./assets/liftout/01-subtle-bear/png/needle_liftout_start_position_ib.png)
+| Liftout Contact Position |![Contact EB](./assets/liftout/01-subtle-bear/png/ref_needle_liftout_landed_high_res_eb.png) |  ![Contact IB](./assets/liftout/01-subtle-bear/png/ref_needle_liftout_landed_high_res_ib.png)
+| Liftout Sever Position |![Sever EB](./assets/liftout/01-subtle-bear/png/ref_liftout_sever_eb.png) |  ![Sever IB](./assets/liftout/01-subtle-bear/png/ref_liftout_sever_ib.png)
+| Liftout Retract Position |![Retract EB](./assets/liftout/01-subtle-bear/png/ref_liftout_eb.png) |  ![Retract IB](./assets/liftout/01-subtle-bear/png/ref_liftout_ib.png)
+
+#### Landing
+
+1. Insert the needle, and guide the lamella to the post
+2. Weld lamella to the post
+3. Discharge the lamella with the electron beam
+4. Removal the needle from the lamella
+5. Retract the needle
+
+| Description |Electron Beam            |  Ion Beam
+:-------------------------:|:-------------------------:|:-------------------------:
+| Landing Entry Position 0 |![Entry EB](./assets/liftout/01-subtle-bear/png/landing_needle_start_position_0_eb.png) |  ![Entry IB](./assets/liftout/01-subtle-bear/png/landing_needle_start_position_0_ib.png)
+| Landing Entry Position 1 |![Entry EB](./assets/liftout/01-subtle-bear/png/landing_needle_start_position_1_eb.png) |  ![Entry IB](./assets/liftout/01-subtle-bear/png/landing_needle_start_position_1_ib.png)
+| Landing Entry Position 2 |![Entry EB](./assets/liftout/01-subtle-bear/png/landing_needle_start_position_2_eb.png) |  ![Entry IB](./assets/liftout/01-subtle-bear/png/landing_needle_start_position_2_ib.png)
+| Landing Entry Position 3 |![Entry EB](./assets/liftout/01-subtle-bear/png/landing_needle_start_position_3_eb.png) |  ![Entry IB](./assets/liftout/01-subtle-bear/png/landing_needle_start_position_3_ib.png)
+| Landing Ready Position |![Ready EB](./assets/liftout/01-subtle-bear/png/landing_needle_ready_position_eb.png) |  ![Ready IB](./assets/liftout/01-subtle-bear/png/landing_needle_ready_position_ib.png)
+| Landing Weld Position |![Weld EB](./assets/liftout/01-subtle-bear/png/landing_lamella_final_weld_high_res_eb.png) |  ![Weld IB](./assets/liftout/01-subtle-bear/png/landing_lamella_final_weld_high_res_ib.png)
+| Landing Removal Position |![Removal EB](./assets/liftout/01-subtle-bear/png/landing_lamella_needle_removal_high_res_eb.png) |  ![Sever IB](./assets/liftout/01-subtle-bear/png/landing_lamella_needle_removal_high_res_ib.png)
+| Landing Retract Position |![Retract EB](./assets/liftout/01-subtle-bear/png/ref_landing_lamella_high_res_eb.png) |  ![Retract IB](./assets/liftout/01-subtle-bear/png/ref_landing_lamella_high_res_ib.png)
+
+#### Setup Lamella
+
+- The user selects the regions of the lamella to polish
+
+|Description| Electron Beam            |  Ion Beam
+:-------------------------:|:-------------------------:|:-------------------------:
+| Polish Setup Position (Low)  | ![PolishSetup LowResEB](./assets/liftout/01-subtle-bear/png/ref_thin_lamella_setup_low_res_eb.png) |  ![PolishSetup LowRes IB](./assets/liftout/01-subtle-bear/png/ref_thin_lamella_setup_low_res_ib.png)
+|Polish Setup Position (High)  |![PolishSetup HighRes EB](./assets/liftout/01-subtle-bear/png/ref_thin_lamella_setup_high_res_eb.png) |  ![PolishSetup HighRes IB](./assets/liftout/01-subtle-bear/png/ref_thin_lamella_setup_high_res_ib.png)
+|Polish Setup Position (Ultra)  |![PolishSetup UltraRes EB](./assets/liftout/01-subtle-bear/png/ref_thin_lamella_setup_ultra_res_eb.png) |  ![PolishSetup UltraRes IB](./assets/liftout/01-subtle-bear/png/ref_thin_lamella_setup_ultra_res_ib.png)
+
+#### Mill Thinning
+
+- Thin the lamella to a lower thickness, using a relatively high current.
+
+|Description| Electron Beam            |  Ion Beam
+:-------------------------:|:-------------------------:|:-------------------------:
+| MillRoughCut Position (Low)  | ![MillRoughCut LowResEB](./assets/liftout/01-subtle-bear/png/ref_thin_lamella_low_res_eb.png) |  ![MillRoughCut LowRes IB](./assets/liftout/01-subtle-bear/png/ref_thin_lamella_low_res_ib.png)
+|MillRoughCut Position (High)  |![MillRoughCut HighRes EB](./assets/liftout/01-subtle-bear/png/ref_thin_lamella_high_res_eb.png) |  ![MillRoughCut HighRes IB](./assets/liftout/01-subtle-bear/png/ref_thin_lamella_high_res_ib.png)
+|MillRoughCut Position (Ultra)  |![MillRoughCut UltraRes EB](./assets/liftout/01-subtle-bear/png/ref_thin_lamella_ultra_res_eb.png) |  ![MillRoughCut UltraRes IB](./assets/liftout/01-subtle-bear/png/ref_thin_lamella_ultra_res_ib.png)
+
+#### Mill Polishing 
+
+- Polish the lamella to electron transparent thickness.
+- Should be completed immediately prior to transfer to prevent contamination buildup.
+
+|Description| Electron Beam            |  Ion Beam
+:-------------------------:|:-------------------------:|:-------------------------:
+| MillPolishingCut Position (Low)  | ![Polish LowResEB](./assets/liftout/01-subtle-bear/png/ref_polish_lamella_low_res_eb.png) |  ![Polish LowRes IB](./assets/liftout/01-subtle-bear/png/ref_polish_lamella_low_res_ib.png)
+|MillPolishingCut Position (High)  |![Polish HighRes EB](./assets/liftout/01-subtle-bear/png/ref_polish_lamella_high_res_eb.png) |  ![Polish HighRes IB](./assets/liftout/01-subtle-bear/png/ref_polish_lamella_high_res_ib.png)
+|MillPolishingCut Position (Ultra)  |![Polish UltraRes EB](./assets/liftout/01-subtle-bear/png/ref_polish_lamella_ultra_res_eb.png) |  ![Polish UltraRes IB](./assets/liftout/01-subtle-bear/png/ref_polish_lamella_ultra_res_ib.png)
+
+
+The following methods were developed for the liftout workflow.
+
+#### Manipulator Preparation
+
+We flatten the side of the needle to maximise surface contact area with the side of the lamella.
+
+TODO: images
+
+#### Landing Surface Preparation
+
+We flatten the side of the landing post to maximise surface contact area with the side of the lamella.
+TODO: images
+
+#### Charge Control
+
+Biological samples in cryogenic conditions often have large amounts of charge which causes challenges with imaging. Often this charging saturates the detectors and images either glow white or completely dark. To overcome this issue, we have developed the following techniques:
+
+- AutoGamma: We automatically apply a digital gamma correction to the image if sufficient mean pixel intensity is determined. Gamma correction shifts the image histogram allowing features to be detected in the image (however it reduces image quality).
+- Charge Neutralisation: To reduce the accumulated charge, we apply a charge neutralisation procedure (e.g. taking a rapid series of electron images to neutralise ion charge after large milling operations). This helps control the charge buildup throughout the process.
+
+TODO: images
+
+#### Side Pickup
+
+To provide better landing stability, we liftout much larger lamella than typical. In conjunction with manipulator and landing surface preparation, we are able to make consistent, right-angled contact with a large surface area between the lamella and the landing post. This provides a more stable base from which to thin the lamella down. The downside of using this method is an increased material waste, and increased thinning time to remove excess material.
+
+To provide better liftout, and landing stability we make contact with the side of the lamella to lift it out of the trench. The side pickup provides the following benefits:
+
+- More stability on contact: we apply a compressive force to the side of the lamella, instead of bending (if touching from the top). This allows us to make firmer contact without bottoming out the lamella in the trench.
+- Better orientation for landing: Due to the lack of rotation/tilt control the angle of liftout determines the orientation for landing the lamella. When lifting from the top of the lamella, it can sometimes rotate, roll or slide of the needle tip when making contact with the post causing bad landing orientation. It is analogous to spinning a basketball on your finger, it can be done but is difficult to repeat. Making contact from the side allows for the lamella to be evenly compressed between the needle and the post, maintaining its orientation.
+
+#### Contact Detection
+
+In order to determine whether the needle and lamella have made sufficient contact, we developed a contact detection procedure.
+
+- We monitor the image brightness, whilst driving the needle towards the lamella.
+- When contact is made between the needle and lamella, there is a significant increase in brightness due to charge disipation. This effect occurs due to the charge build up in the platinum crust being grounded when contact is made with the needle.
+- We detect this change, and stop the needle movement.
+
+Example 01 | Example 02  | Example 03 | Example 04 |
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+|![Example 01](./assets/liftout/contact/contact_1.gif)|![Example 02](./assets/liftout/contact/contact_2.gif)|![Example 03](./assets/liftout/contact/contact_3.gif)|![Example 04](./assets/liftout/contact/contact_4.gif)
+
+However, this effect is very sample dependent and does not occur on some samples.
+
+![Contact Detection](./assets/liftout/contact/contact_brightness.png)
+Sample Specific Contact Detection
+
+#### Deposition Free Attachment
+
+We have developed a repeatable procedure for lifting the lamella by only manipulating the charge buildup. This method does not rely on platinum deposition, or welding (redeposition).
+
+- To attach: We move the needle and lamella close together, and take a series ion beam images to build up charge. When the lamella and needle make contact they stick together with static due to charge.
+- To dettach: Once the lamella is welded to the landing post, we run the electron beam to disapate the charge, and the needle slides off the lamella.
+
+The procedure is still being developed, and understood and is very sensitive to parameters and different conditions (e.g. the number of images being taken).
+
+##### Liftout (Attach)
+
+|Description |Ready|Contact | Sever  |
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
+|Electron View|![Ready](./assets/liftout/01-subtle-bear/png/needle_liftout_start_position_eb.png) |![Contact](./assets/liftout/01-subtle-bear/png/ref_needle_liftout_landed_high_res_eb.png)| ![Sever](./assets/liftout/01-subtle-bear/png/ref_liftout_sever_eb.png) |
+|Ion View |![Ready](./assets/liftout/01-subtle-bear/png/needle_liftout_start_position_ib.png) |![Contact](./assets/liftout/01-subtle-bear/png/ref_needle_liftout_landed_high_res_ib.png)| ![Sever](./assets/liftout/01-subtle-bear/png/ref_liftout_sever_ib.png) |
+
+##### Landing (Dettach)
+
+|Description |Ready| Weld | Removal |
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
+|Electron View|![Ready](./assets/liftout/01-subtle-bear//png/landing_needle_ready_position_eb.png) |![Weld](./assets/liftout/01-subtle-bear/png/landing_lamella_final_weld_high_res_eb.png) | ![Removal](./assets/liftout/01-subtle-bear/png/landing_lamella_needle_removal_high_res_eb.png)
+|Ion View|![Ready](./assets/liftout/01-subtle-bear//png/landing_needle_ready_position_ib.png) | ![Weld](./assets/liftout/01-subtle-bear/png/landing_lamella_final_weld_high_res_ib.png) | ![Removal](./assets/liftout/01-subtle-bear/png/landing_lamella_needle_removal_high_res_ib.png)
+
+
 ### Serial Liftout Method
 
 ## User Interface
