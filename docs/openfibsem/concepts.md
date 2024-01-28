@@ -504,9 +504,6 @@ Assuming you have the user interface open, move the stage under the beams, and t
 3. You can now double click in either beam to move the stage and the system should stay relatively coincident. There will be some small degradation depending on sample quality / consistency. 
 
 
-![Corrected Movement Flat to Electron](./assets/api/movement/move_both_flat_electron.png)
-Finding Coincidence - Flat to Electron
-
 ![Stable Movement - Flat to Ion](./assets/api/movement/move_both_flat_ion.png)
 Finding Coincidence - Flat to Ion
 
@@ -797,11 +794,11 @@ Sputter coating refers to the integrated sputter coater (e.g. on the TFS Aquilos
 
 Currently, OpenFIBSEM does not support sputter coating. We would like to add this in the future, but do not have access to a system with it. If you would like us to prioritise this, and have a system we could use to test, please get in contact.  
 
-### Logging
+## Logging
 
 OpenFISBEM uses a structured event logging format. Operations are logged using a json format and can be parsed directly from the log file. By default, logs are saved in the session directory in logfile.log. For AutoLamella applications, logs are saved inside the Experiment directory in the logfile.log.  
 
-#### Log Parsing
+### Log Parsing
 
 AutoLamella contains a log parser for extracting statistical information from the logs, and a explorer application for analysing data. You could also use other log parsers to export this data. 
 

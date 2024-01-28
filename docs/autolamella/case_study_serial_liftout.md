@@ -97,7 +97,7 @@ If you want to try out this implementation workflow feel free, and if you would 
 
 We will work through the explanatory protocol document, and demonstrate how we can implement the steps using the openfibsem api. We will start from the section Procedure:Preparatory Steps on page 16. This is the start of the FIBSEM operation, after sample preparation and vitrification.
 
-This guide was written for a Thermo Fisher Hydra Plasma FIB, but should be general for other systems. The guide is intened more as an introduction to using openfibsem, rather than a complete automated workfloww. For current implementation in the user interface, please see [AutoLamella Implementation](#autolamella-implementation).
+This guide was written for a Thermo Fisher Hydra Plasma FIB, but should be general for other systems. The guide is intened more as an introduction to using openfibsem, rather than a complete automated workflow. For current implementation in the user interface, please see [AutoLamella Implementation](#autolamella-implementation).
 
 ### Preparatory Steps
 
@@ -105,11 +105,11 @@ The goal of the preparatory steps is to prepare the manipulator and grids for th
 
 #### Available via User Interface
 
-The manipulator preparation is available in AutoLiftout UI in the Tools menu. You will need to connect to the microscope, create / load an experiment and load a serial-liftout protocol before you can access it. 
+The manipulator preparation is available in AutoLiftout UI in the Tools menu. You will need to connect to the microscope, create / load an experiment and load a serial-liftout protocol before you can access it. You can find the code for preparing the manipulator in autolamella/workflows/autoliftout.py:_prepare_manipulator_serial_liftout
 
 #### Step 1 - Prepare Manipulator
 
-In this step we have to prepare and calibrate the manipulator. 
+In this step we have to prepare and calibrate the manipulator.  
 
 A. Focus and Link Stage
 Currently it is recommend to manually focus and link the stage before starting openfibsem. Once you are more confident with the system, you can restore to a saved position to automatically skip this step. 
@@ -164,18 +164,15 @@ We can define our milling protocol as follows:
 
 ```yaml 
 
-flatten:
-    cleaning_cross_section: true
-    depth: 1.0e-05
-    height: 2.5e-6
-    width: 20.0e-06
-    hfw: 150.e-6
-    milling_voltage: 30.0e+3
-    milling_current: 2.8e-08
-    rotation: 0.0
-    scan_direction: BottomToTop
-    application_file: "autolamella"
-    type: "Rectangle"
+prepare-manipulator:
+    application_file: autolamella
+    hfw: 0.00015
+    milling_current: 28.0e-9
+    milling_voltage: 30000
+    type: Rectangle
+    width: 25.0e-6
+    height: 2.50e-6
+    depth: 10.0e-6  
 
 ```
 
@@ -199,7 +196,7 @@ point.y -= 5e-6
 point.x -= 5e-6
 
 # get milling stages from protocol
-stage = get_milling_stages("flatten", settings.protocol, point)
+stage = get_milling_stages("prepare-manipulator", settings.protocol, point)
 
 # mill stages
 milling.mill_stages(microscope, settings, stages)
@@ -281,6 +278,9 @@ stages = get_milling_stages("prepare-copper-grid", settings.protocol)
 # run milling 
 milling.mill_stages(microscope, settings, stages)
 
+# save state for later return
+milling_state = microscope.get_microscope_state()
+
 ```
 
 B. Rotate Flat to Ion
@@ -294,9 +294,9 @@ microscope.move_flat_to_beam(BeamType.ION)
 
 ```
 
-C. Mill Chain of Blocks
+C. Mill Copper Blocks
 
-We mill a chain of blocks into the copper bar, leaving them attached to each other on the side. 
+We mill a series of blocks into the copper bar, leaving them attached to each other on the side. 
 
 ```yaml
 prepare-copper-blocks:
@@ -357,12 +357,14 @@ milling.mill_stages(microscope, settings, stages)
 
 TODO: draw patterns
 
-D. Move Flat to Ion Beam
+D. Move back to Milling Orientation
+
+We restore the microscope, back to the milling orientation. If this position was coincident, it should still be coincident. Otherwise, align manually. 
 
 ```python
 
-# move flat to ion beam
-microscope.move_flat_to_beam(BeamType.ION)
+# we restore our previously saved milling state
+microscope.set_microscope_state(milling_state)
 
 ```
 
@@ -770,6 +772,275 @@ milling_state = utils.load_yaml("path/to/milling_state.yaml")
 
 # restore microscope state
 microscope.set_microscope_state(milling_state)
+
+```
+
+### Step 7 - Align Coincidence
+
+Now that we have a feature the model is trained for, we can use it to detect the feature (Volume Block) and align it in both beams to set the coincidence.
+
+We wrapped this up in a helper function, so we can re use it for any feature:
+
+```python
+
+# select feature
+feature = VolumeBlockBottomEdge()
+
+# align feature so beams are coincident
+lamella = align_feature_coincident(microscope=microscope, 
+                            settings=settings, 
+                            hfw=400e-6,
+                            feature=feature)
+
+
+```
+
+The pseudo code for this function is below. The implemented function (with ui integration) is found in autolamella/workflows/core:align_feature_coincident
+
+```python
+def align_feature_coincident(microscope: FibsemMicroscope, settings: MicroscopeSettings, 
+                              hfw: float = fcfg.REFERENCE_HFW_MEDIUM,
+                              feature: Feature = LamellaCentre()) -> Lamella:
+    """Align the feature in the electron and ion beams to be coincident."""
+
+    # bookkeeping
+    features = [feature]
+
+    # detect and align in electron
+    settings.image.hfw = hfw
+    settings.image.beam_type = BeamType.ELECTRON
+    det = detection.take_image_and_detect_features(
+        microscope=microscope,
+        settings=settings,
+        features=features,
+    )
+    microscope.stable_move(
+        dx=det.features[0].feature_m.x,
+        dy=det.features[0].feature_m.y,
+        beam_type=settings.image.beam_type
+    )
+
+    # Align ion so it is coincident with the electron beam
+    settings.image.beam_type = BeamType.ION
+    settings.image.hfw = hfw
+
+    det = detection.take_image_and_detect_features(
+        microscope=microscope,
+        settings=settings,
+        features=features,
+    )
+    # align vertical
+    microscope.vertical_move(
+        dx=det.features[0].feature_m.x,
+        dy=-det.features[0].feature_m.y,
+    )
+
+    # reference images
+    settings.image.save = True
+    settings.image.hfw = hfw
+    settings.image.filename = f"ref_{feature.name}_align_coincident_final"
+    eb_image, ib_image = acquire.take_reference_images(microscope, settings.image)
+
+    return
+
+
+```
+
+
+#### Step 8 - Remove contamination from manipulator
+
+It is recommended to mill away any contaminants that would have accumulated during storage.
+
+
+#### Step 9 - Insert the Manipulator
+
+Insert the manipulator to the park position
+
+
+```python
+microscope.insert_manipulator("PARK")
+
+```
+
+#### Step 10 - Move the manipulator to make contact
+
+We now need to guide the manipulator to make contact with the surface. We first align the features in the electron beam, and then in the ion. We iteratively align the manipulator using the Ion beam to ensure good contact. 
+
+Note: The current serial liftout dataset doesn't have many images from this part of the workflow, so it will likely perform poorly. If you would like to contribute data for this part (or any part of the workflow), please contact patrick@openfibsem.org. 
+
+We use the helper function move_based_on_detection to apply the correct transformations to move the desired system (in this case the manipulator) based on the detected features. 
+
+```python
+
+    settings.image.beam_type = BeamType.ELECTRON
+    settings.image.hfw = 400e-6
+
+    # DETECT COPPER ADAPTER, VOLUME TOP
+    scan_rotation = microscope.get("scan_rotation", beam_type=BeamType.ION)
+    features = [CopperAdapterTopEdge(), VolumeBlockBottomEdge()] if np.isclose(scan_rotation, 0) else [CopperAdapterBottomEdge(), VolumeBlockTopEdge()]
+    
+    det = detection.take_image_and_detect_features(
+        microscope=microscope,
+        settings=settings,
+        features=features,
+    )
+    # MOVE TO VOLUME BLOCK TOP
+    detection.move_based_on_detection(
+        microscope, settings, det, beam_type=settings.image.beam_type, move_x=True,
+         _move_system="manipulator"
+    )
+
+    # align manipulator to top of lamella in ion x3
+    HFWS = [400e-6, 150e-6, 80e-6]
+
+    for i, hfw in enumerate(HFWS):
+
+
+        settings.image.beam_type = BeamType.ION
+        settings.image.hfw = hfw
+
+        # DETECT COPPER ADAPTER, LAMELLA TOP
+        scan_rotation = microscope.get("scan_rotation", beam_type=BeamType.ION)
+        features = [CopperAdapterTopEdge(), VolumeBlockBottomEdge()] if np.isclose(scan_rotation, 0) else [CopperAdapterBottomEdge(), VolumeBlockTopEdge()]
+        
+        det = detection.take_image_and_detect_features(
+            microscope=microscope,
+            settings=settings,
+            features=features,
+        )
+
+        # MOVE TO VOLUME BLOCK TOP
+        detection.move_based_on_detection(
+            microscope, settings, det, beam_type=settings.image.beam_type, move_x=True, 
+            _move_system="manipulator"
+        )
+
+```
+
+
+#### Step 11 - Attach the Copper Block to the Volume
+
+Once attached, we detect the copper adaptor interface, and mill the weld pattern.
+
+```yaml
+liftout-weld:
+    height: 2.5e-6
+    width: 0.5e-6
+    depth: 4.0e-6
+    pitch_horizontal: 0.75e-6
+    n_columns: 10
+    n_rows: 1
+    pitch_vertical: 0.0e-6
+    rotation: 0.0
+    passes: 1.0
+    milling_voltage: 30.0e+3
+    milling_current: 300.0e-12
+    hfw: 150.0e-6
+    application_file: "autolamella"
+    scan_direction: "BottomToTop"
+    type: "ArrayPattern"
+    preset: "30 keV; 2.5 nA"
+
+```
+
+```python
+features = [VolumeBlockBottomEdge() if np.isclose(scan_rotation, 0) else VolumeBlockTopEdge()] 
+det = detection.take_image_and_detect_features(
+    microscope=microscope,
+    settings=settings,
+    features=features,
+)
+
+# move the pattern to the top of the volume (i.e up by half the height of the pattern)
+point = det.features[0].feature_m 
+point.y += settings.protocol["milling"]["liftout-weld"].get("height", 5e-6) / 2 
+
+# get weld milling stages
+stages = milling.get_milling_stages("liftout-weld", settings.protocol["milling"], point)
+
+# mill stages
+milling.mill_stages(microscope=microscope, settings=settings, stages=stages)
+
+```
+
+#### Step 12 - 14 - Sever the Volume Block
+
+We mill the severing pattern as follows:
+
+```yaml
+liftout-sever:
+    cleaning_cross_section: 0.0
+    depth: 10.0e-06
+    height: 0.5e-06
+    hfw: 400.0e-6
+    milling_voltage: 30.0e+3
+    milling_current: 1.0e-9
+    rotation: 0.0
+    scan_direction: TopToBottom
+    width: 50.0e-06
+    application_file: "autolamella"
+    type: "Rectangle"
+    preset: "30 keV; 20 nA"
+```
+
+Detect the base of the volume block, and sever it from the sample.
+
+```python
+
+# detect points in ion beam
+settings.image.hfw = 400e-6
+settings.image.beam_type = BeamType.ION
+features = [VolumeBlockTopEdge() if np.isclose(scan_rotation, 0) else VolumeBlockBottomEdge()] 
+det = detection.take_image_and_detect_features(
+    microscope=microscope,
+    settings=settings,
+    features=features,
+)
+
+# get the point
+point = det.features[0].feature_m 
+
+
+# get weld milling stages
+stages = milling.get_milling_stages("liftout-sever", settings.protocol["milling"], point)
+
+# mill stages
+milling.mill_stages(microscope=microscope, settings=settings, stages=stages)
+
+
+```
+
+It is recommended by the authors to move the volume up slightly to check it is dettached from the sample. If not, repeat the severing. 
+
+
+#### Step 15 - Extract the Volume from the trench
+
+We slowly retract the volume from the sample plane. We use corrected movements to isolate this movement to the z-plane (dy in Ion)
+
+```python
+
+# retract slowly at first
+for i in range(10):
+    microscope.move_manipulator_corrected(dx=0, dy=1e-6, beam_type=BeamType.ION)
+    if i % 3 == 0:
+        settings.image.filename = f"ref__manipulator_removal_slow_{i:02d}"
+        eb_image, ib_image = acquire.take_reference_images(microscope, settings.image)
+    time.sleep(1)
+
+# then retract more
+for i in range(3):
+    microscope.move_manipulator_corrected(dx=0, dy=20e-6, beam_type=BeamType.ION)
+    settings.image.filename = f"ref__manipulator_removal_{i:02d}"
+    eb_image, ib_image = acquire.take_reference_images(microscope, settings.image)
+    time.sleep(1)
+
+
+```
+
+#### Step 16 - 17 - Retract the manipulator
+
+```python
+microscope.retract_manipulator()
 
 ```
 
@@ -1323,9 +1594,7 @@ def validate_volume_block_size(microscope, settings) -> bool:
 
 ## Section Thinning
 
-Standard Polishing Workflow
-
-
+After this point, you can use the standard autolamella workflow to thin and polish your lamella. If you ran serial liftout through the user interface, it will automatically prompt you to continue the workflow. All the landing positions are saved, and assoicated so you can quickly setup your thinning patterns and continue. 
 
 
 
