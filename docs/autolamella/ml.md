@@ -142,7 +142,11 @@ autolamella-dataset/
 
 The keypoint dataset is used for model evaluation, to as closely mimic the online performance of the models when running on an actual FIBSEM.
 
-[Under Construction]
+You can run the evaluation against the keypoint dataset to determine the accuracy for each detection task. Running keypoint evaluation is the best way to compare two different models, and determine if a new model has improved, or regressed. Machine learning models can often regress on previously successful task when retrained or finetuned, so it is important to assess this accuracy rather than just during training. 
+
+Each dataset contains labelled keypoints in the test directory. You can also create your own keypoint dataset using the Keypoint Labelling plugin. 
+
+For information on using the keypoint evaluation, please see the [Concepts Page.](../openfibsem/concepts.md#model-evaluation)
 
 ## Models
 
@@ -155,7 +159,7 @@ The current best performing models for each method are:
 | Method       | Dataset | Checkpoint   |
 | ----------- | ----------- | -----------|
 | AutoLamella Waffle      | Waffle       | autolamella-waffle-20240107.pt    |
-| AutoLamella Liftout | Full        | autolamella-mega-20240107.pt  |
+| AutoLamella Liftout | Full        | autolamella-liftout-20240107.pt  |
 | AutoLamella Serial Liftout | Serial Liftout         | autolamella-serial-liftout-20240107.pt               |
 
 ### Mega Model
@@ -164,7 +168,7 @@ We are in the process of developing a combined model for all these methods, call
 
 Currently the mega model is outperformed by the specifc waffle, and serial liftout models, but performs better for liftout. My initial thought is that this is because the waffle and serial liftout datasets are from a single sample (and a single run in the serial liftout case), so on these cases the models are probably overfit on these modes. However, the liftout dataset contains multiple samples, and a much more diverse set of images, which benefits more increased size and variation in the dataset.
 
-Therefore, we are very keen to incorporate a lot more varied training data for the other methods. We are looking for additional data to include in this model, if you would like to contribute, please get in contact.
+Therefore, we are very keen to incorporate a lot more varied training data for the other methods. We are looking for additional data to include in this model, if you would like to contribute, please get in contact at patrick@openfibsem.org
 
 ## Tools
 
@@ -219,3 +223,9 @@ generate_segmentation_objects.py
 These bounding boxes, and instance masks should be useful for training different, and larger models, or panoptic segmentation models. If you would like any help using the dataset, labels, or api please contact Patrick @patrickcleeve2, or via [email](mailto:patrick@openfibsem.org).
 
 [Under Construction]
+
+### Depth Estimation
+
+[Under Construction]
+
+Depth-Anything backbone
