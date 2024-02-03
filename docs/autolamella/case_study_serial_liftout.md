@@ -191,7 +191,7 @@ point.x -= 5e-6
 stage = get_milling_stages("prepare-manipulator", settings.protocol, point)
 
 # mill stages
-milling.mill_stages(microscope, settings, stages)
+milling.mill_stages(microscope, stages)
 
 ```
 
@@ -267,7 +267,7 @@ microscope.safe_absolute_stage_movement(milling_position)
 stages = get_milling_stages("prepare-copper-grid", settings.protocol)
 
 # run milling 
-milling.mill_stages(microscope, settings, stages)
+milling.mill_stages(microscope, stages)
 
 # save state for later return
 milling_state = microscope.get_microscope_state()
@@ -342,7 +342,7 @@ stages = get_milling_stages("prepare-copper-blocks", settings.protocol, pts)
 fig = _draw_milling_stages_on_image(image, stages)
 
 # run milling
-milling.mill_stages(microscope, settings, stages)
+milling.mill_stages(microscope, stages)
 
 ```
 
@@ -468,7 +468,7 @@ microscope.move_flat_to_beam(BeamType.ION)
 stages = get_milling_stages("grid-lines", settings.protocol)
 
 # mill stages
-milling.mill_stages(microscope, settings, stages)
+milling.mill_stages(microscope, stages)
 
 ```
 
@@ -699,7 +699,7 @@ polishing_offset = Point(0, settings.protocol["trench"]["stages"][0]["height"] /
 stages = get_milling_stages("trench", settings.protocol, [None, polishing_offset])
 
 # run milling operations
-milling.mill_stages(microscope, settings, stages)
+milling.mill_stages(microscope, stages)
 
 ```
 
@@ -941,7 +941,7 @@ point.y += settings.protocol["milling"]["liftout-weld"].get("height", 5e-6) / 2
 stages = milling.get_milling_stages("liftout-weld", settings.protocol["milling"], point)
 
 # mill stages
-milling.mill_stages(microscope=microscope, settings=settings, stages=stages)
+milling.mill_stages(microscope=microscope, stages=stages)
 
 ```
 
@@ -987,7 +987,7 @@ point = det.features[0].feature_m
 stages = milling.get_milling_stages("liftout-sever", settings.protocol["milling"], point)
 
 # mill stages
-milling.mill_stages(microscope=microscope, settings=settings, stages=stages)
+milling.mill_stages(microscope=microscope, stages=stages)
 
 
 ```
@@ -1378,7 +1378,7 @@ right_corner.y +=  v_offset
 stages = milling.get_milling_stages("weld", settings.protocol, [left_point, right_point])
 
 # mill stages
-milling.mill_stages(microscope=microscope, settings=settings, stages=stages)
+milling.mill_stages(microscope=microscope, stages=stages)
 ```
 
 ### Step 10 - Move Manipulator
@@ -1442,7 +1442,7 @@ point.y += v_offset
 stages = milling.get_milling_stages("landing-sever", settings.protocol, point)
 
 # mill stages
-milling.mill_stages(microscope=microscope, settings=settings, stages=stages)
+milling.mill_stages(microscope=microscope, stages=stages)
 ```
 
 ### Step 12 - Validate Release
