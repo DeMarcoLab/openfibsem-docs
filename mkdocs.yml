@@ -66,6 +66,7 @@ nav:
   - AutoLamella:
     - autolamella/index.md
     - Getting Started: autolamella/getting_started.md
+    - Walkthrough: autolamella/walkthrough.md
     - Motivation: autolamella/motivation.md
     - User Guide: autolamella/user_guide.md
     - Machine Learning: autolamella/ml.md

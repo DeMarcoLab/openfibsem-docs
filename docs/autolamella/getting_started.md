@@ -33,9 +33,71 @@ We provide individual baseline protocols for each method:
 - autolamella-autoliftout: protocol-autoliftout-base.yaml
 - autolamella-serial-liftout: protocol-serial-liftout.yaml
 
-For details about the protocol options, please see below. For details about milling configurations, please see the [Milling API](../openfibsem/concepts.md#milling-api).
+It is recommended that you start with either the on-grid or waffle method in supervised mode to test everything is working correctly.  
 
-Protocol Structure
+For details about the protocol options, please see [Protocol Structure](#protocol-structure) below. For details about milling configurations, please see the [Milling API](../openfibsem/concepts.md#milling-api).
+
+## Running AutoLamella
+
+Once you have configured your microscope, and have a protocol selected, you are ready to run AutoLamella.
+
+To run autolamella:
+
+```bash
+
+autolamella_ui
+```
+
+To run the liftout methods (these will be merged into the main user interface eventually):
+
+```bash
+autoliftout_ui
+```
+
+
+Or launch via napari plugin manager:
+Napari -> Plugins -> Napari OpenFIBSEM -> AutoLamella UI
+
+### User Guide
+
+The following steps show the basic walkthrough for starting autolamella. The waffle method is used as an example.
+
+For a detailed walkthrough on each method please see [AutoLamella Walkthrough](./walkthrough.md).
+
+![AutoLamella UI Start](assets/autolamella_ui_start.png)
+AutoLamella - Start Screen
+
+![AutoLamella UI Connect](assets/autolamella_ui_connected.png)
+AutoLamella - Microscope Connected
+
+![AutoLamella UI Create Exp](assets/autolamella_ui_create_experiment.png)
+AutoLamella - Create Experiment
+
+![AutoLamella Name Exp](assets/autolamella_ui_name_experiment.png)
+AutoLamella - Name Experiment
+
+![AutoLamella Select Protocol](assets/autolamella_ui_select_protocol.png)
+AutoLamella - Select Protocol
+
+![AutoLamella Protocol UI](assets/autolamella_ui_protocol_ui.png)
+AutoLamella - Protocol UI
+
+![AutoLamella - Ready to Start](assets/autolamella_ui_ready_to_start.png)
+AutoLamella - Ready to Start
+
+![AutoLamella Add Lamella](assets/autolamella_ui_add_lamella.png)
+AutoLamella - Add Lamella
+
+![AutoLamella Trench Ready](assets/autolamella_ui_trench_ready.png)
+AutoLamella - Trench Ready
+
+From here you can follow the instructions at the bottom right of the screen, and they will walk you through the workflow.
+
+
+
+## Protocol Structure
+
+The following is the entire protocol structure for all methods. Each method uses a subset of the configuration listed here. 
 
 ```yaml
 # protocol
@@ -300,48 +362,3 @@ milling:                                                                    # mi
         type: "Rectangle"
         preset: "30 keV; 20 nA"
 ```
-
-## Running AutoLamella
-
-Once you have configured your microscope, and have a protocol selected, you are ready to run AutoLamella.
-
-To run autolamella:
-
-```bash
-
-autolamella_ui
-```
-
-Or launch via napari plugin manager:
-Napari -> Plugins -> Napari OpenFIBSEM -> AutoLamella UI
-
-### User Guide
-
-![AutoLamella UI Start](assets/autolamella_ui_start.png)
-AutoLamella - Start Screen
-
-![AutoLamella UI Connect](assets/autolamella_ui_connected.png)
-AutoLamella - Microscope Connected
-
-![AutoLamella UI Create Exp](assets/autolamella_ui_create_experiment.png)
-AutoLamella - Create Experiment
-
-![AutoLamella Name Exp](assets/autolamella_ui_name_experiment.png)
-AutoLamella - Name Experiment
-
-![AutoLamella Select Protocol](assets/autolamella_ui_select_protocol.png)
-AutoLamella - Select Protocol
-
-![AutoLamella Protocol UI](assets/autolamella_ui_protocol_ui.png)
-AutoLamella - Protocol UI
-
-![AutoLamella - Ready to Start](assets/autolamella_ui_ready_to_start.png)
-AutoLamella - Ready to Start
-
-![AutoLamella Add Lamella](assets/autolamella_ui_add_lamella.png)
-AutoLamella - Add Lamella
-
-![AutoLamella Trench Ready](assets/autolamella_ui_trench_ready.png)
-AutoLamella - Trench Ready
-
-From here you can follow the instructions at the bottom right of the screen, and they will walk you through the workflow.

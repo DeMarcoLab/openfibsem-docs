@@ -1,125 +1,210 @@
 # Walkthrough
 
-This is a general walkthrough on running an autolamella workflow. Further details can be viewed in their respective documentation and some are linked within this walkthrough.
+The following page provides a detailed walkthrough for each method. As the methods contain significant overlap, only the unique parts will be described. 
 
-A guided video walkthrough can be found [here](put video link here)
-
-You can find more details on the application features here: [Autolamella Features](features.md)
-
-## Methods
-
-The autolamella program has incorporated two possible workflows that can be achieved. One is the default auto lamella which is the standard lamella preparation workflow. The other is the waffle method workflow which has been recently developed as outlined in this [paper](https://www.nature.com/articles/s41467-022-29501-3). 
-
-From a user interface perspective, both methods can be setup and run in a near identical fashion. The core processes of selecting lamella positions, milling parameters, supervision and monitoring can be set up the same way for both methods.
-
-## Connection and Setup
-
-The first step is to connect to the microscope. This can be setup to be done manually or automatically if the system parameters are setup in the system.yaml file.
-
-To connect, first launch the autolamella program. Then in the connect tab (Under the system tab), enter the IP address of the microscope server and select the manufacturer of the microscope. Then click connect. 
-
-![connect to microscope](img/walkthrough_2/connect_to_microscope.png)
-
-Once connected, create an experiment from the file menu by clicking create experiment. This will prompt you to choose a location to save the experiment folder which contains the experiment.yaml file. 
-
-The experiment file contains all the information about the experiment and the lamellae. This includes the positions of the lamellae, the milling parameters, and the status of each lamella.
-
-Once an experiment has been created, the experiment can be reloaded anytime by clicking load experiment from the file menu. This will prompt you to select the experiment.yaml file to load.
-
-The next step is to load a protocol. Select load protocol from the file menu. This will prompt you to select a protocol.yaml file to load. A default one is provided, however, it can be modified to suit your needs. In the protocol tab, changes can be made and then saved. Details on each parameter is explained in the [features](features.md) section of the documentation under Lamella protocol. !
-
-![load protocol](img/walkthrough_2/change_protocol.png)
-
-To update the changes for the current session, click update protocol. To save these changes to a new protocol file, click save protocol. This will prompt you to select a location to save the protocol.yaml file. 
-
-## Adding Lamellae
-
-Once the system is setup, the first step is to acquire images and move to a location for creating a lamella. This can be done by clicking acquire all images in the imaging tab. This will acquire all the images and display them in the napari viewer. To move, directly to some coordinates, you can move to a position in the movement tab. Alternatively, you can also click on the image to move to that position. The movement tab also has controls for tilting and moving flat to the ion or electron beam.
-
-Once at a desired location, click add lamella to add a lamella to the experiment. This will setup a position. To move around, double clicking on the image will move the stage to that position. Alternatively, you can also move to a position in the movement tab. 
-
-![add lamella](img/walkthrough_2/add_lamella.png)
-
-This image shows an example of the setup when using the waffle method workflow. However, the initial placement phase is identical for the default workflow. 
-
-![add lamella](img/walkthrough_2/default_method_setup.png)
+Each walkthrough assumes you have already [configured your microscope](./../openfibsem/getting_started.md#configuring-your-microscope), loaded your sample and peformed initial setup (linked the stage, platinum deposition, etc.)
 
 
-To remove a lamella, click remove lamella and this will remove it from the experiment. The dropdown next to current lamella can be used to select a lamella individually and remove it or change its placement as necessary.
-Once satisfied with the placement, click save position to confirm its location. Additional lamellae can be added and saved in the same way. Once all the lamellae location have been saved, the process can continue to the next step.
+## On Grid Method
 
-## Workflow
+The following walkhrough is for the on-grid lamella method. The default protocol is protocol-on-grid.yaml.
 
-The process now diverges based on which workflow is being used. 
+## Setup Experiment
 
-### Default Workflow
+1. Connect to the Microscope (Connection Tab -> Select Configuration -> Connect to Microscope)
+2. Create an Experiment (File Menu -> Create Experiment -> Select Directory -> Select Experiment Name)
+3. Load a Protocol (File Menu -> Load Protocol -> protocol-on-grid.yaml). We recommend starting with this protocol, and editting it to suit your microscope and sample.
+4. Move the stage to the sample grid. You can save this position for future use in the Movement Tab (Movement Tab -> Add Position -> Give your position a name (e.g. Grid 01) -> Export Position (save to file))
+5. Move the stage to the milling angle. This is the tilt angle you want to mill your lamella at. You can use the Movement Tab to move to this tilt angle. 
+6. Acquire Images. Use the Image Tab to acquire images with both beams. Images are required to display milling patterns.
+7. Make you beams coincident / eucentric. Use the movement controls to align the coincidence of the beams. First double click on a feature in the electron beam to centre it. Then press Alt + double click in the ion beam align the same feature coincident. The same feature should now be centred in both beams.  
 
-#### Setup
+### Setup Positions
 
-With lamellae chosen and position saved. The button labelled "Run Setup Autolamella" will be highlighted. Clicking this will begin the process of setting up the lamellae and confirming the position. 
+After you have setup your experiment, and microscope, you can now start selecting the lamella positions. 
 
-To make any changes to the milling parameters, click on the milling tab. In the dropdown labelled milling stage, the specific aspect can be selected. The paraemters such as width and height can then be changed. 
+1. Add a Lamella. Change to the Experiment tab, and Add Lamella. You can use the same movement controls to navigate around the sample to find your region of interest. It may also help to increase the field of view to get your bearings.  
+2. Once you have found your region of interest, move the milling patterns with the milling controls. Press shift + left click to move the selected pattern, or cntrl + shift + left click to move all the patterns (keeping the same orientation). Patterns cannot be placed outside the image. You can adjust the dimensions and settings for the patterns in the Milling tab.  For best results, make sure your beams are coincident and the lamella and fiducial are placed along the horizontal centre of the image (aligned with the tilt axis).
+3. Once you are happy with your pattern positions, press Save Position (in the Experiment tab). The button will switch from orange to green and indicate 'Position Ready'.
+4. Repeat steps 1 - 5 until you have selected all your lamella positions.
+5. When you are ready, press Run Setup AutoLamella.
 
-For multiple lamellae, the program will iterate through the lamellae and setup each one. Each individial lamella has its own state saved.
+### Setup AutoLamella
 
-![setup default](img/walkthrough_2/setup_default_lamella.png)
+After pressing Setup AutoLamella:
 
-Changes to the fiducial, microexpansion or notch can also be done here. Once satisfied with the process, press the continue to progress through the setup into the milling process. If a fiducial is being used, it will mill the fiducial at this stage.
+1. The software will move to the first selected lamella position and if supervision is enabled ask you to confirm the the milling patterns. Press Continue to confirm, or use the milling controls to adjust.
+2. Next, the alignment fiducial will be milling. The area around the fiducial will be used to align the lamella at each step. If supervision is enabled, ask you to confirm the milling operation. Press Run Milling to mill the fiducial, and then press Continue when happy with the fiducial.  
+3. After the fiducial has been milled, an alignment image is acquired.
+4. Steps 1 - 3 will be repeated for each selected lamella position.
 
-#### Run Autolamella
+### Run AutoLamella
 
-Once setup is complete and the program is ready to run autolamella, click the Run Autolamella button in the experiment tab to begin the process. This will begin the process of milling the lamella.
+After pressing Run AutoLamella
 
-It will now run through each stage in the lamella preparation phase. Press run milling in the milling tab to run the milling process in each stage. Once again, any last minute changes can be made at the milling tab. 
+1. The software will move back to the first selected lamella position, and re-align using the alignment image.
+2. The stress relief features (microexpansion, waffle notch) will be milled.  If supervision is enabled, ask you to confirm the milling operation. Press Run Milling to mill the pattern, and then press Continue when happy with the milling.
+3. The rough trench milling patterns will be milled (all lamella trenches except the final polishing).  If supervision is enabled, ask you to confirm the milling operation. Press Run Milling to mill the pattern, and then press Continue when happy with the milling.  
+4. Steps 1 - 4 will be repeated for each selected lamella position.
+5. Once rough milling has been completed for each lamella, the software will go back to the first selected lamella position, realign the alignment image, and begin final polishing.  If supervision is enabled, ask you to confirm the milling operation. Press Run Milling to mill the pattern, and then press Continue when happy with the milling.  
+6. Step 5 is repeated for all selected lamella positions.
+7. Once final polishing is completed the software will return to the Experiment Tab, where you can see the status of all selected lamella. You are free to select more lamella and run again, but it is recommended to remove your sample after final polishing to prevent contamination build up. 
 
-![run milling](img/walkthrough_2/run_milling_default.png)
+## Waffle Method
 
-If milling is unsatisfactory, changes can be made and the milling process can be redone by clicking Run Milling again. Once satisfactory, click continue to move to the next stage. 
+The following walkthrough is for the waffle method. The default protocol is protocol-waffle.yaml.
 
-The program will run through each stage on multiple lamellae before moving onto the next stage. i.e. it will mill the rough trenches for all the lamellae before moving onto the next stage for any lamella.
+## Setup Experiment
 
-Once all the stages have been completed and the lamellae have been prepared, the experiment is complete. In the main experiment tab, the status of each lamella will be marked as finished.
+1. Connect to the Microscope (Connection Tab -> Select Configuration -> Connect to Microscope)
+2. Create an Experiment (File Menu -> Create Experiment -> Select Directory -> Select Experiment Name)
+3. Load a Protocol (File Menu -> Load Protocol -> protocol-waffle.yaml). We recommend starting with this protocol, and editting it to suit your microscope and sample.
+4. Move the stage to the sample grid. You can save this position for future use in the Movement Tab (Movement Tab -> Add Position -> Give your position a name (e.g. Grid 01) -> Export Position (save to file))
+5. Move the stage flat to the ion beam. This is the rotation and tilt that makes the sample perpendicular to the ion beam. You can use the Movement Tab -> Move Flat to Ion Beam button to move to this position. If this does not move you to the current position, please check you have configured your microscope correctly.  
+6. Acquire Images. Use the Image Tab to acquire images with both beams. Images are required to display milling patterns.
+7. Make you beams coincident / eucentric. Use the movement controls to align the coincidence of the beams. First double click on a feature in the electron beam to centre it. Then press Alt + double click in the ion beam align the same feature coincident. The same feature should now be centred in both beams.  
 
-![Finish default](img/walkthrough_2/finish_default.png)
+### Setup Trench Positions
 
-### Waffle Method
+After you have setup your experiment, and microscope, you can now start selecting the trench positions. 
 
-The waffle method for lamella preparation involves a different workflow. 
+1. Add a Lamella. Change to the Experiment tab, and Add Lamella. You can use the same movement controls to navigate around the sample to find your region of interest. It may also help to increase the field of view to get your bearings.  
+2. Once you have found your region of interest, move the milling patterns with the milling controls. Press shift + left click to move the selected pattern, or cntrl + shift + left click to move all the patterns (keeping the same orientation). Patterns cannot be placed outside the image. You can adjust the dimensions and settings for the patterns in the Milling tab. 
+3. Once you are happy with your pattern positions, press Save Position (in the Experiment tab). The button will switch from orange to green and indicate 'Position Ready'.
+4. Repeat steps 1 - 5 until you have selected all your lamella positions.
+5. When you are ready, press Run Waffle Trench Milling AutoLamella.
 
-The initial trenches are milled in a way to allow for undercuts to be performed. Once these are done, the lamellae are milled in the usual fashion as the default workflow
+##### Using the Minimap
 
-#### Waffle Trenches
+As an alternative to the above, you can also use the minimap to acquire a tiled image flat to the ion beam and select positions from there. To access the minimap, use the Tools Menu -> Open Minimap Tool. 
 
-Once the positions have been selected as outlined above, click Run Waffle Trench Milling to begin the process
+1. Set the image beam type to Ion, and select your imaging settings. Recommended settings are Grid Size = 2000um, Tile Size = 500um, resolution 1024px, Dwell Time = 1us, Autocontrast, Autogamma. The save path and file name will be generated for you experiment automatically. 
+2. Press Run Tile Collection. The software will acquire a tileset, and stitch it together. Currently overlap is not supported. 
+3. Once the stitching is complete, you can add a new lamella position with Alt + Left Click. 
+4. Change to the Position Tab and enable Display Pattern (and select trench) to see an overlay of the trench pattern in the image. 
+5. To move an existing pattern, go to the Position Tab -> Select the Position and press Shift + Left Click on the image to move it. You can also move the stage to the position by pressing Move to Position Name or by Double Left Clicking on the image. 
+6. Optionally, if you have correlation data (fluroescence images) you can load them in the Correlation Tab and correlate them with your overview image. 
+7. Once you are happy with the positions go back to the AutoLamella UI. 
+8. In the AutoLamella UI, go through each selected position and press move to position. Once you are happy with your pattern positions, press Save Position (in the Experiment tab). The button will switch from orange to green and indicate 'Position Ready'. IMPORTANT: make sure you go to the position before pressing Save Position (otherwise it will save the position as wherever the stage currently is, we are working on making this more streamlined). 
+9. When you are ready, press Run Waffle Trench Milling to start milling trenches. 
 
-Similar to the default workflow, at each stage, the program will iterate through each stage for each lamella and allow you to make changes to the milling if necessary. If the milling is unsatisfactory, click Run Milling again to redo the milling. Once satisfied, click continue to move to the next stage.
+### Trench Milling
 
-![waffle milling](img/walkthrough_2/run_trench_waffle.png)
+After pressing Trench Milling:
 
-#### Waffle Undercut
+1. The software will move to the first selected trench position, and restore the microscope state. 
+2. The trench milling pattern (trench) will be milled. If supervision is enabled, ask you to confirm the milling operation. Press Run Milling to mill the pattern, and then press Continue when happy with the milling.
+3. Charge neutralisation will be run, this is to disapate ion charge built up during trench milling. 
+4. Reference images will be acquired of the final trench. 
+5. Steps 1 - 4 will be repeated for each selected position.
+6. Once all trenches have been milled, the software will return to the Experiment Tab and undercut milling will be enabled. Press Run Waffle Undercut Milling to start milling undercuts. 
 
+### Undercut Milling
 
-Once the waffle trenches have been milled, the next step is to perform undercuts on the lamellae. The Run waffle Undercut Milling button will be highlighted. Clicking this will begin the process of undercutting the lamellae.
+After pressing Undercut Milling.
 
-If the trench milling was unsuccessful and cannot be redone, you can mark the specific lamella as Failed. This will skip the rest of the process for that lamella. The status of the lamella will be marked as failed in the main experiment tab.
+1. The software will move the the first trench position, and restore the microscope state. 
+2. The stage will rotate 180 degrees, and tilt flat to the electron beam to prepare for undercut milling. 
+3. The software will use machine learning feature detection to align the lamella (trench) centre in the electron and ion beams. If supervision is enabled, it will ask you to confirm the feature detections. Drag the feature to move it to the correct location (if required), and then press Continue to proceed with the workflow. 
+4. The stage will tilt down by the amount specified in the protocol protocol["options"]["undercut_tilt_angle"] (default is -5.0 deg). 
+5. The software will detect the top of the lamella to be used to place the undercut pattern. If supervision is enabled, it will ask you to confirm the feature detections. Drag the feature to move it to the correct location (if required), and then press Continue to proceed with the workflow.  
+6. The undercut milling pattern (undercut) will be milled. If supervision is enabled, ask you to confirm the milling operation. Press Run Milling to mill the pattern, and then press Continue when happy with the milling.
+7. Steps 4 - 6 will repeat for the number of iterations specified in protocol["options"]["undercut_tilt_steps"]
+8. The software will detect the centre of the lamella to re-align it to the centre of the image in both beams to restore coincidence after tilting. If supervision is enabled, it will ask you to confirm the feature detections. Drag the feature to move it to the correct location (if required), and then press Continue to proceed with the workflow. 
+9. Reference images will be acquired of the final undercut. 
+10. Steps 1 - 9 will be repeated for each selected position.
+11. Once all undercuts have been milled, the software will return to the Experiment Tab and Setup AutoLamella will be enabled. Press Run Setup AutoLamella to setup the final lamella milling. 
 
-![Failed Lamllea](img/walkthrough_2/lamella_failed.png)
+### Setup and Run AutoLamella
 
-The undercut milling begins by first identifying the location of the lamella centre, this brings up the detection tab where the user can verify that the lamella centre has been detected correctly by the program. If incorrect, the centre location can be manually adjusted by dragging the location point.
+From here, the workflow is exactly the same as the on-grid method. For more details please see [On-Grid Setup AutoLamella](#setup-autolamella)
 
-![detection_ex](img/walkthrough_2/detection_ex.png)
+The same as for the on-grid method, after the final polishing workflow completes the software will return the Experiment Tab and display the status of each lamella. It is recommended that you remove your sample after final polishing to prevent contamination build up. 
 
-Once detection is verified, the stage will tilt to the specified undercut tilt angle and relaunch the centre verification process from the tilted angle. Once the centre location has been verified, it will return to the milling tab to confirm the milling step. As usual, any changes to be made can be done so and remilling can be done until result is satisfactory. Once satisfied, click continue to move to the next stage.
+## Liftout Method
 
-The program will continue to tilt to the next undercut and rerun the process. By default, there are two undercuts, however, any number of undercuts can be set up.
+[Under Construction]
 
-It will perform all the undercuts for each lamella before moving onto the subsequent lamella
+## Setup Protocol
 
-Once the undercuts are done, the next stages are identical to the default workflow. In the main experiment tab, the Run Setup Autolamella will be highlighted and the process can continue as outlined above.
+Both liftout method require additional protocol setup. This step will walkthrough configuring the protocol for your system. 
 
-## Features and Details
+### Scan Rotation
 
-This walkthrough goes through a basic outline of the autolamella process. However, there are a vast array of tools and features available to customise and automate the process. These are outlined in the [features](features.md) section of the documentation. 
+Liftout was developed with ion beam scan rotation set to 0 degrees. I've done my best to make it agnostic to the scan rotation (e.g. fliping the direction of movements), but can't promise i've considered everything. I know scan rotation = 180 deg is more common, but it's recommened to use 0 degrees for running liftout. I will update this note, when I have validated it works for 180 deg rotation too. If you use 180 degrees rotation, and encountered specific issues, please let me know at patrick@openfibsem.org.
 
+### Named Positions
 
+You will need to define two named positions, to specify which grid is for milling and which is for landing. Respectively these are called lamella_start_position and landing_start_position in the protocol.  
 
+To specify these named positions, you first need to add them to the positions.yaml file. To add the named positions.
+
+1. Open OpenFIBSEM UI / AutoLamella UI / AutoLiftout UI, connect to the microscope.
+2. Change to the Movement Tab.
+3. Move the stage to the grid you want to use for milling. Go flat to the Ion beam.
+4. Press Add Position. Rename the position, and press update. You can call it whatever you like, but recommended is something like liftout-grid-01-milling.
+5. Move the stage to the grid you want to use for landing. Go to the landing angle.
+6. Press Add Position. Rename the position, and press update. You can call it whatever you like, but recommended is something like liftout-grid-02-landing.
+7. Press Export Positions and select the positions.yaml. Choose to overwrite and append to the file. 
+8. Reload AutoLiftout UI, connect to the microscope, and create/load your experiment/protocol to see these named positions in the Protocol tab.
+9. Set the Lamella Start Position and Landing Start Position to your named position. Update Protocol and Save Protocol (File Menu -> Save Protocol).
+
+### Setup AutoLiftout
+
+The Setup AutoLiftout workflow will walk you through selecting milling positions and their corresponding landing positions. 
+
+1. The software will move the stage to the position specified as Lamella Start Position.  
+2. Navigate to the region of interest, and select the position to mill the trenches. You can also adjust the milling patterns in the milling tab. The trench overlay is only for navigation and selection and won't be milled yet. Press Continue when you are happy. 
+3. You will be asked if you want to continue selecting milling positions. Press Yes and Step 2 will be repeated for a new milling position. Continue selecting positions until you are happy. Press No to continue to select landing positions.
+4. The software will move the stage to the position specified as Landing Start Position. 
+5. Navigate to the landing post / grid, and mill the surface flat. Press Run Milling to mill the flatten pattern, and then press Continue when happy with the milling.
+6. Step 5 will be repeated for each selected milling position.
+7. Once you have selected and milled each landing position, the software will return to the Experiment Tab. You should see the status of each lamella. 
+8. When you are ready, press Run AutoLiftout to begin the workflow. 
+
+### Run AutoLiftout
+
+The AutoLiftout workflow consists of four tasks; trench milling, undercut milling, liftout and landing. Trenches and Undercuts are the same workflow as in the waffle method, and can be completed in batch, but liftout and landing have to be completed sequentially for each lamella. 
+
+For details on the trench and undercut milling, please see the above [walkthrough](#trench-milling). The only different between these workflows is the milling patterns for the trench and undercut which are defined in the protocol. 
+
+#### Liftout
+
+Before starting Liftout you will be asked if you want to Continue Lamella-01-XX from LiftoutLamella. You will need to complete both Liftout and Landing for each laemlla in sequence, and this is the last point you can interrupt without losing your lamella. Once you are ready, press Continue to start Liftout. Press Skip to continue to the next lamella. 
+
+1. The software will move the stage to the undercut position, and restore the microscope state. 
+2. The software will use machine learning feature detection to align the lamella (trench) centre in the electron and ion beams. If supervision is enabled, it will ask you to confirm the feature detections. Drag the feature to move it to the correct location (if required), and then press Continue to proceed with the workflow. 
+3. The manipulator will be inserted above and to the left of the lamella trench. The software will use machine learning feature detection to detect the manipulator tip and the left edge of the lamella. If supervision is enabled, it will ask you to confirm the feature detections. Drag the feature to move it to the correct location (if required), and then press Continue to proceed with the workflow. 
+4. Step 3 will be repeated several times in different beams to align the manipulator to the left of the lamella edge. If supervision if enabled you will be asked to confirm the position of the manipulator. Use the manipulator controls to adjust if required. 
+5. The sample will be charged with the ion beam. The software will use machine learning feature detection to detect the manipulator tip and the left edge of the lamella and move them to contact. If supervision is enabled, it will ask you to confirm the feature detections. Drag the feature to move it to the correct location (if required), and then press Continue to proceed with the workflow. 
+6. If using brightness based contact detection, the manipulator will be iteratively moved towards the lamella until contact is detected. If not, no additional movement is made. 
+7. The manipulator is moved slightly up to avoid bottoming out, and make better surface contact with the lamella.
+8. If liftout weld is selected, the manipulator is welded to the lamella with a milling redeposition pattern. If no weld is selected, the software continues on. 
+9. The software will use machine learning feature detection to detect the right edge of the lamella. If supervision is enabled, it will ask you to confirm the feature detections. Drag the feature to move it to the correct location (if required), and then press Continue to proceed with the workflow. 
+10. The sever milling pattern (sever) will be milled. If supervision is enabled, ask you to confirm the milling operation. Press Run Milling to mill the pattern, and then press Continue when happy with the milling.
+11. The manipulator is removed from the trench, and then retracted fully.
+12. The software will then ask you to continue with Land Lamella. It is recommended you complete landing immediately.
+
+#### Landing
+
+1. The softwre moves the stage to the landing position selected earlier and aligns to the reference image. 
+2. The manipulator will be inserted above and to the left of the landing post. The software will use machine learning feature detection to detect the right edge of the lamella and the landing post. If supervision is enabled, it will ask you to confirm the feature detections. Drag the feature to move it to the correct location (if required), and then press Continue to proceed with the workflow.
+4. Step 2 will be repeated several times in different beams to land the lamella right edge on the landing post.
+5. After landing, if supervision is enabled, the software will ask you to confirm the lamella has landed. Press Continue if it has landed to continue with the workflow, or press Repeat to repeat the last step.
+6. The software detects the lamella right edge to place the weld milling pattern. If supervision is enabled, it will ask you to confirm the feature detections. Drag the feature to move it to the correct location (if required), and then press Continue to proceed with the workflow.
+7. The weld milling pattern (weld) will be milled. If supervision is enabled, ask you to confirm the milling operation. Press Run Milling to mill the pattern, and then press Continue when happy with the milling.
+8. The sample will be discharged, and optionally this procedure can be repeated. If the manipulator was welded to the lamella, the cut is performed here. 
+9. The manipulator moves back from the landing post. If supervision is enabled, you will be asked to confirm if the landing was successful. Press Continue to continue with the workflow, or Repeate to retry the landing attempt (deposition free attachment only).
+10. You can optionally reset (re-sharpen, mill) the manipulator. This is not required for deposition free attachment method.
+
+The software will now repeate Liftout and Landing for each selected position. Once all landings are completed (or you exit early), you can move onto polishing lamella with AutoLamella workflow. 
+
+### Liftout - Run AutoLamella
+
+From here, the workflow is exactly the same as the on-grid method. For more details please see [On-Grid Setup AutoLamella](#setup-autolamella). The only difference is the stage will move to a different angle for lamella milling as specified in the protocol under protocol["options"]["lamella_tilt_angle"]
+
+The same as for the on-grid method, after the final polishing workflow completes the software will return the Experiment Tab and display the status of each lamella. It is recommended that you remove your sample after final polishing to prevent contamination build up.
+
+## Serial Liftout Method
+
+[Under Construction]
