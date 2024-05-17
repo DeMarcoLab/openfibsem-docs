@@ -141,7 +141,7 @@ options:
     landing_joining_method: Weld                                        # method to join lamella and landing post (autolamella-autoliftout only) [Weld]
     landing_post_x_offset: 0.75e-6                                      # additional offset movement after contact (autolamella-autoliftout only)
     landing_charge_neutralisation_iterations: 100                       # number of electron images to discharge sample (autolamella-autoliftout only)
-    lamella_start_position: grid-01-lamella                             # the saved position to start selecting lamella positions 
+    trench_start_position: grid-01-lamella                             # the saved position to start selecting lamella positions 
     landing_start_position: grid-02-landing                             # the saved position to start selecting landing positions
     landing_grid:                                                       # the landing grid parameters (autolamella-serial-liftout only)
         x: 100.0e-6

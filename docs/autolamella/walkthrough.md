@@ -109,7 +109,7 @@ After pressing Undercut Milling.
 4. The stage will tilt down by the amount specified in the protocol protocol["options"]["undercut_tilt_angle"] (default is -5.0 deg). 
 5. The software will detect the top of the lamella to be used to place the undercut pattern. If supervision is enabled, it will ask you to confirm the feature detections. Drag the feature to move it to the correct location (if required), and then press Continue to proceed with the workflow.  
 6. The undercut milling pattern (undercut) will be milled. If supervision is enabled, ask you to confirm the milling operation. Press Run Milling to mill the pattern, and then press Continue when happy with the milling.
-7. Steps 4 - 6 will repeat for the number of iterations specified in protocol["options"]["undercut_tilt_steps"]
+7. Steps 4 - 6 will repeat for the number of iterations specified in protocol["milling"]["undercut"]["stages]
 8. The software will detect the centre of the lamella to re-align it to the centre of the image in both beams to restore coincidence after tilting. If supervision is enabled, it will ask you to confirm the feature detections. Drag the feature to move it to the correct location (if required), and then press Continue to proceed with the workflow. 
 9. Reference images will be acquired of the final undercut. 
 10. Steps 1 - 9 will be repeated for each selected position.
@@ -135,7 +135,7 @@ Liftout was developed with ion beam scan rotation set to 0 degrees. I've done my
 
 ### Named Positions
 
-You will need to define two named positions, to specify which grid is for milling and which is for landing. Respectively these are called lamella_start_position and landing_start_position in the protocol.  
+You will need to define two named positions, to specify which grid is for milling and which is for landing. Respectively these are called trench_start_position and landing_start_position in the protocol.  
 
 To specify these named positions, you first need to add them to the positions.yaml file. To add the named positions.
 

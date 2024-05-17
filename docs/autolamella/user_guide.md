@@ -35,7 +35,7 @@ For liftout methods, the user needs to specify the inital lamella and landing po
 
 ```yaml
 options:
-    lamella_start_position: pre-tilt-35-deg-grid-01-lamella     # starting point for selecting milling position
+    trench_start_position: pre-tilt-35-deg-grid-01-lamella     # starting point for selecting milling position
     landing_start_position: pre-tilt-35-deg-grid-02-landing     # starting point for selecting landing position
 ```
 
