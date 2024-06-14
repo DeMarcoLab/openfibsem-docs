@@ -139,8 +139,8 @@ The pre-defined working distance for each beam, that defines the eucentric point
 
 | Model       | Electron Beam | Ion Beam   |
 | ----------- | ----------- | -----------|
-| TFS - Helios      | 4.0 mm       | 16.5 mm    |
-| TFS - Aquilos | 7.0 mm        | 16.5 mm    |
+| TFS - Helios (Hydra)      | 4.0 mm       | 16.5 mm    |
+| TFS - Aquilos | 7.0 mm        | 19 mm    |
 | TESCAN - Amber |          |               |
 
 
