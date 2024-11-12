@@ -70,6 +70,6 @@ nav:
     - Motivation: autolamella/motivation.md
     - User Guide: autolamella/user_guide.md
     - Machine Learning: autolamella/ml.md
-    - Case Study - Serial Liftout: autolamella/case_study_serial_liftout.md
+    # - Case Study - Serial Liftout: autolamella/case_study_serial_liftout.md
   - Blog:
     - blog/index.md

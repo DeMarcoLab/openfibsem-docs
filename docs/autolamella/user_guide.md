@@ -156,7 +156,7 @@ We acquire low and high magnification reference images for analysis and alignmen
 
 The liftout stage attaches the selected region to the manipulator, and severs it from the rest of the sample. After liftout, the selected region should be solely attached to the manipulator and be ready to be transfered to the landing grid.  
 
-Specific implementations for liftout, and serial-liftout. The following breakdown is for the liftout method, for serial-liftout please see [Serial Liftout Case Study](./case_study_serial_liftout.md)
+Specific implementations for liftout, and serial-liftout. 
 
 #### Restore Undercut Position
 
@@ -200,7 +200,7 @@ The manipulator is moved slowly upwards from the trench, and then retracted full
 
 The landing stage attaches the selected region to the landing grid, and severs it from the manipulator. After landing the selected region should be solely attached to the landing grid, and dettached from the manipulator. 
 
-Specific implementations for liftout, and serial-liftout. The following breakdown is for the liftout method, for serial-liftout please see [Serial Liftout Case Study](./case_study_serial_liftout.md)
+Specific implementations for liftout, and serial-liftout.
 
 
 ### Restore Landing Position
