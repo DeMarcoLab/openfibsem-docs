@@ -1,0 +1,1642 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for the OpenFIBSEM Project">
+      
+      
+      
+      
+        <link rel="prev" href="../getting_started/">
+      
+      
+        <link rel="next" href="../motivation/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.44">
+    
+    
+      
+        <title>Walkthrough - OpenFIBSEM Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#walkthrough" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenFIBSEM Documentation" class="md-header__button md-logo" aria-label="OpenFIBSEM Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenFIBSEM Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Walkthrough
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="deep-purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/DeMarcoLab/fibsem" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    DeMarcoLab/fibsem
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+    
+  
+  OpenFIBSEM
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../openfibsem/" class="md-tabs__link">
+          
+  
+    
+  
+  OpenFIBSEM API
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+    
+  
+  AutoLamella
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../blog/" class="md-tabs__link">
+          
+  
+    
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenFIBSEM Documentation" class="md-nav__button md-logo" aria-label="OpenFIBSEM Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    OpenFIBSEM Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/DeMarcoLab/fibsem" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    DeMarcoLab/fibsem
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    OpenFIBSEM
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            OpenFIBSEM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../openfibsem/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    OpenFIBSEM API
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            OpenFIBSEM API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openfibsem/getting_started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openfibsem/installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openfibsem/concepts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Concepts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openfibsem/user_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    User Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openfibsem/examples/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Examples
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openfibsem/roadmap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Roadmap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openfibsem/reference/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    AutoLamella
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            AutoLamella
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting_started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Walkthrough
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Walkthrough
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#on-grid-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      On Grid Method
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-experiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup Experiment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup Experiment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup-positions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup Positions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setup-autolamella" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup AutoLamella
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-autolamella" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run AutoLamella
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#waffle-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Waffle Method
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-experiment_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup Experiment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup Experiment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup-trench-positions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup Trench Positions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup Trench Positions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-the-minimap" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using the Minimap
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trench-milling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Trench Milling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#undercut-milling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Undercut Milling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setup-and-run-autolamella" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup and Run AutoLamella
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#liftout-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Liftout Method
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-protocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup Protocol
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup Protocol">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scan-rotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scan Rotation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#named-positions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Named Positions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setup-autoliftout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup AutoLiftout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-autoliftout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run AutoLiftout
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Run AutoLiftout">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#liftout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Liftout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#landing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Landing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#liftout-run-autolamella" class="md-nav__link">
+    <span class="md-ellipsis">
+      Liftout - Run AutoLamella
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serial-liftout-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Serial Liftout Method
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../motivation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Motivation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    User Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Machine Learning
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../blog/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Blog
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Blog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#on-grid-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      On Grid Method
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-experiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup Experiment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup Experiment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup-positions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup Positions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setup-autolamella" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup AutoLamella
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-autolamella" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run AutoLamella
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#waffle-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Waffle Method
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-experiment_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup Experiment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup Experiment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup-trench-positions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup Trench Positions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup Trench Positions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-the-minimap" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using the Minimap
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trench-milling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Trench Milling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#undercut-milling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Undercut Milling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setup-and-run-autolamella" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup and Run AutoLamella
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#liftout-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Liftout Method
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-protocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup Protocol
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup Protocol">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scan-rotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scan Rotation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#named-positions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Named Positions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setup-autoliftout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup AutoLiftout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-autoliftout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run AutoLiftout
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Run AutoLiftout">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#liftout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Liftout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#landing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Landing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#liftout-run-autolamella" class="md-nav__link">
+    <span class="md-ellipsis">
+      Liftout - Run AutoLamella
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serial-liftout-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Serial Liftout Method
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="walkthrough">Walkthrough</h1>
+<p>The following page provides a detailed walkthrough for each method. As the methods contain significant overlap, only the unique parts will be described. </p>
+<p>Each walkthrough assumes you have already <a href="../../openfibsem/getting_started/#configuring-your-microscope">configured your microscope</a>, loaded your sample and peformed initial setup (linked the stage, platinum deposition, etc.)</p>
+<h2 id="on-grid-method">On Grid Method</h2>
+<p>The following walkhrough is for the on-grid lamella method. The default protocol is protocol-on-grid.yaml.</p>
+<h2 id="setup-experiment">Setup Experiment</h2>
+<ol>
+<li>Connect to the Microscope (Connection Tab -&gt; Select Configuration -&gt; Connect to Microscope)</li>
+<li>Create an Experiment (File Menu -&gt; Create Experiment -&gt; Select Directory -&gt; Select Experiment Name)</li>
+<li>Load a Protocol (File Menu -&gt; Load Protocol -&gt; protocol-on-grid.yaml). We recommend starting with this protocol, and editting it to suit your microscope and sample.</li>
+<li>Move the stage to the sample grid. You can save this position for future use in the Movement Tab (Movement Tab -&gt; Add Position -&gt; Give your position a name (e.g. Grid 01) -&gt; Export Position (save to file))</li>
+<li>Move the stage to the milling angle. This is the tilt angle you want to mill your lamella at. You can use the Movement Tab to move to this tilt angle. </li>
+<li>Acquire Images. Use the Image Tab to acquire images with both beams. Images are required to display milling patterns.</li>
+<li>Make you beams coincident / eucentric. Use the movement controls to align the coincidence of the beams. First double click on a feature in the electron beam to centre it. Then press Alt + double click in the ion beam align the same feature coincident. The same feature should now be centred in both beams.  </li>
+</ol>
+<h3 id="setup-positions">Setup Positions</h3>
+<p>After you have setup your experiment, and microscope, you can now start selecting the lamella positions. </p>
+<ol>
+<li>Add a Lamella. Change to the Experiment tab, and Add Lamella. You can use the same movement controls to navigate around the sample to find your region of interest. It may also help to increase the field of view to get your bearings.  </li>
+<li>Once you have found your region of interest, move the milling patterns with the milling controls. Press shift + left click to move the selected pattern, or cntrl + shift + left click to move all the patterns (keeping the same orientation). Patterns cannot be placed outside the image. You can adjust the dimensions and settings for the patterns in the Milling tab.  For best results, make sure your beams are coincident and the lamella and fiducial are placed along the horizontal centre of the image (aligned with the tilt axis).</li>
+<li>Once you are happy with your pattern positions, press Save Position (in the Experiment tab). The button will switch from orange to green and indicate 'Position Ready'.</li>
+<li>Repeat steps 1 - 5 until you have selected all your lamella positions.</li>
+<li>When you are ready, press Run Setup AutoLamella.</li>
+</ol>
+<h3 id="setup-autolamella">Setup AutoLamella</h3>
+<p>After pressing Setup AutoLamella:</p>
+<ol>
+<li>The software will move to the first selected lamella position and if supervision is enabled ask you to confirm the the milling patterns. Press Continue to confirm, or use the milling controls to adjust.</li>
+<li>Next, the alignment fiducial will be milling. The area around the fiducial will be used to align the lamella at each step. If supervision is enabled, ask you to confirm the milling operation. Press Run Milling to mill the fiducial, and then press Continue when happy with the fiducial.  </li>
+<li>After the fiducial has been milled, an alignment image is acquired.</li>
+<li>Steps 1 - 3 will be repeated for each selected lamella position.</li>
+</ol>
+<h3 id="run-autolamella">Run AutoLamella</h3>
+<p>After pressing Run AutoLamella</p>
+<ol>
+<li>The software will move back to the first selected lamella position, and re-align using the alignment image.</li>
+<li>The stress relief features (microexpansion, waffle notch) will be milled.  If supervision is enabled, ask you to confirm the milling operation. Press Run Milling to mill the pattern, and then press Continue when happy with the milling.</li>
+<li>The rough trench milling patterns will be milled (all lamella trenches except the final polishing).  If supervision is enabled, ask you to confirm the milling operation. Press Run Milling to mill the pattern, and then press Continue when happy with the milling.  </li>
+<li>Steps 1 - 4 will be repeated for each selected lamella position.</li>
+<li>Once rough milling has been completed for each lamella, the software will go back to the first selected lamella position, realign the alignment image, and begin final polishing.  If supervision is enabled, ask you to confirm the milling operation. Press Run Milling to mill the pattern, and then press Continue when happy with the milling.  </li>
+<li>Step 5 is repeated for all selected lamella positions.</li>
+<li>Once final polishing is completed the software will return to the Experiment Tab, where you can see the status of all selected lamella. You are free to select more lamella and run again, but it is recommended to remove your sample after final polishing to prevent contamination build up. </li>
+</ol>
+<h2 id="waffle-method">Waffle Method</h2>
+<p>The following walkthrough is for the waffle method. The default protocol is protocol-waffle.yaml.</p>
+<h2 id="setup-experiment_1">Setup Experiment</h2>
+<ol>
+<li>Connect to the Microscope (Connection Tab -&gt; Select Configuration -&gt; Connect to Microscope)</li>
+<li>Create an Experiment (File Menu -&gt; Create Experiment -&gt; Select Directory -&gt; Select Experiment Name)</li>
+<li>Load a Protocol (File Menu -&gt; Load Protocol -&gt; protocol-waffle.yaml). We recommend starting with this protocol, and editting it to suit your microscope and sample.</li>
+<li>Move the stage to the sample grid. You can save this position for future use in the Movement Tab (Movement Tab -&gt; Add Position -&gt; Give your position a name (e.g. Grid 01) -&gt; Export Position (save to file))</li>
+<li>Move the stage flat to the ion beam. This is the rotation and tilt that makes the sample perpendicular to the ion beam. You can use the Movement Tab -&gt; Move Flat to Ion Beam button to move to this position. If this does not move you to the current position, please check you have configured your microscope correctly.  </li>
+<li>Acquire Images. Use the Image Tab to acquire images with both beams. Images are required to display milling patterns.</li>
+<li>Make you beams coincident / eucentric. Use the movement controls to align the coincidence of the beams. First double click on a feature in the electron beam to centre it. Then press Alt + double click in the ion beam align the same feature coincident. The same feature should now be centred in both beams.  </li>
+</ol>
+<h3 id="setup-trench-positions">Setup Trench Positions</h3>
+<p>After you have setup your experiment, and microscope, you can now start selecting the trench positions. </p>
+<ol>
+<li>Add a Lamella. Change to the Experiment tab, and Add Lamella. You can use the same movement controls to navigate around the sample to find your region of interest. It may also help to increase the field of view to get your bearings.  </li>
+<li>Once you have found your region of interest, move the milling patterns with the milling controls. Press shift + left click to move the selected pattern, or cntrl + shift + left click to move all the patterns (keeping the same orientation). Patterns cannot be placed outside the image. You can adjust the dimensions and settings for the patterns in the Milling tab. </li>
+<li>Once you are happy with your pattern positions, press Save Position (in the Experiment tab). The button will switch from orange to green and indicate 'Position Ready'.</li>
+<li>Repeat steps 1 - 5 until you have selected all your lamella positions.</li>
+<li>When you are ready, press Run Waffle Trench Milling AutoLamella.</li>
+</ol>
+<h5 id="using-the-minimap">Using the Minimap</h5>
+<p>As an alternative to the above, you can also use the minimap to acquire a tiled image flat to the ion beam and select positions from there. To access the minimap, use the Tools Menu -&gt; Open Minimap Tool. </p>
+<ol>
+<li>Set the image beam type to Ion, and select your imaging settings. Recommended settings are Grid Size = 2000um, Tile Size = 500um, resolution 1024px, Dwell Time = 1us, Autocontrast, Autogamma. The save path and file name will be generated for you experiment automatically. </li>
+<li>Press Run Tile Collection. The software will acquire a tileset, and stitch it together. Currently overlap is not supported. </li>
+<li>Once the stitching is complete, you can add a new lamella position with Alt + Left Click. </li>
+<li>Change to the Position Tab and enable Display Pattern (and select trench) to see an overlay of the trench pattern in the image. </li>
+<li>To move an existing pattern, go to the Position Tab -&gt; Select the Position and press Shift + Left Click on the image to move it. You can also move the stage to the position by pressing Move to Position Name or by Double Left Clicking on the image. </li>
+<li>Optionally, if you have correlation data (fluroescence images) you can load them in the Correlation Tab and correlate them with your overview image. </li>
+<li>Once you are happy with the positions go back to the AutoLamella UI. </li>
+<li>In the AutoLamella UI, go through each selected position and press move to position. Once you are happy with your pattern positions, press Save Position (in the Experiment tab). The button will switch from orange to green and indicate 'Position Ready'. IMPORTANT: make sure you go to the position before pressing Save Position (otherwise it will save the position as wherever the stage currently is, we are working on making this more streamlined). </li>
+<li>When you are ready, press Run Waffle Trench Milling to start milling trenches. </li>
+</ol>
+<h3 id="trench-milling">Trench Milling</h3>
+<p>After pressing Trench Milling:</p>
+<ol>
+<li>The software will move to the first selected trench position, and restore the microscope state. </li>
+<li>The trench milling pattern (trench) will be milled. If supervision is enabled, ask you to confirm the milling operation. Press Run Milling to mill the pattern, and then press Continue when happy with the milling.</li>
+<li>Charge neutralisation will be run, this is to disapate ion charge built up during trench milling. </li>
+<li>Reference images will be acquired of the final trench. </li>
+<li>Steps 1 - 4 will be repeated for each selected position.</li>
+<li>Once all trenches have been milled, the software will return to the Experiment Tab and undercut milling will be enabled. Press Run Waffle Undercut Milling to start milling undercuts. </li>
+</ol>
+<h3 id="undercut-milling">Undercut Milling</h3>
+<p>After pressing Undercut Milling.</p>
+<ol>
+<li>The software will move the the first trench position, and restore the microscope state. </li>
+<li>The stage will rotate 180 degrees, and tilt flat to the electron beam to prepare for undercut milling. </li>
+<li>The software will use machine learning feature detection to align the lamella (trench) centre in the electron and ion beams. If supervision is enabled, it will ask you to confirm the feature detections. Drag the feature to move it to the correct location (if required), and then press Continue to proceed with the workflow. </li>
+<li>The stage will tilt down by the amount specified in the protocol protocol["options"]["undercut_tilt_angle"] (default is -5.0 deg). </li>
+<li>The software will detect the top of the lamella to be used to place the undercut pattern. If supervision is enabled, it will ask you to confirm the feature detections. Drag the feature to move it to the correct location (if required), and then press Continue to proceed with the workflow.  </li>
+<li>The undercut milling pattern (undercut) will be milled. If supervision is enabled, ask you to confirm the milling operation. Press Run Milling to mill the pattern, and then press Continue when happy with the milling.</li>
+<li>Steps 4 - 6 will repeat for the number of iterations specified in protocol["milling"]["undercut"]["stages]</li>
+<li>The software will detect the centre of the lamella to re-align it to the centre of the image in both beams to restore coincidence after tilting. If supervision is enabled, it will ask you to confirm the feature detections. Drag the feature to move it to the correct location (if required), and then press Continue to proceed with the workflow. </li>
+<li>Reference images will be acquired of the final undercut. </li>
+<li>Steps 1 - 9 will be repeated for each selected position.</li>
+<li>Once all undercuts have been milled, the software will return to the Experiment Tab and Setup AutoLamella will be enabled. Press Run Setup AutoLamella to setup the final lamella milling. </li>
+</ol>
+<h3 id="setup-and-run-autolamella">Setup and Run AutoLamella</h3>
+<p>From here, the workflow is exactly the same as the on-grid method. For more details please see <a href="#setup-autolamella">On-Grid Setup AutoLamella</a></p>
+<p>The same as for the on-grid method, after the final polishing workflow completes the software will return the Experiment Tab and display the status of each lamella. It is recommended that you remove your sample after final polishing to prevent contamination build up. </p>
+<h2 id="liftout-method">Liftout Method</h2>
+<p>[Under Construction]</p>
+<h2 id="setup-protocol">Setup Protocol</h2>
+<p>Both liftout method require additional protocol setup. This step will walkthrough configuring the protocol for your system. </p>
+<h3 id="scan-rotation">Scan Rotation</h3>
+<p>Liftout was developed with ion beam scan rotation set to 0 degrees. I've done my best to make it agnostic to the scan rotation (e.g. fliping the direction of movements), but can't promise i've considered everything. I know scan rotation = 180 deg is more common, but it's recommened to use 0 degrees for running liftout. I will update this note, when I have validated it works for 180 deg rotation too. If you use 180 degrees rotation, and encountered specific issues, please let me know at patrick@openfibsem.org.</p>
+<h3 id="named-positions">Named Positions</h3>
+<p>You will need to define two named positions, to specify which grid is for milling and which is for landing. Respectively these are called trench_start_position and landing_start_position in the protocol.  </p>
+<p>To specify these named positions, you first need to add them to the positions.yaml file. To add the named positions.</p>
+<ol>
+<li>Open OpenFIBSEM UI / AutoLamella UI / AutoLiftout UI, connect to the microscope.</li>
+<li>Change to the Movement Tab.</li>
+<li>Move the stage to the grid you want to use for milling. Go flat to the Ion beam.</li>
+<li>Press Add Position. Rename the position, and press update. You can call it whatever you like, but recommended is something like liftout-grid-01-milling.</li>
+<li>Move the stage to the grid you want to use for landing. Go to the landing angle.</li>
+<li>Press Add Position. Rename the position, and press update. You can call it whatever you like, but recommended is something like liftout-grid-02-landing.</li>
+<li>Press Export Positions and select the positions.yaml. Choose to overwrite and append to the file. </li>
+<li>Reload AutoLiftout UI, connect to the microscope, and create/load your experiment/protocol to see these named positions in the Protocol tab.</li>
+<li>Set the Lamella Start Position and Landing Start Position to your named position. Update Protocol and Save Protocol (File Menu -&gt; Save Protocol).</li>
+</ol>
+<h3 id="setup-autoliftout">Setup AutoLiftout</h3>
+<p>The Setup AutoLiftout workflow will walk you through selecting milling positions and their corresponding landing positions. </p>
+<ol>
+<li>The software will move the stage to the position specified as Lamella Start Position.  </li>
+<li>Navigate to the region of interest, and select the position to mill the trenches. You can also adjust the milling patterns in the milling tab. The trench overlay is only for navigation and selection and won't be milled yet. Press Continue when you are happy. </li>
+<li>You will be asked if you want to continue selecting milling positions. Press Yes and Step 2 will be repeated for a new milling position. Continue selecting positions until you are happy. Press No to continue to select landing positions.</li>
+<li>The software will move the stage to the position specified as Landing Start Position. </li>
+<li>Navigate to the landing post / grid, and mill the surface flat. Press Run Milling to mill the flatten pattern, and then press Continue when happy with the milling.</li>
+<li>Step 5 will be repeated for each selected milling position.</li>
+<li>Once you have selected and milled each landing position, the software will return to the Experiment Tab. You should see the status of each lamella. </li>
+<li>When you are ready, press Run AutoLiftout to begin the workflow. </li>
+</ol>
+<h3 id="run-autoliftout">Run AutoLiftout</h3>
+<p>The AutoLiftout workflow consists of four tasks; trench milling, undercut milling, liftout and landing. Trenches and Undercuts are the same workflow as in the waffle method, and can be completed in batch, but liftout and landing have to be completed sequentially for each lamella. </p>
+<p>For details on the trench and undercut milling, please see the above <a href="#trench-milling">walkthrough</a>. The only different between these workflows is the milling patterns for the trench and undercut which are defined in the protocol. </p>
+<h4 id="liftout">Liftout</h4>
+<p>Before starting Liftout you will be asked if you want to Continue Lamella-01-XX from LiftoutLamella. You will need to complete both Liftout and Landing for each laemlla in sequence, and this is the last point you can interrupt without losing your lamella. Once you are ready, press Continue to start Liftout. Press Skip to continue to the next lamella. </p>
+<ol>
+<li>The software will move the stage to the undercut position, and restore the microscope state. </li>
+<li>The software will use machine learning feature detection to align the lamella (trench) centre in the electron and ion beams. If supervision is enabled, it will ask you to confirm the feature detections. Drag the feature to move it to the correct location (if required), and then press Continue to proceed with the workflow. </li>
+<li>The manipulator will be inserted above and to the left of the lamella trench. The software will use machine learning feature detection to detect the manipulator tip and the left edge of the lamella. If supervision is enabled, it will ask you to confirm the feature detections. Drag the feature to move it to the correct location (if required), and then press Continue to proceed with the workflow. </li>
+<li>Step 3 will be repeated several times in different beams to align the manipulator to the left of the lamella edge. If supervision if enabled you will be asked to confirm the position of the manipulator. Use the manipulator controls to adjust if required. </li>
+<li>The sample will be charged with the ion beam. The software will use machine learning feature detection to detect the manipulator tip and the left edge of the lamella and move them to contact. If supervision is enabled, it will ask you to confirm the feature detections. Drag the feature to move it to the correct location (if required), and then press Continue to proceed with the workflow. </li>
+<li>If using brightness based contact detection, the manipulator will be iteratively moved towards the lamella until contact is detected. If not, no additional movement is made. </li>
+<li>The manipulator is moved slightly up to avoid bottoming out, and make better surface contact with the lamella.</li>
+<li>If liftout weld is selected, the manipulator is welded to the lamella with a milling redeposition pattern. If no weld is selected, the software continues on. </li>
+<li>The software will use machine learning feature detection to detect the right edge of the lamella. If supervision is enabled, it will ask you to confirm the feature detections. Drag the feature to move it to the correct location (if required), and then press Continue to proceed with the workflow. </li>
+<li>The sever milling pattern (sever) will be milled. If supervision is enabled, ask you to confirm the milling operation. Press Run Milling to mill the pattern, and then press Continue when happy with the milling.</li>
+<li>The manipulator is removed from the trench, and then retracted fully.</li>
+<li>The software will then ask you to continue with Land Lamella. It is recommended you complete landing immediately.</li>
+</ol>
+<h4 id="landing">Landing</h4>
+<ol>
+<li>The softwre moves the stage to the landing position selected earlier and aligns to the reference image. </li>
+<li>The manipulator will be inserted above and to the left of the landing post. The software will use machine learning feature detection to detect the right edge of the lamella and the landing post. If supervision is enabled, it will ask you to confirm the feature detections. Drag the feature to move it to the correct location (if required), and then press Continue to proceed with the workflow.</li>
+<li>Step 2 will be repeated several times in different beams to land the lamella right edge on the landing post.</li>
+<li>After landing, if supervision is enabled, the software will ask you to confirm the lamella has landed. Press Continue if it has landed to continue with the workflow, or press Repeat to repeat the last step.</li>
+<li>The software detects the lamella right edge to place the weld milling pattern. If supervision is enabled, it will ask you to confirm the feature detections. Drag the feature to move it to the correct location (if required), and then press Continue to proceed with the workflow.</li>
+<li>The weld milling pattern (weld) will be milled. If supervision is enabled, ask you to confirm the milling operation. Press Run Milling to mill the pattern, and then press Continue when happy with the milling.</li>
+<li>The sample will be discharged, and optionally this procedure can be repeated. If the manipulator was welded to the lamella, the cut is performed here. </li>
+<li>The manipulator moves back from the landing post. If supervision is enabled, you will be asked to confirm if the landing was successful. Press Continue to continue with the workflow, or Repeate to retry the landing attempt (deposition free attachment only).</li>
+<li>You can optionally reset (re-sharpen, mill) the manipulator. This is not required for deposition free attachment method.</li>
+</ol>
+<p>The software will now repeate Liftout and Landing for each selected position. Once all landings are completed (or you exit early), you can move onto polishing lamella with AutoLamella workflow. </p>
+<h3 id="liftout-run-autolamella">Liftout - Run AutoLamella</h3>
+<p>From here, the workflow is exactly the same as the on-grid method. For more details please see <a href="#setup-autolamella">On-Grid Setup AutoLamella</a>. The only difference is the stage will move to a different angle for lamella milling as specified in the protocol under protocol["options"]["lamella_tilt_angle"]</p>
+<p>The same as for the on-grid method, after the final polishing workflow completes the software will return the Experiment Tab and display the status of each lamella. It is recommended that you remove your sample after final polishing to prevent contamination build up.</p>
+<h2 id="serial-liftout-method">Serial Liftout Method</h2>
+<p>[Under Construction]</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.expand", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "content.code.copy"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>

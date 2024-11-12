@@ -1,0 +1,1606 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for the OpenFIBSEM Project">
+      
+      
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../installation/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.44">
+    
+    
+      
+        <title>Getting Started - OpenFIBSEM Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#getting-started" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenFIBSEM Documentation" class="md-header__button md-logo" aria-label="OpenFIBSEM Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenFIBSEM Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Getting Started
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="deep-purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/DeMarcoLab/fibsem" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    DeMarcoLab/fibsem
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+    
+  
+  OpenFIBSEM
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+    
+  
+  OpenFIBSEM API
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../autolamella/" class="md-tabs__link">
+          
+  
+    
+  
+  AutoLamella
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../blog/" class="md-tabs__link">
+          
+  
+    
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenFIBSEM Documentation" class="md-nav__button md-logo" aria-label="OpenFIBSEM Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    OpenFIBSEM Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/DeMarcoLab/fibsem" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    DeMarcoLab/fibsem
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    OpenFIBSEM
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            OpenFIBSEM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    OpenFIBSEM API
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            OpenFIBSEM API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-openfibsem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install OpenFIBSEM
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install OpenFIBSEM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#additional-installation-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additional Installation Information
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-your-microscope" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring your Microscope
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring your Microscope">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generating-an-intial-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generating an intial configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#full-microscope-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Full Microscope Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Full Microscope Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ip-address" class="md-nav__link">
+    <span class="md-ellipsis">
+      IP Address
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rotation-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rotation Reference
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#column-tilt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Column Tilt
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eucentric-height" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eucentric Height
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#thermo-fisher-microscopes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Thermo Fisher Microscopes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#system-fingerprint" class="md-nav__link">
+    <span class="md-ellipsis">
+      System Fingerprint
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connecting-to-the-microscope" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connecting to the Microscope
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Connecting to the Microscope">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#before-you-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      Before You Start
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#try-out-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Try out Examples
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-the-user-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run the User Interface
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Run the User Interface">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#select-your-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Select Your Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connect-to-the-microscope" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connect to the Microscope
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acquire-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      Acquire Images
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#congratulations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Congratulations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../concepts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Concepts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    User Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Examples
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roadmap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Roadmap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../autolamella/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    AutoLamella
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            AutoLamella
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../autolamella/getting_started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../autolamella/walkthrough/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Walkthrough
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../autolamella/motivation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Motivation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../autolamella/user_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    User Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../autolamella/ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Machine Learning
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../blog/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Blog
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Blog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-openfibsem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install OpenFIBSEM
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install OpenFIBSEM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#additional-installation-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additional Installation Information
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-your-microscope" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring your Microscope
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring your Microscope">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generating-an-intial-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generating an intial configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#full-microscope-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Full Microscope Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Full Microscope Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ip-address" class="md-nav__link">
+    <span class="md-ellipsis">
+      IP Address
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rotation-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rotation Reference
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#column-tilt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Column Tilt
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eucentric-height" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eucentric Height
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#thermo-fisher-microscopes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Thermo Fisher Microscopes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#system-fingerprint" class="md-nav__link">
+    <span class="md-ellipsis">
+      System Fingerprint
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connecting-to-the-microscope" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connecting to the Microscope
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Connecting to the Microscope">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#before-you-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      Before You Start
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#try-out-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Try out Examples
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-the-user-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run the User Interface
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Run the User Interface">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#select-your-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Select Your Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connect-to-the-microscope" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connect to the Microscope
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acquire-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      Acquire Images
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#congratulations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Congratulations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="getting-started">Getting Started</h1>
+<h2 id="install-openfibsem">Install OpenFIBSEM</h2>
+<p>Install Package</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>fibsem<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.9<span class="w"> </span>pip
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>conda<span class="w"> </span>activate<span class="w"> </span>fibsem
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>pip<span class="w"> </span>install<span class="w"> </span>fibsem<span class="w"> </span>
+</span></code></pre></div>
+<h3 id="additional-installation-information">Additional Installation Information</h3>
+<p>For detailed instructions on installation, and installing the commercial microscope APIs, see <a href="../installation/">Installation Guide</a>.</p>
+<h2 id="configuring-your-microscope">Configuring your Microscope</h2>
+<p>To get started you only need a few values to configure your microscope. See below for a explanation of some these values.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">name</span><span class="p">:</span><span class="w">                           </span><span class="l l-Scalar l-Scalar-Plain">monash-tfs-hydra-pfib-01</span><span class="w">    </span><span class="c1"># a descriptive name for your configuration </span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">ip_address</span><span class="p">:</span><span class="w">                     </span><span class="l l-Scalar l-Scalar-Plain">192.168.0.1</span><span class="w">                 </span><span class="c1"># the ip address of the microscope PC</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">manufacturer</span><span class="p">:</span><span class="w">                   </span><span class="l l-Scalar l-Scalar-Plain">Thermo</span><span class="w">                      </span><span class="c1"># the microscope manufactuer, Thermo, Tescan or Demo                       </span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nt">rotation-reference</span><span class="p">:</span><span class="w">             </span><span class="l l-Scalar l-Scalar-Plain">49</span><span class="w">                          </span><span class="c1"># the reference rotation value (rotation when loading)  [degrees]</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nt">shuttle-pre-tilt</span><span class="p">:</span><span class="w">               </span><span class="l l-Scalar l-Scalar-Plain">35</span><span class="w">                          </span><span class="c1"># the pre-tilt of the shuttle                           [degrees]</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nt">electron-beam-eucentric-height</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4.0e-3</span><span class="w">                      </span><span class="c1"># the eucentric height of the electron beam             [metres]</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nt">ion-beam-eucentric-height</span><span class="p">:</span><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">16.5e-3</span><span class="w">                     </span><span class="c1"># the eucentric height of the ion beam                  [metres]</span>
+</span></code></pre></div>
+<h3 id="generating-an-intial-configuration">Generating an intial configuration</h3>
+<p>To generate an initial configuration for your microscope, run the cli:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>fibsem-generate-config<span class="w"> </span>--path<span class="w"> </span>path/to/save/configuration.yaml
+</span></code></pre></div>
+<p>This will walk you through generating your configuration, and use derived and default values for the rest of the configuration to get you started.</p>
+<p>You can edit the rest of the configuration values once it has been generated. The full configuration is below.</p>
+<h3 id="full-microscope-configuration">Full Microscope Configuration</h3>
+<p>The full microscope configuration after generation is as follows. See below for an explanation of some specific values.</p>
+<div class="language-yaml highlight"><span class="filename">microscope-configuration.yaml</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># configuration</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># Please don&#39;t edit or delete this file, it is the default configuration for the microscope</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># configuration </span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nt">info</span><span class="p">:</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openfibsem-microscope-configuration</span><span class="w">               </span><span class="c1"># a descriptive name for your configuration                     [SPECIFIED]</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nt">ip_address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.0.1</span><span class="w">                                 </span><span class="c1"># the ip address of the microscope PC                           [SPECIFIED]</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nt">manufacturer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Thermo</span><span class="w">                                    </span><span class="c1"># the microscope manufactuer                                    [SPECIFIED]        </span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="nt">stage</span><span class="p">:</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w">                    </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">                        </span><span class="c1"># the stage is enabled                                          [USER]</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="nt">rotation</span><span class="p">:</span><span class="w">                   </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">                        </span><span class="c1"># the stage is able to rotate                                   [USER]</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="nt">tilt</span><span class="p">:</span><span class="w">                       </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">                        </span><span class="c1"># the stage is able to tilt                                     [USER]</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="nt">rotation_reference</span><span class="p">:</span><span class="w">         </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w">                           </span><span class="c1"># the reference rotation value                                  [SPECIFIED] </span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="nt">rotation_180</span><span class="p">:</span><span class="w">               </span><span class="l l-Scalar l-Scalar-Plain">180</span><span class="w">                         </span><span class="c1"># the reference rotation + 180 degrees                          [DERIVED - rotation-reference]</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="nt">shuttle_pre_tilt</span><span class="p">:</span><span class="w">           </span><span class="l l-Scalar l-Scalar-Plain">35.0</span><span class="w">                        </span><span class="c1"># the pre-tilt of the shuttle                                   [SPECIFIED]</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="nt">manipulator_height_limit</span><span class="p">:</span><span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">0.0037</span><span class="w">                      </span><span class="c1"># the linked height limit for manipulator (Thermo Only)         [DERIVED - manufactuer]</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="nt">electron</span><span class="p">:</span><span class="w">                                              </span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w">                    </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">                        </span><span class="c1"># the electron beam is enabled                                  [USER]</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="nt">column_tilt</span><span class="p">:</span><span class="w">                </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w">                           </span><span class="c1"># the column tilt of the electron beam                          [DERIVED - manufactuer]</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">    </span><span class="nt">eucentric_height</span><span class="p">:</span><span class="w">           </span><span class="l l-Scalar l-Scalar-Plain">7.0e-3</span><span class="w">                      </span><span class="c1"># the eucentric height of the electron beam                     [SPECIFIED]</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">    </span><span class="nt">voltage</span><span class="p">:</span><span class="w">                    </span><span class="l l-Scalar l-Scalar-Plain">2000</span><span class="w">                        </span><span class="c1"># the voltage of the electron beam                              [USER]</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">    </span><span class="nt">current</span><span class="p">:</span><span class="w">                    </span><span class="l l-Scalar l-Scalar-Plain">50.0e-12</span><span class="w">                    </span><span class="c1"># the current of the electron beam                              [USER]</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">    </span><span class="nt">resolution</span><span class="p">:</span><span class="w">                 </span><span class="p p-Indicator">[</span><span class="nv">1536</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1024</span><span class="p p-Indicator">]</span><span class="w">                </span><span class="c1"># the default electron resolution                       [pixel] [USER]</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">    </span><span class="nt">hfw</span><span class="p">:</span><span class="w">                        </span><span class="l l-Scalar l-Scalar-Plain">150.0e-6</span><span class="w">                    </span><span class="c1"># the default electron hfw                              [metres][USER]</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">    </span><span class="nt">dwell_time</span><span class="p">:</span><span class="w">                 </span><span class="l l-Scalar l-Scalar-Plain">1.0e-06</span><span class="w">                     </span><span class="c1"># the default electron dwell time</span>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">    </span><span class="nt">detector_mode</span><span class="p">:</span><span class="w">              </span><span class="l l-Scalar l-Scalar-Plain">SecondaryElectrons</span><span class="w">          </span><span class="c1"># the detector mode of the electron beam                        [USER]</span>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">    </span><span class="nt">detector_type</span><span class="p">:</span><span class="w">              </span><span class="l l-Scalar l-Scalar-Plain">ETD</span><span class="w">                         </span><span class="c1"># the detector type of the electron beam                        [USER]</span>
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="nt">ion</span><span class="p">:</span>
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w">                    </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">                        </span><span class="c1"># the ion beam is enabled                                       [USER]</span>
+</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="w">    </span><span class="nt">column_tilt</span><span class="p">:</span><span class="w">                </span><span class="l l-Scalar l-Scalar-Plain">52</span><span class="w">                          </span><span class="c1"># the column tilt of the electron beam                          [SPECIFIED]</span>
+</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="w">    </span><span class="nt">eucentric_height</span><span class="p">:</span><span class="w">           </span><span class="l l-Scalar l-Scalar-Plain">16.5e-3</span><span class="w">                     </span><span class="c1"># the eucentric height of the ion beam                          [SPECIFIED]</span>
+</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">    </span><span class="nt">plasma</span><span class="p">:</span><span class="w">                     </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">                       </span><span class="c1"># ion beam is a plasma column                                   [USER]</span>
+</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="w">    </span><span class="nt">plasma_gas</span><span class="p">:</span><span class="w">                 </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w">                        </span><span class="c1"># the plasma gas for the ion beam (plasma fib only)             [USER]</span>
+</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="w">    </span><span class="nt">voltage</span><span class="p">:</span><span class="w">                    </span><span class="l l-Scalar l-Scalar-Plain">30000</span><span class="w">                       </span><span class="c1"># the voltage of the ion beam                                   [USER]</span>
+</span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="w">    </span><span class="nt">current</span><span class="p">:</span><span class="w">                    </span><span class="l l-Scalar l-Scalar-Plain">2.0e-11</span><span class="w">                     </span><span class="c1"># the current of the ion beam                                   [USER]</span>
+</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="w">    </span><span class="nt">resolution</span><span class="p">:</span><span class="w">                 </span><span class="p p-Indicator">[</span><span class="nv">1536</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1024</span><span class="p p-Indicator">]</span><span class="w">                </span><span class="c1"># the default ion resolution                            [pixel] [USER]</span>
+</span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="w">    </span><span class="nt">hfw</span><span class="p">:</span><span class="w">                        </span><span class="l l-Scalar l-Scalar-Plain">150.0e-6</span><span class="w">                    </span><span class="c1"># the default ion hfw                                   [metres][USER]</span>
+</span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="w">    </span><span class="nt">dwell_time</span><span class="p">:</span><span class="w">                 </span><span class="l l-Scalar l-Scalar-Plain">1.0e-06</span><span class="w">                     </span><span class="c1"># the default ion dwell time</span>
+</span><span id="__span-3-38"><a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="w">    </span><span class="nt">detector_mode</span><span class="p">:</span><span class="w">              </span><span class="l l-Scalar l-Scalar-Plain">SecondaryElectrons</span><span class="w">          </span><span class="c1"># the detector mode of the ion beam                             [USER]</span>
+</span><span id="__span-3-39"><a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a><span class="w">    </span><span class="nt">detector_type</span><span class="p">:</span><span class="w">              </span><span class="l l-Scalar l-Scalar-Plain">ETD</span><span class="w">                         </span><span class="c1"># the detector type of the ion beam                             [USER]</span>
+</span><span id="__span-3-40"><a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="nt">manipulator</span><span class="p">:</span>
+</span><span id="__span-3-41"><a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w">                    </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">                        </span><span class="c1"># manipulator is enabled                                        [USER]</span>
+</span><span id="__span-3-42"><a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a><span class="w">    </span><span class="nt">rotation</span><span class="p">:</span><span class="w">                   </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">                       </span><span class="c1"># manipulator is able to rotate                                 [USER]</span>
+</span><span id="__span-3-43"><a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a><span class="w">    </span><span class="nt">tilt</span><span class="p">:</span><span class="w">                       </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">                       </span><span class="c1"># manipulator is able to tilt                                   [USER]</span>
+</span><span id="__span-3-44"><a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a><span class="nt">gis</span><span class="p">:</span>
+</span><span id="__span-3-45"><a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w">                    </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">                        </span><span class="c1"># gis is enabled                                                [USER]</span>
+</span><span id="__span-3-46"><a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a><span class="w">    </span><span class="nt">multichem</span><span class="p">:</span><span class="w">                  </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">                        </span><span class="c1"># multichem is enabled                                          [USER]</span>
+</span><span id="__span-3-47"><a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a><span class="w">    </span><span class="nt">sputter_coater</span><span class="p">:</span><span class="w">             </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">                       </span><span class="c1"># sputter coater is enabled                                     [USER]                        </span>
+</span><span id="__span-3-48"><a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a><span class="nt">imaging</span><span class="p">:</span>
+</span><span id="__span-3-49"><a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a><span class="w">    </span><span class="nt">beam_type</span><span class="p">:</span><span class="w">                  </span><span class="l l-Scalar l-Scalar-Plain">ELECTRON</span><span class="w">                    </span><span class="c1"># the default imaging beam type (ELECTRON, or ION)              [USER]</span>
+</span><span id="__span-3-50"><a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a><span class="w">    </span><span class="nt">resolution</span><span class="p">:</span><span class="w">                 </span><span class="p p-Indicator">[</span><span class="nv">1536</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1024</span><span class="p p-Indicator">]</span><span class="w">                </span><span class="c1"># the default imaging resolution                        [pixel] [USER]</span>
+</span><span id="__span-3-51"><a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a><span class="w">    </span><span class="nt">hfw</span><span class="p">:</span><span class="w">                        </span><span class="l l-Scalar l-Scalar-Plain">150.0e-6</span><span class="w">                    </span><span class="c1"># the default imaging hfw                               [metres][USER]</span>
+</span><span id="__span-3-52"><a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a><span class="w">    </span><span class="nt">dwell_time</span><span class="p">:</span><span class="w">                 </span><span class="l l-Scalar l-Scalar-Plain">1.0e-06</span><span class="w">                     </span><span class="c1"># the default imaging dwell time                        [second][USER]</span>
+</span><span id="__span-3-53"><a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a><span class="w">    </span><span class="nt">imaging_current</span><span class="p">:</span><span class="w">            </span><span class="l l-Scalar l-Scalar-Plain">2.0e-11</span><span class="w">                     </span><span class="c1"># the default imaging current                           [amp]   [USER]</span>
+</span><span id="__span-3-54"><a id="__codelineno-3-54" name="__codelineno-3-54" href="#__codelineno-3-54"></a><span class="w">    </span><span class="nt">autocontrast</span><span class="p">:</span><span class="w">               </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">                        </span><span class="c1"># use autocontrast                                              [USER]</span>
+</span><span id="__span-3-55"><a id="__codelineno-3-55" name="__codelineno-3-55" href="#__codelineno-3-55"></a><span class="w">    </span><span class="nt">autogamma</span><span class="p">:</span><span class="w">                  </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">                       </span><span class="c1"># use autogamma                                                 [USER]</span>
+</span><span id="__span-3-56"><a id="__codelineno-3-56" name="__codelineno-3-56" href="#__codelineno-3-56"></a><span class="w">    </span><span class="nt">save</span><span class="p">:</span><span class="w">                       </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">                       </span><span class="c1"># auto save images                                              [USER]</span>
+</span><span id="__span-3-57"><a id="__codelineno-3-57" name="__codelineno-3-57" href="#__codelineno-3-57"></a><span class="nt">milling</span><span class="p">:</span>
+</span><span id="__span-3-58"><a id="__codelineno-3-58" name="__codelineno-3-58" href="#__codelineno-3-58"></a><span class="w">    </span><span class="nt">milling_voltage</span><span class="p">:</span><span class="w">            </span><span class="l l-Scalar l-Scalar-Plain">30000</span><span class="w">                       </span><span class="c1"># the default milling voltage       (Thermo)            [volt]  [USER]</span>
+</span><span id="__span-3-59"><a id="__codelineno-3-59" name="__codelineno-3-59" href="#__codelineno-3-59"></a><span class="w">    </span><span class="nt">milling_current</span><span class="p">:</span><span class="w">            </span><span class="l l-Scalar l-Scalar-Plain">2.0e-09</span><span class="w">                     </span><span class="c1"># the default milling current       (Thermo)            [amp]   [USER]   </span>
+</span><span id="__span-3-60"><a id="__codelineno-3-60" name="__codelineno-3-60" href="#__codelineno-3-60"></a><span class="w">    </span><span class="nt">dwell_time</span><span class="p">:</span><span class="w">                 </span><span class="l l-Scalar l-Scalar-Plain">1.0e-06</span><span class="w">                     </span><span class="c1"># the default milling dwell time    (TESCAN)            [second][USER]</span>
+</span><span id="__span-3-61"><a id="__codelineno-3-61" name="__codelineno-3-61" href="#__codelineno-3-61"></a><span class="w">    </span><span class="nt">rate</span><span class="p">:</span><span class="w">                       </span><span class="l l-Scalar l-Scalar-Plain">3.4e-09</span><span class="w">                     </span><span class="c1"># the default milling spuuter rate  (TESCAN)            [um3/s] [USER]</span>
+</span><span id="__span-3-62"><a id="__codelineno-3-62" name="__codelineno-3-62" href="#__codelineno-3-62"></a><span class="w">    </span><span class="nt">spot_size</span><span class="p">:</span><span class="w">                  </span><span class="l l-Scalar l-Scalar-Plain">5.4e-08</span><span class="w">                     </span><span class="c1"># the default milling spot size     (TESCAN)            [metres][USER]</span>
+</span><span id="__span-3-63"><a id="__codelineno-3-63" name="__codelineno-3-63" href="#__codelineno-3-63"></a><span class="w">    </span><span class="nt">preset</span><span class="p">:</span><span class="w">                     </span><span class="s">&quot;30</span><span class="nv"> </span><span class="s">keV;</span><span class="nv"> </span><span class="s">20</span><span class="nv"> </span><span class="s">nA&quot;</span><span class="w">             </span><span class="c1"># the default milling preset        (TESCAN)                    [USER]                      </span>
+</span></code></pre></div>
+<h4 id="ip-address">IP Address</h4>
+<p>To find the local ip address of the microscope PC, you can use <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig">ipconfig</a>. If you have a standard setup, and have installed openfibsem on the Support PC, this ip address is usually 192.168.0.1. But this might not be the case, so check with ipconfig</p>
+<h4 id="rotation-reference">Rotation Reference</h4>
+<p>The rotation reference is the reference point for stage rotation. For standard ThermoFisher systems it is the rotation when initially loading the stage. It is also the rotation used when you tilt perpendicular to the Electron Beam. The rotation_180 value is 180 degrees offset from the reference rotation, and is the rotation used to tilt perpendicular to the Ion Beam.</p>
+<p><img alt="Rotation Reference" src="../assets/api/movement/pre_tilt_flat_stage.png" />
+Rotation Reference Position</p>
+<p><img alt="Rotation 180 Reference" src="../assets/api/movement/pre_tilt_flat_stage_180.png" />
+Rotation 180 Reference Position</p>
+<h4 id="column-tilt">Column Tilt</h4>
+<p>The column tilt angle for each beam. This is standardised for each manufactuer.</p>
+<table>
+<thead>
+<tr>
+<th>Manufacturer</th>
+<th>Electron Beam</th>
+<th>Ion Beam</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Thermo Fisher</td>
+<td>0 deg</td>
+<td>52 deg</td>
+</tr>
+<tr>
+<td>Tescan</td>
+<td>0 deg</td>
+<td>55 deg</td>
+</tr>
+</tbody>
+</table>
+<h4 id="eucentric-height">Eucentric Height</h4>
+<p>The pre-defined working distance for each beam, that defines the eucentric point of the system. This is standard for each different model. I will add more to the table below as I confirm them.</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Electron Beam</th>
+<th>Ion Beam</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TFS - Helios (Hydra)</td>
+<td>4.0 mm</td>
+<td>16.5 mm</td>
+</tr>
+<tr>
+<td>TFS - Aquilos</td>
+<td>7.0 mm</td>
+<td>19 mm</td>
+</tr>
+<tr>
+<td>TESCAN - Amber</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="thermo-fisher-microscopes">Thermo Fisher Microscopes</h4>
+<p>If you are using a Thermo Fisher FIBSEM, I would recommend loading our application files; autolamella and cryo_Pt_dep. You don't have to use them, but you may need to setup application files to work with our milling conventions. </p>
+<p>They are found in fibsem/external/application_files. You can load them using xTUI. </p>
+<h4 id="system-fingerprint">System Fingerprint</h4>
+<p>BETA: Not Yet Available</p>
+<p>Connect to the microscope, read the configuration directly from it.</p>
+<h3 id="connecting-to-the-microscope">Connecting to the Microscope</h3>
+<p>Once you have configured you microscope, you should be able to connect to the microscope.</p>
+<h4 id="before-you-start">Before You Start</h4>
+<p>Before you start it is recommended that you setup the microscope in the same way you would normally. This includes:</p>
+<ul>
+<li>Pumping the System</li>
+<li>Loading a Sample  </li>
+<li>Turning on the Beams</li>
+<li>Linking the Stage (Thermo Fisher)</li>
+<li>Anything else</li>
+</ul>
+<p>We are working on controlling these aspects of the systems, but for now consider them pre-requistes for using openfibsem (and applications)</p>
+<h4 id="try-out-examples">Try out Examples</h4>
+<p>To get familiar with the API, you can try out the <a href="../examples/">example scripts</a>.</p>
+<h4 id="run-the-user-interface">Run the User Interface</h4>
+<p>You can run the general microscope user interface with the following command:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>fibsem_ui
+</span></code></pre></div>
+<p>Or if you installed the napari plugin, you can launch it through the plugin menu.</p>
+<p><img alt="OpenFIBSEM UI" src="../assets/ui_start_up.png" />
+OpenFIBSEM UI - Start Up</p>
+<h5 id="select-your-configuration">Select Your Configuration</h5>
+<p>From here, you can select your configuration using the "..." button. Select your configuration, add it to the user configurations, and make it the default.</p>
+<p><img alt="OpenFIBSEM Ui Configuration" src="../assets/ui_select_configuration.png" />
+OpenFIBSEM UI - Select Configuration</p>
+<h5 id="connect-to-the-microscope">Connect to the Microscope</h5>
+<p>Once you have selected your configuration, you can connect to the microscope. From here you have full control over the microscope systems.</p>
+<p><img alt="OpenFIBSEM UI - Connected" src="../assets/ui_microscope_connected.png" />
+OpenFIBSEM UI - Microscope Connected</p>
+<h5 id="acquire-images">Acquire Images</h5>
+<p>Change to the Image tab, and try to take an image.</p>
+<p><img alt="OpenFIBSEM UI - Acquired Images" src="../assets/ui_microscope_image_acquired.png" />
+OpenFIBSEM UI - Images Acquired</p>
+<h3 id="congratulations">Congratulations</h3>
+<p>If you made it this far, congratulations! Your system is setup and should be ready to use. We have only scratched the surface of concepts and the api, so please check out the <a href="../concepts/">Concepts</a> page to learn more about the OpenFIBSEM API, and how it can best help you.</p>
+<p>If you have any questions feel free to reach out to Patrick on <a href="https://twitter.com/PatrickCleeve">Twitter</a> or via <a href="mailto:patrick@openfibsem.org">email</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.expand", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "content.code.copy"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>

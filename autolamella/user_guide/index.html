@@ -1,0 +1,3092 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for the OpenFIBSEM Project">
+      
+      
+      
+      
+        <link rel="prev" href="../motivation/">
+      
+      
+        <link rel="next" href="../ml/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.44">
+    
+    
+      
+        <title>User Guide - OpenFIBSEM Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#workflow" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OpenFIBSEM Documentation" class="md-header__button md-logo" aria-label="OpenFIBSEM Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenFIBSEM Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              User Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="deep-purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/DeMarcoLab/fibsem" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    DeMarcoLab/fibsem
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+    
+  
+  OpenFIBSEM
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../openfibsem/" class="md-tabs__link">
+          
+  
+    
+  
+  OpenFIBSEM API
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+    
+  
+  AutoLamella
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../blog/" class="md-tabs__link">
+          
+  
+    
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenFIBSEM Documentation" class="md-nav__button md-logo" aria-label="OpenFIBSEM Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    OpenFIBSEM Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/DeMarcoLab/fibsem" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    DeMarcoLab/fibsem
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    OpenFIBSEM
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            OpenFIBSEM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../openfibsem/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    OpenFIBSEM API
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            OpenFIBSEM API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openfibsem/getting_started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openfibsem/installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openfibsem/concepts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Concepts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openfibsem/user_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    User Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openfibsem/examples/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Examples
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openfibsem/roadmap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Roadmap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openfibsem/reference/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    AutoLamella
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            AutoLamella
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting_started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../walkthrough/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Walkthrough
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../motivation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Motivation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    User Guide
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    User Guide
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-stages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow Stages
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#select-positions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Select Positions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#select-landing-positions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Select Landing Positions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#isolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Isolation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Isolation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trench-milling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Trench Milling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Trench Milling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#restore-selected-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restore Selected Position
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Restore Selected Position">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#align-reference-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      Align Reference Image
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mill-trench" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mill Trench
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acquire-reference-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      Acquire Reference Images
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#undercut-milling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Undercut Milling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Undercut Milling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#restore-trench-milling-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restore Trench Milling Position
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move-flat-to-electron-beam" class="md-nav__link">
+    <span class="md-ellipsis">
+      Move Flat to Electron Beam
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coincident-feature-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coincident Feature Alignment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mill-undercut" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mill Undercut
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return-flat-to-electron-beam-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      Return Flat to Electron Beam [Optional]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#align-feature-in-ion-beam" class="md-nav__link">
+    <span class="md-ellipsis">
+      Align Feature in Ion Beam
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acquire-reference-images_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Acquire Reference Images
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#liftout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Liftout
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Liftout">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#restore-undercut-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restore Undercut Position
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coincident-feature-alignment_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coincident Feature Alignment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insert-manipulator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Insert Manipulator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manipulator-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manipulator Control
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manipulator-contact-and-attachment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manipulator Contact and Attachment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manipulator-sever" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manipulator Sever
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retract-manipulator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retract Manipulator
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#landing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Landing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#restore-landing-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restore Landing Position
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insert-manipulator_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Insert Manipulator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#landing-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Landing Procedure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retract-manipulator_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retract Manipulator
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#polishing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Polishing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Polishing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup-lamella" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup Lamella
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mill-stress-relief" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mill Stress Relief
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mill-thinning-cut" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mill Thinning Cut
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mill Thinning Cut">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#align-reference-image_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Align Reference Image
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mill-thinning-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mill Thinning Pattern
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acquire-reference-images_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Acquire Reference Images
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mill-polishing-cut" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mill Polishing Cut
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mill Polishing Cut">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#align-reference-image_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Align Reference Image
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mill-polishing-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mill Polishing Pattern
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acquire-reference-images_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Acquire Reference Images
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods Implementation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#on-grid-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      On Grid Method
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#waffle-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Waffle Method
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#liftout-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Liftout Method
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Liftout Method">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mill-trench_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mill Trench
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mill-undercut_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mill Undercut
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#liftout_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Liftout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#landing_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Landing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setup-lamella_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup Lamella
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mill-thinning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mill Thinning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mill-polishing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mill Polishing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manipulator-preparation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manipulator Preparation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#landing-surface-preparation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Landing Surface Preparation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#charge-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Charge Control
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#side-pickup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Side Pickup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contact-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contact Detection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deposition-free-attachment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deposition Free Attachment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deposition Free Attachment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#liftout-attach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Liftout (Attach)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#landing-dettach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Landing (Dettach)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serial-liftout-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Serial Liftout Method
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Interface
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#process-improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Process Improvements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Process Improvements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#machine-learning-microscope-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Machine Learning Microscope Control
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contact-detection_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contact Detection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deposition-free-manipulator-attachment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deposition Free Manipulator Attachment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coincidence-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coincidence Alignment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instance-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instance Detection
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experiment-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experiment Management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Experiment Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#microscope-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Microscope Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protocol-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Protocol Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analysis-and-optimisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analysis and Optimisation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Machine Learning
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../blog/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Blog
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Blog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-stages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow Stages
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#select-positions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Select Positions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#select-landing-positions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Select Landing Positions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#isolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Isolation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Isolation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trench-milling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Trench Milling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Trench Milling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#restore-selected-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restore Selected Position
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Restore Selected Position">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#align-reference-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      Align Reference Image
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mill-trench" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mill Trench
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acquire-reference-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      Acquire Reference Images
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#undercut-milling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Undercut Milling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Undercut Milling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#restore-trench-milling-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restore Trench Milling Position
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move-flat-to-electron-beam" class="md-nav__link">
+    <span class="md-ellipsis">
+      Move Flat to Electron Beam
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coincident-feature-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coincident Feature Alignment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mill-undercut" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mill Undercut
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return-flat-to-electron-beam-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      Return Flat to Electron Beam [Optional]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#align-feature-in-ion-beam" class="md-nav__link">
+    <span class="md-ellipsis">
+      Align Feature in Ion Beam
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acquire-reference-images_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Acquire Reference Images
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#liftout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Liftout
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Liftout">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#restore-undercut-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restore Undercut Position
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coincident-feature-alignment_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coincident Feature Alignment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insert-manipulator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Insert Manipulator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manipulator-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manipulator Control
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manipulator-contact-and-attachment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manipulator Contact and Attachment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manipulator-sever" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manipulator Sever
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retract-manipulator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retract Manipulator
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#landing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Landing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#restore-landing-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restore Landing Position
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insert-manipulator_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Insert Manipulator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#landing-procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Landing Procedure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retract-manipulator_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retract Manipulator
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#polishing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Polishing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Polishing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup-lamella" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup Lamella
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mill-stress-relief" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mill Stress Relief
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mill-thinning-cut" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mill Thinning Cut
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mill Thinning Cut">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#align-reference-image_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Align Reference Image
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mill-thinning-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mill Thinning Pattern
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acquire-reference-images_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Acquire Reference Images
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mill-polishing-cut" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mill Polishing Cut
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mill Polishing Cut">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#align-reference-image_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Align Reference Image
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mill-polishing-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mill Polishing Pattern
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acquire-reference-images_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Acquire Reference Images
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods Implementation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#on-grid-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      On Grid Method
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#waffle-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Waffle Method
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#liftout-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Liftout Method
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Liftout Method">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mill-trench_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mill Trench
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mill-undercut_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mill Undercut
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#liftout_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Liftout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#landing_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Landing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setup-lamella_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup Lamella
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mill-thinning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mill Thinning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mill-polishing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mill Polishing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manipulator-preparation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manipulator Preparation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#landing-surface-preparation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Landing Surface Preparation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#charge-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Charge Control
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#side-pickup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Side Pickup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contact-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contact Detection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deposition-free-attachment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deposition Free Attachment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deposition Free Attachment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#liftout-attach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Liftout (Attach)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#landing-dettach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Landing (Dettach)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serial-liftout-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Serial Liftout Method
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Interface
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#process-improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Process Improvements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Process Improvements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#machine-learning-microscope-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Machine Learning Microscope Control
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contact-detection_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contact Detection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deposition-free-manipulator-attachment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deposition Free Manipulator Attachment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coincidence-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coincidence Alignment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instance-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instance Detection
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experiment-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experiment Management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Experiment Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#microscope-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Microscope Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protocol-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Protocol Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analysis-and-optimisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analysis and Optimisation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="workflow">Workflow</h1>
+<p>AutoLamella workflows are broken down into a series of consecutive steps called workflow stages. Workflow stages are shared across methods, with most only requiring changes to the protocol. </p>
+<p>We group these stages into three conceptual groups; setup, isolation and polishing.  </p>
+<p>The full map of every workflow is as follows:</p>
+<p>[TODO]</p>
+<h2 id="workflow-stages">Workflow Stages</h2>
+<p>At the end of each workflow stage, we save the state of the microscope, allowing us to restore the state of the microscope at the start of the next stage,This allows us to continue on exactly from the previous state even if time has passed, the system has been rebooted or any other interruption. It also allows us to batch operations, e.g. perform all trench milling operations together, and easily stop and start the program.  </p>
+<p>Assume that at the end of every workflow stage, the state is saved and can be restored to via the time travel controls.</p>
+<p>Pre Workflow Stage:
+We restore the state of the microscope which was saved after selecting positions, and log that this workflow stage has started for analytics purposes.  </p>
+<p>Post Workflow Stage:<br />
+We save the state of the microscope, and log that this workflow stage has finished.  </p>
+<h2 id="setup">Setup</h2>
+<p>In the setup stages, the user selects the positions for milling and landing (liftout methods only). These stages are currently manual, and the user must select the position by following the guided steps in the workflow.</p>
+<h3 id="select-positions">Select Positions</h3>
+<p>The user selects the milling positions. For the on-grid method these are the positions of the final lamella and are selected at the milling angle. For waffle, liftout and serial-liftout the positions are for trench milling and are selected flat to the ion beam. </p>
+<p>On-grid and waffle methods support the use of the minimap, which allows multiple positions to be selected in a short amount of time, as well as correlation with fluorescence data. We will add minimap support for other methods in the future. </p>
+<p>For liftout methods, the user needs to specify the inital lamella and landing positions in the protocol. Saved positions can be exported from the Movement tab, and are stored in fibsem/config/positions.yaml.  </p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">options</span><span class="p">:</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">trench_start_position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pre-tilt-35-deg-grid-01-lamella</span><span class="w">     </span><span class="c1"># starting point for selecting milling position</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">landing_start_position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pre-tilt-35-deg-grid-02-landing</span><span class="w">     </span><span class="c1"># starting point for selecting landing position</span>
+</span></code></pre></div>
+<h3 id="select-landing-positions">Select Landing Positions</h3>
+<p>The user selects the landing positions for liftout methods. For the liftout method the user is required to select a landing position for each selected milling position. For serial-liftout, we generate a map of landing positions, based on the protocol values.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">options</span><span class="p">:</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nt">landing_grid</span><span class="p">:</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">        </span><span class="nt">x</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100.0e-6</span><span class="w">     </span><span class="c1"># grid spacing in x</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">        </span><span class="nt">y</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">400.0e-6</span><span class="w">     </span><span class="c1"># grid spacing in y</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">        </span><span class="nt">rows</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span><span class="w">         </span><span class="c1"># number of rows to generate</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">        </span><span class="nt">cols</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w">        </span><span class="c1"># number of columns to generate</span>
+</span></code></pre></div>
+<h2 id="isolation">Isolation</h2>
+<p>The isolation stages remove the bulk of material from the sides and underside of the selected area. Higher milling currents are used to prioritise material removal over sample damage. </p>
+<h3 id="trench-milling">Trench Milling</h3>
+<p>The trench milling stage removes the bulk of material from around the selected area.</p>
+<h4 id="restore-selected-position">Restore Selected Position</h4>
+<p>We restore the selected trench milling position that was selected the setup steps. The trench milling position was selected flat to the ion beam, so we do not need to move. Both the position of the stage, and the milling pattern were selected.</p>
+<h5 id="align-reference-image">Align Reference Image</h5>
+<p>We can optionally choose to align a reference image to re-align with more precision. (Not recommended).</p>
+<h5 id="mill-trench">Mill Trench</h5>
+<p>We retrieve the milling pattern and position from the protocol and draw it. If in supervised mode, the user has the opportunity to edit this pattern. Otherwise, the milling operation will start. Once milling has finished, the system is restored back to the imaging configuration.</p>
+<h4 id="acquire-reference-images">Acquire Reference Images</h4>
+<p>We acquire low and high magnification reference images. These enable us to analyse the success of the milling operations, and provide a potential reference for alignment in future alignments.</p>
+<h3 id="undercut-milling">Undercut Milling</h3>
+<p>The undercut milling stage removes material from the underside of the selected area, freeing it from the base of the sample / holder. </p>
+<h4 id="restore-trench-milling-position">Restore Trench Milling Position</h4>
+<p>We restore the trench milling position.</p>
+<h4 id="move-flat-to-electron-beam">Move Flat to Electron Beam</h4>
+<p>We move the stage flat to the electron beam (rotate 180 degrees compucentrically).</p>
+<p>You can specify an additional compucentric rotation offset with the following parameters:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">options</span><span class="p">:</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">compucentric_x_offset</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">25e-6</span><span class="w">    </span><span class="c1"># fixed y movement after compucentric rotation (metres)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">compuncentric_y_offset</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50e-6</span><span class="w">   </span><span class="c1"># fixed y movement after compucentric rotation (metres)</span>
+</span></code></pre></div>
+<h4 id="coincident-feature-alignment">Coincident Feature Alignment</h4>
+<p>We perform a coincident feature alignment to ensure we are coincident after compucentrically rotating.</p>
+<p>Align Feature Coincident
+    Detect Feature Centre in Electron Beam
+    Stable Move to Feature Centre
+    Detect Feature Centre in Ion Beam
+    Vertical Move to Feature Centre
+    The Feature should now be centred in both beams (coincident)</p>
+<p>We can specify which feature we want to align with using the features argument.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">on-grid</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">waffle</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LamellaCentre</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nt">liftout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LamellaCentre</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nt">serial-liftout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VolumeBlockTopEdge</span>
+</span></code></pre></div>
+<p>Under the hood we use the projected stage position to differentiate between multiple feature detection. The position is projected from the trench milling position to this view.  </p>
+<h4 id="mill-undercut">Mill Undercut</h4>
+<p>We tilt the stage down (negative) to access the underside of the volume block. We can perform this step in increments by specifying the parameters, tilt_angle, and tilt_angle_step. Specifying multiple steps will repeat this step multiple times, gradually shrinking the height of the undercut pattern.</p>
+<p>We detect the top edge of the volume block to place our undercut pattern. We can specify a specific offset from this pattern to determine how 'deep' we want to perform the undercut, v_offset.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">undercut</span><span class="p">:</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">tilt_angle</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-5</span><span class="w">      </span><span class="c1"># undercut tilt per step</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">tilt_angle_step</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w">  </span><span class="c1"># number of undercut steps</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nt">v_offset</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0e-6</span><span class="w">    </span><span class="c1"># milling pattern offset</span>
+</span></code></pre></div>
+<p>We retrieve the undercut milling pattern from the protocol and draw it using the detected feature position. Once milling operations are completed the microscope is restore back to the imaging configuration.</p>
+<h4 id="return-flat-to-electron-beam-optional">Return Flat to Electron Beam [Optional]</h4>
+<p>After milling the undercut pattern, we can optionally return flat to the electron beam, or stay at the tilted angle. It's recommended to stay at the tilted angle if doing the waffle method as the next step is to perform the lamella thinning and polishing.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">options</span><span class="p">:</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="nt">undercut_return_to_electron</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">   </span><span class="c1"># move flat to electron after undercut</span>
+</span></code></pre></div>
+<h4 id="align-feature-in-ion-beam">Align Feature in Ion Beam</h4>
+<p>After moving back we align the feature in the ion beam to ensure coincidence of the beams before moving to the next stage.</p>
+<h4 id="acquire-reference-images_1">Acquire Reference Images</h4>
+<p>We acquire low and high magnification reference images for analysis and alignment.</p>
+<h3 id="liftout">Liftout</h3>
+<p>The liftout stage attaches the selected region to the manipulator, and severs it from the rest of the sample. After liftout, the selected region should be solely attached to the manipulator and be ready to be transfered to the landing grid.  </p>
+<p>Specific implementations for liftout, and serial-liftout. </p>
+<h4 id="restore-undercut-position">Restore Undercut Position</h4>
+<p>We restore to the undercut position. </p>
+<h4 id="coincident-feature-alignment_1">Coincident Feature Alignment</h4>
+<p>We use the coincident alignment (LamellaCentre) procedure to ensure the beams are coincident.</p>
+<h4 id="insert-manipulator">Insert Manipulator</h4>
+<p>We insert the manipulator to the liftout offset position. This position is just above the eucentric position, and to the left of the sample. </p>
+<h4 id="manipulator-control">Manipulator Control</h4>
+<p>We use the feature detector to move the manipulator to the left edge of the lamella. The feature detection detects the manipulator tip, and the lamella left edge in both beams, and moves the manipulator into position inside the side trench to the left of the lamella edge. If deposition free attachment is used, the sample is charged at this point.  </p>
+<h4 id="manipulator-contact-and-attachment">Manipulator Contact and Attachment</h4>
+<p>Once the manipulator is positioned to the left edge of the lamella and inside the trench, we horizontally towards the lamella, so the manipulator makes contact with the side of the lamella. If brightness based contact detection is used, the manipulator will move slowly towards the lamella until a brightness change is observed.</p>
+<p>Once the manipulator is in contact with the lamella, the joining method can occur. For deposition free attachment, the workflow continues. For redeposition welding, the 
+weld pattern if placed at the interface of the manipulator and lamella. The lamella and manipulator are now joined together. </p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="l l-Scalar l-Scalar-Plain">options</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">liftout_joining_method</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w">                    </span><span class="c1"># manipulator joing method to use, None or Weld</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">liftout_contact_offset</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.25e-6</span><span class="w">                 </span><span class="c1"># additional movement after contact</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nt">liftout_contact_detection</span><span class="p">:</span><span class="w">                      </span><span class="c1"># use brightness based contact detection</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="nt">liftout_charge_neutralisation_iterations</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">35</span><span class="w">    </span><span class="c1"># number of images to charge sample before contact</span>
+</span></code></pre></div>
+<h4 id="manipulator-sever">Manipulator Sever</h4>
+<p>We detect the right edge of the lamella region, and place the severing pattern. The severing pattern dettaches the lamella from the rest of the sample. The lamella should be attached solely to the manipulator. </p>
+<h4 id="retract-manipulator">Retract Manipulator</h4>
+<p>The manipulator is moved slowly upwards from the trench, and then retracted fully. </p>
+<h3 id="landing">Landing</h3>
+<p>The landing stage attaches the selected region to the landing grid, and severs it from the manipulator. After landing the selected region should be solely attached to the landing grid, and dettached from the manipulator. </p>
+<p>Specific implementations for liftout, and serial-liftout.</p>
+<h3 id="restore-landing-position">Restore Landing Position</h3>
+<p>We restore the landing position selected by the user, and align to the reference images. We should be centred on the landing position and coincident in both beams.</p>
+<h3 id="insert-manipulator_1">Insert Manipulator</h3>
+<p>We insert the manipulator to the landing position, which is near the parking position high above the grid. We detect the lamella, manipulator and landing position and move the manipulator down to the left of the landing post position. </p>
+<h3 id="landing-procedure">Landing Procedure</h3>
+<p>We detect the right edge of the lamella and the landing post and move the manipulator so they are in contact. </p>
+<p>Once they are in contact we can weld the lamella to the landing post. The reposition weld pattern (spot_weld) is placed on the landing post side of the interface between the lamella and landing post. If the manipulator and lamella were welded togehter, they are cut using a milling pattern. </p>
+<p>The manipulator is slowly pulled back from the landing post, and reference images are acquired. If the lamella has been successfuly attached to the post, the workflow continues. If deposition free attachment was used, and the lamella fails to attach to the landing post it will still be attached to the manipulator, and the landing procedure can be repeated again. </p>
+<h3 id="retract-manipulator_1">Retract Manipulator</h3>
+<p>We retract the manipulator, and acquire high and low magnification reference images for analysis and alignment. If the manipulator needs to be reset due to being cut, the reset procedure occurs now. </p>
+<h2 id="polishing">Polishing</h2>
+<p>The polishing stages mill the final lamella to electron transparency. In these stages, lower milling currents are used to prioritise sample damage over material removal.  </p>
+<h3 id="setup-lamella">Setup Lamella</h3>
+<p>Prior to polishing we get the user to select the final polishing position and pattern. The user also can confirm the position of an alignment fiducial, specified in 'fiducial'. This allows the user to avoid contamination, or use fluroescence data to correlate milling sites, which are not currently supported.</p>
+<p>This is a guided workflow, and the stage will move to the position of the last completed stage (waffle: undercut, liftout: landing), so the user only needs to move the pattern in the user interface. Once the user selects the polishing position, the microscope state is saved.  </p>
+<h3 id="mill-stress-relief">Mill Stress Relief</h3>
+<p>We mill a stress relief feature for on-grid methods to prevent lamellae from cracking when polished. The feature to mill is defined using the following key:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">on-grid</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">microexpansion</span><span class="w"> </span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nt">waffle</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">notch</span>
+</span></code></pre></div>
+<p>Practically, this milling operation occurs at the same time as the thinning cut to save time.  </p>
+<h3 id="mill-thinning-cut">Mill Thinning Cut</h3>
+<p>The thinning cut removes the bulk of the material from the lamella, but leaves a small amount to prevent contamination on the final polished lamella. Contamination will slowly build up on all exposed surfaces, so we want to complete all the polishing as close to finishing the workflow and removing the sample as possible.  </p>
+<h4 id="align-reference-image_1">Align Reference Image</h4>
+<p>We restore the microscope state from the setup lamella stage, and align to the fiducial image. The user can specify the following alignment parameters. </p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">options</span><span class="p">:</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="nt">alignment_attempts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w">               </span><span class="c1"># the number of alignment repeats</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">alignment_at_milling_current</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">  </span><span class="c1"># align at the milling current (or imaging current)</span>
+</span></code></pre></div>
+<h4 id="mill-thinning-pattern">Mill Thinning Pattern</h4>
+<p>We retrieve the lamella milling pattern from the protocol, and the position selected in the setup lamella stage. We mill all lamella stages, excluding the final one which is completed during the polishing stage. The following protocol shows an example of the breakdown.  </p>
+<p><div class="language-yaml highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">lamella</span><span class="p">:</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">stages</span><span class="p">:</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w">   </span><span class="nt">application_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">autolamella</span><span class="w">   </span><span class="c1"># mill thinning</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w">         </span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">        </span><span class="nt">trench_height</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.5e-06</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w">   </span><span class="nt">application_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">autolamella</span><span class="w">   </span><span class="c1"># mill thinning</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">        </span><span class="nt">trench_height</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0e-06</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w">   </span><span class="nt">application_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">autolamella</span><span class="w">   </span><span class="c1"># mill polishing</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">        </span><span class="nt">trench_height</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0e-07</span>
+</span></code></pre></div>
+Once the milling is complete, the microscope returns to the imaging configuration. </p>
+<h4 id="acquire-reference-images_2">Acquire Reference Images</h4>
+<p>We acquire low and high magnification reference images for analysis and alignment.</p>
+<h3 id="mill-polishing-cut">Mill Polishing Cut</h3>
+<p>The final polishing should be completed as close to removing the sample from the microscope as possible to prevent contamination build up. </p>
+<h4 id="align-reference-image_2">Align Reference Image</h4>
+<p>We align the fiducial reference image the same as in the thinning stage. </p>
+<h4 id="mill-polishing-pattern">Mill Polishing Pattern</h4>
+<p>We retrieve the final polishing pattern and position from the protocol and mill the pattern. Once the milling is complete, the microscope returns to the imaging configuration. </p>
+<h4 id="acquire-reference-images_3">Acquire Reference Images</h4>
+<p>We acquire low and high magnification reference images for analysis and alignment. Additional high quality images (frame integrated) can be specified for this stage. The final reference images can also be disabled</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">options</span><span class="p">:</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="nt">take_final_reference_images</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">               </span><span class="c1"># take reference images after polishing</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nt">high_quality_image</span><span class="p">:</span><span class="w"> </span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">                                   </span><span class="c1"># take high quality reference images after polishing</span>
+</span></code></pre></div>
+<h2 id="methods-implementation">Methods Implementation</h2>
+<h3 id="on-grid-method">On Grid Method</h3>
+<h3 id="waffle-method">Waffle Method</h3>
+<h3 id="liftout-method">Liftout Method</h3>
+<p>AutoLamella Liftout is an automated liftout method for the preparation of cryo lamella.
+The autoliftout requires the following workflow steps:</p>
+<h4 id="setup_1">Setup</h4>
+<ul>
+<li>The user selects lamella and landing positions.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Description</th>
+<th style="text-align: center;">Electron Beam</th>
+<th style="text-align: center;">Ion Beam</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Lamella Position (Low)</td>
+<td style="text-align: center;"><img alt="Lamella Positions EB" src="../assets/liftout/01-subtle-bear/png/ref_lamella_low_res_eb.png" /></td>
+<td style="text-align: center;"><img alt="Lamella Positions IB" src="../assets/liftout/01-subtle-bear/png/ref_lamella_low_res_ib.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">Lamella Position (High)</td>
+<td style="text-align: center;"><img alt="Lamella Positions EB" src="../assets/liftout/01-subtle-bear/png/ref_lamella_high_res_eb.png" /></td>
+<td style="text-align: center;"><img alt="Lamella Positions IB" src="../assets/liftout/01-subtle-bear/png/ref_lamella_high_res_ib.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">Landing Position (Low)</td>
+<td style="text-align: center;"><img alt="Landing Positions EB" src="../assets/liftout/01-subtle-bear/png/ref_landing_low_res_eb.png" /></td>
+<td style="text-align: center;"><img alt="Landing Positions IB" src="../assets/liftout/01-subtle-bear/png/ref_landing_low_res_ib.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">Landing Position (High)</td>
+<td style="text-align: center;"><img alt="Landing Positions EB" src="../assets/liftout/01-subtle-bear/png/ref_landing_high_res_eb.png" /></td>
+<td style="text-align: center;"><img alt="Landing Positions IB" src="../assets/liftout/01-subtle-bear/png/ref_landing_high_res_ib.png" /></td>
+</tr>
+</tbody>
+</table>
+<h4 id="mill-trench_1">Mill Trench</h4>
+<p>Mill lower, upper and side trenches using high currents. (horsheshoe pattern, see ref)</p>
+<ul>
+<li>Lower and Upper trenches release lamella from the bulk.</li>
+<li>Side trench provides access for the needle.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Description</th>
+<th style="text-align: center;">Electron Beam</th>
+<th style="text-align: center;">Ion Beam</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Trench Position (Low)</td>
+<td style="text-align: center;"><img alt="Trench LowResEB" src="../assets/liftout/01-subtle-bear/png/ref_trench_low_res_eb.png" /></td>
+<td style="text-align: center;"><img alt="Trench LowRes IB" src="../assets/liftout/01-subtle-bear/png/ref_trench_low_res_ib.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">Trench Position (High)</td>
+<td style="text-align: center;"><img alt="Trench HighRes EB" src="../assets/liftout/01-subtle-bear/png/ref_trench_high_res_eb.png" /></td>
+<td style="text-align: center;"><img alt="Trench HighRes IB" src="../assets/liftout/01-subtle-bear/png/ref_trench_high_res_ib.png" /></td>
+</tr>
+</tbody>
+</table>
+<h4 id="mill-undercut_1">Mill Undercut</h4>
+<ul>
+<li>Mill the underside and part of the other side of the lamella to release from the base of the bulk. Undercut is also refered to as the jcut.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Description</th>
+<th style="text-align: center;">Electron Beam</th>
+<th style="text-align: center;">Ion Beam</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Undercut Position (Low)</td>
+<td style="text-align: center;"><img alt="UnderCut LowResEB" src="../assets/liftout/01-subtle-bear/png/ref_jcut_low_res_eb.png" /></td>
+<td style="text-align: center;"><img alt="Trench LowRes IB" src="../assets/liftout/01-subtle-bear/png/ref_jcut_low_res_ib.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">Undercut Position (High)</td>
+<td style="text-align: center;"><img alt="UnderCut HighRes EB" src="../assets/liftout/01-subtle-bear/png/ref_jcut_high_res_eb.png" /></td>
+<td style="text-align: center;"><img alt="Trench HighRes IB" src="../assets/liftout/01-subtle-bear/png/ref_jcut_high_res_ib.png" /></td>
+</tr>
+</tbody>
+</table>
+<h4 id="liftout_1">Liftout</h4>
+<ol>
+<li>Insert the needle, and guide to near the lamella.</li>
+<li>Charge the sample with the ion beam</li>
+<li>Make contact with the lamella,</li>
+<li>Sever the lamella from the bulk.</li>
+<li>Retract the needle.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Description</th>
+<th style="text-align: center;">Electron Beam</th>
+<th style="text-align: center;">Ion Beam</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Liftout Entry Position</td>
+<td style="text-align: center;"><img alt="Entry EB" src="../assets/liftout/01-subtle-bear/png/ref_liftout_needle_eb.png" /></td>
+<td style="text-align: center;"><img alt="Entry IB" src="../assets/liftout/01-subtle-bear/png/ref_liftout_needle_ib.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">Liftout Ready Position</td>
+<td style="text-align: center;"><img alt="Ready EB" src="../assets/liftout/01-subtle-bear/png/needle_liftout_start_position_eb.png" /></td>
+<td style="text-align: center;"><img alt="Ready IB" src="../assets/liftout/01-subtle-bear/png/needle_liftout_start_position_ib.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">Liftout Contact Position</td>
+<td style="text-align: center;"><img alt="Contact EB" src="../assets/liftout/01-subtle-bear/png/ref_needle_liftout_landed_high_res_eb.png" /></td>
+<td style="text-align: center;"><img alt="Contact IB" src="../assets/liftout/01-subtle-bear/png/ref_needle_liftout_landed_high_res_ib.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">Liftout Sever Position</td>
+<td style="text-align: center;"><img alt="Sever EB" src="../assets/liftout/01-subtle-bear/png/ref_liftout_sever_eb.png" /></td>
+<td style="text-align: center;"><img alt="Sever IB" src="../assets/liftout/01-subtle-bear/png/ref_liftout_sever_ib.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">Liftout Retract Position</td>
+<td style="text-align: center;"><img alt="Retract EB" src="../assets/liftout/01-subtle-bear/png/ref_liftout_eb.png" /></td>
+<td style="text-align: center;"><img alt="Retract IB" src="../assets/liftout/01-subtle-bear/png/ref_liftout_ib.png" /></td>
+</tr>
+</tbody>
+</table>
+<h4 id="landing_1">Landing</h4>
+<ol>
+<li>Insert the needle, and guide the lamella to the post</li>
+<li>Weld lamella to the post</li>
+<li>Discharge the lamella with the electron beam</li>
+<li>Removal the needle from the lamella</li>
+<li>Retract the needle</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Description</th>
+<th style="text-align: center;">Electron Beam</th>
+<th style="text-align: center;">Ion Beam</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Landing Entry Position 0</td>
+<td style="text-align: center;"><img alt="Entry EB" src="../assets/liftout/01-subtle-bear/png/landing_needle_start_position_0_eb.png" /></td>
+<td style="text-align: center;"><img alt="Entry IB" src="../assets/liftout/01-subtle-bear/png/landing_needle_start_position_0_ib.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">Landing Entry Position 1</td>
+<td style="text-align: center;"><img alt="Entry EB" src="../assets/liftout/01-subtle-bear/png/landing_needle_start_position_1_eb.png" /></td>
+<td style="text-align: center;"><img alt="Entry IB" src="../assets/liftout/01-subtle-bear/png/landing_needle_start_position_1_ib.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">Landing Entry Position 2</td>
+<td style="text-align: center;"><img alt="Entry EB" src="../assets/liftout/01-subtle-bear/png/landing_needle_start_position_2_eb.png" /></td>
+<td style="text-align: center;"><img alt="Entry IB" src="../assets/liftout/01-subtle-bear/png/landing_needle_start_position_2_ib.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">Landing Entry Position 3</td>
+<td style="text-align: center;"><img alt="Entry EB" src="../assets/liftout/01-subtle-bear/png/landing_needle_start_position_3_eb.png" /></td>
+<td style="text-align: center;"><img alt="Entry IB" src="../assets/liftout/01-subtle-bear/png/landing_needle_start_position_3_ib.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">Landing Ready Position</td>
+<td style="text-align: center;"><img alt="Ready EB" src="../assets/liftout/01-subtle-bear/png/landing_needle_ready_position_eb.png" /></td>
+<td style="text-align: center;"><img alt="Ready IB" src="../assets/liftout/01-subtle-bear/png/landing_needle_ready_position_ib.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">Landing Weld Position</td>
+<td style="text-align: center;"><img alt="Weld EB" src="../assets/liftout/01-subtle-bear/png/landing_lamella_final_weld_high_res_eb.png" /></td>
+<td style="text-align: center;"><img alt="Weld IB" src="../assets/liftout/01-subtle-bear/png/landing_lamella_final_weld_high_res_ib.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">Landing Removal Position</td>
+<td style="text-align: center;"><img alt="Removal EB" src="../assets/liftout/01-subtle-bear/png/landing_lamella_needle_removal_high_res_eb.png" /></td>
+<td style="text-align: center;"><img alt="Sever IB" src="../assets/liftout/01-subtle-bear/png/landing_lamella_needle_removal_high_res_ib.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">Landing Retract Position</td>
+<td style="text-align: center;"><img alt="Retract EB" src="../assets/liftout/01-subtle-bear/png/ref_landing_lamella_high_res_eb.png" /></td>
+<td style="text-align: center;"><img alt="Retract IB" src="../assets/liftout/01-subtle-bear/png/ref_landing_lamella_high_res_ib.png" /></td>
+</tr>
+</tbody>
+</table>
+<h4 id="setup-lamella_1">Setup Lamella</h4>
+<ul>
+<li>The user selects the regions of the lamella to polish</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Description</th>
+<th style="text-align: center;">Electron Beam</th>
+<th style="text-align: center;">Ion Beam</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Polish Setup Position (Low)</td>
+<td style="text-align: center;"><img alt="PolishSetup LowResEB" src="../assets/liftout/01-subtle-bear/png/ref_thin_lamella_setup_low_res_eb.png" /></td>
+<td style="text-align: center;"><img alt="PolishSetup LowRes IB" src="../assets/liftout/01-subtle-bear/png/ref_thin_lamella_setup_low_res_ib.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">Polish Setup Position (High)</td>
+<td style="text-align: center;"><img alt="PolishSetup HighRes EB" src="../assets/liftout/01-subtle-bear/png/ref_thin_lamella_setup_high_res_eb.png" /></td>
+<td style="text-align: center;"><img alt="PolishSetup HighRes IB" src="../assets/liftout/01-subtle-bear/png/ref_thin_lamella_setup_high_res_ib.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">Polish Setup Position (Ultra)</td>
+<td style="text-align: center;"><img alt="PolishSetup UltraRes EB" src="../assets/liftout/01-subtle-bear/png/ref_thin_lamella_setup_ultra_res_eb.png" /></td>
+<td style="text-align: center;"><img alt="PolishSetup UltraRes IB" src="../assets/liftout/01-subtle-bear/png/ref_thin_lamella_setup_ultra_res_ib.png" /></td>
+</tr>
+</tbody>
+</table>
+<h4 id="mill-thinning">Mill Thinning</h4>
+<ul>
+<li>Thin the lamella to a lower thickness, using a relatively high current.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Description</th>
+<th style="text-align: center;">Electron Beam</th>
+<th style="text-align: center;">Ion Beam</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">MillRoughCut Position (Low)</td>
+<td style="text-align: center;"><img alt="MillRoughCut LowResEB" src="../assets/liftout/01-subtle-bear/png/ref_thin_lamella_low_res_eb.png" /></td>
+<td style="text-align: center;"><img alt="MillRoughCut LowRes IB" src="../assets/liftout/01-subtle-bear/png/ref_thin_lamella_low_res_ib.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">MillRoughCut Position (High)</td>
+<td style="text-align: center;"><img alt="MillRoughCut HighRes EB" src="../assets/liftout/01-subtle-bear/png/ref_thin_lamella_high_res_eb.png" /></td>
+<td style="text-align: center;"><img alt="MillRoughCut HighRes IB" src="../assets/liftout/01-subtle-bear/png/ref_thin_lamella_high_res_ib.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">MillRoughCut Position (Ultra)</td>
+<td style="text-align: center;"><img alt="MillRoughCut UltraRes EB" src="../assets/liftout/01-subtle-bear/png/ref_thin_lamella_ultra_res_eb.png" /></td>
+<td style="text-align: center;"><img alt="MillRoughCut UltraRes IB" src="../assets/liftout/01-subtle-bear/png/ref_thin_lamella_ultra_res_ib.png" /></td>
+</tr>
+</tbody>
+</table>
+<h4 id="mill-polishing">Mill Polishing</h4>
+<ul>
+<li>Polish the lamella to electron transparent thickness.</li>
+<li>Should be completed immediately prior to transfer to prevent contamination buildup.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Description</th>
+<th style="text-align: center;">Electron Beam</th>
+<th style="text-align: center;">Ion Beam</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">MillPolishingCut Position (Low)</td>
+<td style="text-align: center;"><img alt="Polish LowResEB" src="../assets/liftout/01-subtle-bear/png/ref_polish_lamella_low_res_eb.png" /></td>
+<td style="text-align: center;"><img alt="Polish LowRes IB" src="../assets/liftout/01-subtle-bear/png/ref_polish_lamella_low_res_ib.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">MillPolishingCut Position (High)</td>
+<td style="text-align: center;"><img alt="Polish HighRes EB" src="../assets/liftout/01-subtle-bear/png/ref_polish_lamella_high_res_eb.png" /></td>
+<td style="text-align: center;"><img alt="Polish HighRes IB" src="../assets/liftout/01-subtle-bear/png/ref_polish_lamella_high_res_ib.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">MillPolishingCut Position (Ultra)</td>
+<td style="text-align: center;"><img alt="Polish UltraRes EB" src="../assets/liftout/01-subtle-bear/png/ref_polish_lamella_ultra_res_eb.png" /></td>
+<td style="text-align: center;"><img alt="Polish UltraRes IB" src="../assets/liftout/01-subtle-bear/png/ref_polish_lamella_ultra_res_ib.png" /></td>
+</tr>
+</tbody>
+</table>
+<p>The following methods were developed for the liftout workflow.</p>
+<h4 id="manipulator-preparation">Manipulator Preparation</h4>
+<p>We flatten the side of the needle to maximise surface contact area with the side of the lamella.</p>
+<p>TODO: images</p>
+<h4 id="landing-surface-preparation">Landing Surface Preparation</h4>
+<p>We flatten the side of the landing post to maximise surface contact area with the side of the lamella.
+TODO: images</p>
+<h4 id="charge-control">Charge Control</h4>
+<p>Biological samples in cryogenic conditions often have large amounts of charge which causes challenges with imaging. Often this charging saturates the detectors and images either glow white or completely dark. To overcome this issue, we have developed the following techniques:</p>
+<ul>
+<li>AutoGamma: We automatically apply a digital gamma correction to the image if sufficient mean pixel intensity is determined. Gamma correction shifts the image histogram allowing features to be detected in the image (however it reduces image quality).</li>
+<li>Charge Neutralisation: To reduce the accumulated charge, we apply a charge neutralisation procedure (e.g. taking a rapid series of electron images to neutralise ion charge after large milling operations). This helps control the charge buildup throughout the process.</li>
+</ul>
+<p>TODO: images</p>
+<h4 id="side-pickup">Side Pickup</h4>
+<p>To provide better landing stability, we liftout much larger lamella than typical. In conjunction with manipulator and landing surface preparation, we are able to make consistent, right-angled contact with a large surface area between the lamella and the landing post. This provides a more stable base from which to thin the lamella down. The downside of using this method is an increased material waste, and increased thinning time to remove excess material.</p>
+<p>To provide better liftout, and landing stability we make contact with the side of the lamella to lift it out of the trench. The side pickup provides the following benefits:</p>
+<ul>
+<li>More stability on contact: we apply a compressive force to the side of the lamella, instead of bending (if touching from the top). This allows us to make firmer contact without bottoming out the lamella in the trench.</li>
+<li>Better orientation for landing: Due to the lack of rotation/tilt control the angle of liftout determines the orientation for landing the lamella. When lifting from the top of the lamella, it can sometimes rotate, roll or slide of the needle tip when making contact with the post causing bad landing orientation. It is analogous to spinning a basketball on your finger, it can be done but is difficult to repeat. Making contact from the side allows for the lamella to be evenly compressed between the needle and the post, maintaining its orientation.</li>
+</ul>
+<h4 id="contact-detection">Contact Detection</h4>
+<p>In order to determine whether the needle and lamella have made sufficient contact, we developed a contact detection procedure.</p>
+<ul>
+<li>We monitor the image brightness, whilst driving the needle towards the lamella.</li>
+<li>When contact is made between the needle and lamella, there is a significant increase in brightness due to charge disipation. This effect occurs due to the charge build up in the platinum crust being grounded when contact is made with the needle.</li>
+<li>We detect this change, and stop the needle movement.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Example 01</th>
+<th style="text-align: center;">Example 02</th>
+<th style="text-align: center;">Example 03</th>
+<th style="text-align: center;">Example 04</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><img alt="Example 01" src="../assets/liftout/contact/contact_1.gif" /></td>
+<td style="text-align: center;"><img alt="Example 02" src="../assets/liftout/contact/contact_2.gif" /></td>
+<td style="text-align: center;"><img alt="Example 03" src="../assets/liftout/contact/contact_3.gif" /></td>
+<td style="text-align: center;"><img alt="Example 04" src="../assets/liftout/contact/contact_4.gif" /></td>
+</tr>
+</tbody>
+</table>
+<p>However, this effect is very sample dependent and does not occur on some samples.</p>
+<p><img alt="Contact Detection" src="../assets/liftout/contact/contact_brightness.png" />
+Sample Specific Contact Detection</p>
+<h4 id="deposition-free-attachment">Deposition Free Attachment</h4>
+<p>We have developed a repeatable procedure for lifting the lamella by only manipulating the charge buildup. This method does not rely on platinum deposition, or welding (redeposition).</p>
+<ul>
+<li>To attach: We move the needle and lamella close together, and take a series ion beam images to build up charge. When the lamella and needle make contact they stick together with static due to charge.</li>
+<li>To dettach: Once the lamella is welded to the landing post, we run the electron beam to disapate the charge, and the needle slides off the lamella.</li>
+</ul>
+<p>The procedure is still being developed, and understood and is very sensitive to parameters and different conditions (e.g. the number of images being taken).</p>
+<h5 id="liftout-attach">Liftout (Attach)</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Description</th>
+<th style="text-align: center;">Ready</th>
+<th style="text-align: center;">Contact</th>
+<th style="text-align: center;">Sever</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Electron View</td>
+<td style="text-align: center;"><img alt="Ready" src="../assets/liftout/01-subtle-bear/png/needle_liftout_start_position_eb.png" /></td>
+<td style="text-align: center;"><img alt="Contact" src="../assets/liftout/01-subtle-bear/png/ref_needle_liftout_landed_high_res_eb.png" /></td>
+<td style="text-align: center;"><img alt="Sever" src="../assets/liftout/01-subtle-bear/png/ref_liftout_sever_eb.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">Ion View</td>
+<td style="text-align: center;"><img alt="Ready" src="../assets/liftout/01-subtle-bear/png/needle_liftout_start_position_ib.png" /></td>
+<td style="text-align: center;"><img alt="Contact" src="../assets/liftout/01-subtle-bear/png/ref_needle_liftout_landed_high_res_ib.png" /></td>
+<td style="text-align: center;"><img alt="Sever" src="../assets/liftout/01-subtle-bear/png/ref_liftout_sever_ib.png" /></td>
+</tr>
+</tbody>
+</table>
+<h5 id="landing-dettach">Landing (Dettach)</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Description</th>
+<th style="text-align: center;">Ready</th>
+<th style="text-align: center;">Weld</th>
+<th style="text-align: center;">Removal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Electron View</td>
+<td style="text-align: center;"><img alt="Ready" src="../assets/liftout/01-subtle-bear/png/landing_needle_ready_position_eb.png" /></td>
+<td style="text-align: center;"><img alt="Weld" src="../assets/liftout/01-subtle-bear/png/landing_lamella_final_weld_high_res_eb.png" /></td>
+<td style="text-align: center;"><img alt="Removal" src="../assets/liftout/01-subtle-bear/png/landing_lamella_needle_removal_high_res_eb.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">Ion View</td>
+<td style="text-align: center;"><img alt="Ready" src="../assets/liftout/01-subtle-bear/png/landing_needle_ready_position_ib.png" /></td>
+<td style="text-align: center;"><img alt="Weld" src="../assets/liftout/01-subtle-bear/png/landing_lamella_final_weld_high_res_ib.png" /></td>
+<td style="text-align: center;"><img alt="Removal" src="../assets/liftout/01-subtle-bear/png/landing_lamella_needle_removal_high_res_ib.png" /></td>
+</tr>
+</tbody>
+</table>
+<h3 id="serial-liftout-method">Serial Liftout Method</h3>
+<h2 id="user-interface">User Interface</h2>
+<h2 id="process-improvements">Process Improvements</h2>
+<h3 id="machine-learning-microscope-control">Machine Learning Microscope Control</h3>
+<h3 id="contact-detection_1">Contact Detection</h3>
+<h3 id="deposition-free-manipulator-attachment">Deposition Free Manipulator Attachment</h3>
+<h3 id="coincidence-alignment">Coincidence Alignment</h3>
+<h3 id="instance-detection">Instance Detection</h3>
+<h2 id="experiment-management">Experiment Management</h2>
+<h3 id="microscope-configuration">Microscope Configuration</h3>
+<h3 id="protocol-configuration">Protocol Configuration</h3>
+<h3 id="analysis-and-optimisation">Analysis and Optimisation</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.expand", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "content.code.copy"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>
